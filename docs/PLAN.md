@@ -10,13 +10,15 @@ No calendar estimates yet: target-device background/cue tests and tool setup det
 
 ## P0: Environment, foundation and risk prototypes
 
-Dependencies: approval of this plan; Android Studio/SDK installation; actual phone model/Android version and language preference.
+Dependencies: approval of this plan; Android Studio/SDK installation; access to the confirmed Galaxy S24 Ultra and S22 Ultra (both Android 16; exact models/One UI in `PRODUCT.md`); speech language preference.
 
 Task groups: scaffold compatible stable Kotlin/Compose Gradle project; pin toolchain/version catalog and wrapper; add runnable README and GitHub Actions tests/lint/build with a stable required merge gate. Configure `main` protection so tests must run and pass before any PR merges; verify account support and a failing/passing test PR. Build a tiny 2.2-second rep and Down/Up phase demonstration with fake-clock unit tests, real offline TTS, screen-off foreground playback and actionable notification. Measure cue delay/cancellation and evaluate persistent banner versus overlay on the user's device. Decide service type/wake-lock lifecycle; record device results and missing permission fallback. Install offline voice data if needed and verify airplane mode.
 
 Gate: a debug APK runs on phone; phase progression stays correct while screen off and switching apps; obsolete voice cancels on skip; offline voice or explicit sound fallback works. Document measured limitations and chosen approach before building full UI. This is a disposable or reusable small vertical slice, not an excuse to build all features at once.
 
 CI gate: the automated tests pass in GitHub Actions, and a PR with failing tests demonstrably cannot merge. Protection/check configuration is documented; add instrumentation and shared-contract checks as those suites appear. Do not mark this gate complete based only on a local test run or workflow file.
+
+Device scope: run the timing, offline speech, screen-off and notification/banner prototype checks on both confirmed phones. Record differences instead of assuming one Samsung result covers the other.
 
 Learning: Gradle wrapper, app lifecycle, Compose state, monotonic time, coroutines, foreground service versus UI thread.
 
@@ -67,6 +69,8 @@ Requirements: all phone requirements R01-R23/R25.
 Task groups: full real-device acceptance matrix and regressions; performance/battery measurements; accessibility and visual review; migration/import/restore rehearsals. Produce a signed personal-use APK and explain installation/update. Securely back up signing key outside Git so updates can retain app data. Complete README, troubleshooting, module/function docs and learning walkthrough. CI runs relevant checks; no secrets/private DBs/media in artifacts. Validate all requirement coverage rather than stopping at basic timer MVP.
 
 Gate: user can use Timey daily without a web server; all agreed phone features demonstrated, known OS limits explained and accepted, setup/test docs reproducible. User accepts phone milestone before web/API implementation begins.
+
+Device gate: complete the relevant acceptance matrix and at least one full real routine on each confirmed phone; verify Drive recovery and cross-device conflicts between the two.
 
 Learning: debug versus release APKs, signing keys, CI evidence, profiling and interpreting regressions.
 

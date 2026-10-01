@@ -55,7 +55,18 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 
 ## Open questions before affected phases
 
-Target phone model/Android version; speech language(s); selected-phase wording and Static voice direction; acceptable minimum phase length and speech-overlap policy; stop/restore behavior after force-stop/reboot; required exact banner appearance versus a reliable notification/optional overlay. These do not prevent reviewing the project plan.
+Speech language(s); selected-phase wording and Static voice direction; acceptable minimum phase length and speech-overlap policy; stop/restore behavior after force-stop/reboot; required exact banner appearance versus a reliable notification/optional overlay. These do not prevent reviewing the project plan.
+
+## Confirmed target phones
+
+Reported by the user on 2026-10-01; verify current software versions when recording device-test evidence:
+
+| Phone | Model | Android | One UI |
+| --- | --- | --- | --- |
+| Samsung Galaxy S24 Ultra | SM-S928B/DS | 16 | 8.5 |
+| Samsung Galaxy S22 Ultra | SM-S908E | 16 | 8.0 |
+
+Both are target devices for development and acceptance. Android minimum-version support outside these phones remains an engineering choice to record during P0.
 
 ## Reference evidence
 
