@@ -18,9 +18,9 @@ Later ExUnit tests cover contexts, Ecto migrations, API authentication/validatio
 | Display/manual | Time and reps in countdown/count-up/static; correct boundaries; early checkmark; manual clamping/wait; voice numbering separate from completed-count display; no next step begins during wait. |
 | Cues | Step-start name, last-N seconds/reps, global/step overrides, all/selected phases; selected Up in Down → Up announces number at rep start and Up at its boundary; Static inherits global new-step count direction and respects step override; English default and Portuguese selection; cancel on pause/skip/restart/stop, missing offline voice, long phrase in short phase, no stale cue backlog. |
 | Editing | Three disclosure states/bulk buttons, drag entire loop, independent copy IDs/order/colors, Simple conversion equivalence, next palette with explicit prepare/rest role, search containing routine, undo/redo and redo invalidation. |
-| Persistence | Changed-only 60-second autosave, exit flush, explicit save versus autosave history, draft invalidity, concurrent save calls, DB reopen/migration/rollback, import rejected before mutations. |
+| Persistence | Changed-only 60-second autosave without history; manual/exit saves create history, including exit after a minute autosave; unchanged-exit behavior per confirmed policy; draft invalidity, concurrent save calls, DB reopen/migration/rollback, import rejected before mutations. |
 | Sync | Offline autosave coalescing; explicit backups preserved; retries/dedup/pagination; edits arriving during upload; disconnected/revoked auth; conflicting concurrent heads; delete/edit conflict; new account isolation; fresh install restore. |
-| History | Five-day boundary with fake UTC clock, explicit-save-only snapshots, restore as new revision, corrupted snapshot refusal, expired pending history, current data survives cleanup. |
+| History | Five-calendar-day boundary with fake clock and agreed timezone (including midnight/DST); manual/exit-save snapshots; retained old offline history uploads after reconnect without time-triggered pruning; new-edit-triggered cleanup per confirmed event; dormant-device re-upload prevention; restore as new revision, corrupted snapshot refusal, current data survives cleanup. |
 | API later | Auth scopes/errors, CRUD of all content, order/copy/conversion/search, import/export/history/restore, stale update preconditions, request retry idempotency, docs/examples/contract parity. |
 
 ## Real-device matrix
@@ -30,6 +30,8 @@ Use both confirmed phones for device acceptance and at least one full real routi
 P0 validates background timing, offline speech in English and Portuguese, and notification/banner behavior on both devices. P4/P5 use them as independent sync clients to verify restore and concurrent-edit conflicts; fresh-install checks use safe test data and an explicit data-preservation procedure. If a phone is unavailable, mark its cases blocked/not run rather than inferring a pass from the other phone.
 
 Check airplane mode; screen on/off; app background/another app; running/paused notification and banner dismissal; stop/return Home; permission denial; music/headphones/Bluetooth; rotation/large text/TalkBack; battery saver/idle; process kill and separately force-stop/reboot recovery. Verify wake resources release after stop/finish and waiting, and measure actual timing/audio drift against the P0-agreed tolerance. Hardware-specific results are not universal Android guarantees.
+
+After crash/reboot, verify reopening offers saved workout paused with Continue/Restart and no stale audio or automatic progression through the interruption. Verify Explicit Stop clears the saved session. Do not equate process recreation with reboot; capture checkpoint position/remaining-time fidelity for each case.
 
 ## Complete manual-test instructions in each issue
 

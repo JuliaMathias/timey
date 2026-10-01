@@ -28,10 +28,10 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 | R10 | Playback controls | Previous/Next move one executed step across loop/set boundaries; restart-step starts its first rep/phase; all preserve paused/running state. Restart-routine asks confirmation and starts at routine beginning preserving state. Pause/resume and hold-to-exit; notification X completely ends the session. |
 | R11 | Playback context and preview | Show current loop, set, rep, phase, next step and remaining routine time. Label time as estimated when manual waits affect it. Completion offers exit/restart. Short preview exercises selected voice/phase/sound configuration without full playback. |
 | R12 | Background phone behavior | Screen-off/other-app playback and actionable ongoing notification. Running banner stays visible or reappears after dismissal; paused banner can disappear/stay dismissed. Pause/resume and stop work outside app. Stop returns app to Home. Reproduce the useful behavior with supported APIs; exact OS rendering is device-dependent and tested early. |
-| R13 | Save/autosave | Explicit save; changed edits autosave locally every 60s and on leaving editor. Saves are transactional. Online saves request sync; offline autosaves coalesce into latest changes for reconnect. Saving does not block on cloud. |
+| R13 | Save/autosave | Explicit save; changed edits autosave locally every 60s. Leaving the editor performs a normal save and creates history, including edits already persisted by minute autosave. Saves are transactional. Online saves request sync; offline autosaves coalesce into latest changes for reconnect. Saving does not block on cloud. |
 | R14 | Google Drive sync and new devices | Authorize same Google account on a new device, download latest synced routines/settings, then use locally. Reconnect sends latest content plus pending explicit-save history; retries preserve edits. No need to replay each autosave. |
 | R15 | Conflicts and deletions | Concurrent edits preserve both versions and let user choose/keep both. Deletes are recorded so offline devices cannot silently resurrect them. Account switching never uploads one account's private data into another without an explicit choice. |
-| R16 | Five-day version history | Every explicit saved version retained for a rolling five-day window; autosaves and save-on-exit do not add history (proposed classification). Preserve offline explicit saves for later upload while in retention window. Current data never expires. Restore is a new edit and does not erase later versions. |
+| R16 | Five-calendar-day version history | Manual Save and normal save-on-exit create saved versions; minute autosaves do not. Use calendar days, not a rolling 120 hours. Older backups remain until new edits trigger cleanup; time passing, opening or reconnecting alone must not delete them. Preserve retained offline history for upload, even when older than five days. Current data never expires. Restore is a new edit and does not overwrite later versions. Exact calendar boundary/timezone and cleanup event remain to clarify. |
 | R17 | Independent composition | Insert an entire routine at beginning/end/selected position in an Advanced routine, including its exercise sequence, without links to source. All copied IDs are new. Original edits never alter the copy. Preview insertion and support undo. |
 | R18 | Safe conversion | Simple → Advanced creates an independent copy with equivalent execution, including preparation/cooldown and final-rest setting. No tabs, destructive reverse conversion, or accidental replacement. |
 | R19 | Automatic palette | New work/custom steps take next palette color; prepare/rest use configurable default colors. Imported/duplicated steps keep colors. Role is explicit, not guessed from a step's name. Palette is readable and can be overridden. |
@@ -44,17 +44,21 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 
 ## Proposed defaults to review, not previously confirmed requirements
 
-- Backup retention means the previous 120 hours, using UTC timestamps; device displays local times. Keep every explicit save in that window, not five snapshots. Exit-triggered save is an autosave for history purposes.
 - Collapse affects view state only. Middle exposes step name, role, duration/reps, phases summary and color; Full reveals cues, display, confirmation and skip settings. Final layout is reviewed during UI design.
 - Regular custom steps cycle independently of fixed prepare/rest colors. Default cooldown/finish colors are configurable too. Confirm exact palette during design.
 - Countdown speaks remaining reps; Count-up speaks upcoming rep ordinal (1, 2, ...) at rep start while screen may initially show 0 completed. Confirm the display/announcement distinction during player review.
 - Empty names, zero rep count, zero/negative active durations and invalid phases are rejected. Set count one + skip-on-last-set may remove a step entirely: warn rather than silently clear the flag. All-skipped/empty routines cannot play.
 - Import is copying with fresh IDs by default; full backup restoration preserves identity through the restore flow. Runtime is unchanged by import, editing or sync.
-- An interrupted process restores a session paused after reconciliation; reboot invalidates monotonic deadlines and offers restart/recovery, not automatic background workout resumption. Clarify during reliability prototype.
 
 ## Open questions before affected phases
 
-Portuguese locale (Brazil/Portugal); initial global new-step count direction; acceptable minimum phase length and speech-overlap policy; stop/restore behavior after force-stop/reboot; required exact banner appearance versus a reliable notification/optional overlay. These do not prevent reviewing the project plan.
+Portuguese locale (Brazil/Portugal); initial global new-step count direction; acceptable minimum phase length and speech-overlap policy; calendar-history boundary/timezone and exact new-edit cleanup trigger; exit-save behavior when no edits were made; required exact banner appearance versus a reliable notification/optional overlay. These do not prevent reviewing the project plan.
+
+## Confirmed saving and recovery decisions
+
+Confirmed on 2026-10-01: history uses five calendar days. Saving when leaving the editor is a normal save, not an autosave, and contributes a backup. Minute autosaves remain excluded. Do not drop a retained backup solely because a long-offline device reconnects; cleanup of old history begins only when new edits occur. The exact cleanup event and day boundary/timezone are pending clarification. Consequently, history may remain older than five days while no new edits are made; five days is the cleanup window, not unconditional time-to-live.
+
+After a crash or reboot, reopening offers the saved workout paused with options to continue or restart. Explicit Stop clears the session and returns Home. Recover from persisted state without automatically playing audio or counting the interruption as active workout time; reboot invalidates old monotonic deadlines. P0/P3 verify recovery/checkpoint behavior on both phones.
 
 ## Confirmed voice decisions
 
