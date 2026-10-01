@@ -7,6 +7,7 @@ Checked 2026-10-01 using official documentation. These sources support platform 
 - [OpenAI: AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md) — directory-scoped instructions and discovery. Root instructions explicitly direct agents to read Android/web guidance even when working from root.
 - [OpenAI: execution plans](https://developers.openai.com/cookbook/articles/codex_exec_plans) — living, resumable plans with progress, decisions and validation. Timey's execution template adapts these ideas; Markdown plan files are loaded because AGENTS points to them, not because every filename is special.
 - [GitHub: planning and tracking work](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/planning-and-tracking-work-for-your-team-or-project) — issues, milestones, templates and optional Project views. No separate agent-management product is required by these mechanisms.
+- [GitHub: protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches) — required status checks, up-to-date branches, administrator enforcement, accepted skipped statuses and account-plan/visibility availability. A workflow alone does not prohibit merging; configure and verify the protection too.
 
 ## Android architecture and tooling
 

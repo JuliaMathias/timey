@@ -16,6 +16,7 @@ Suggested board states: Backlog, Ready, In progress, Review, Done. Labels: andro
 2. Create milestone issues from the task groups in `PLAN.md`, split into small tasks with observable acceptance criteria and meaningful tests. Preserve requirement IDs, dependencies, scope, and learning objectives.
 3. Create the Project board if the user wants it. Add existing issues rather than copying their descriptions into new cards. Record issue URLs back in the plan.
 4. Start P0 only after plan approval. Later phases remain visible but do not block the first runnable phone prototype.
+5. As part of P0, add GitHub Actions tests and protect `main` so PRs cannot merge until the required checks pass. Verify enforcement with a deliberately failing test PR followed by a passing revision. Record the actual required check names and settings; do not merely add a workflow file and assume it blocks merges.
 
 The GitHub CLI is already available on this Mac. Authentication has not been checked; remote management requires the user's account authorization. Templates in `.github/` standardize tasks, bugs, and review without installing anything.
 
@@ -26,6 +27,10 @@ Before coding, read relevant instructions and requirement IDs, inspect current s
 Implement and test a coherent increment, update its documentation, inspect the diff, and commit with a title and body. Useful increments include a model plus validation tests, persistence plus migration tests, and a screen plus interaction tests. Do not hold all work until a large feature is complete. Do not create knowingly broken intermediate commits.
 
 When a remote exists, use a feature branch per issue and a small PR. Link the issue and include actual validation. Commits are local by default; commit authorization is not automatic permission to publish or merge. A review checks the behavior against the issue, not just style.
+
+Tests must run and pass in GitHub Actions before merging each PR. Require PRs and an up-to-date branch, require the stable CI gate from GitHub Actions, and apply protections to administrators too, without a routine bypass. Failed, cancelled, missing, or pending tests block merge. Local checks remain useful but do not replace this requirement. See `TESTING.md` for suite coverage and enforcement details.
+
+GitHub's documented branch protection availability depends on account plan and visibility: public repositories support it on Free, while private repositories require a supporting paid plan such as Pro. Verify the user's account capability before choosing final visibility; keep the CI merge requirement and explain any unresolved enforcement limitation. Do not change privacy or purchase a plan without the user's choice.
 
 Done means acceptance criteria met, tests passed or material limitations explicitly accepted, device evidence collected where required, documentation updated, and work integrated. A generated screen or a passing compile alone is insufficient.
 

@@ -35,7 +35,20 @@ From `android/`: `./gradlew testDebugUnitTest lintDebug assembleDebug`. With emu
 
 From `web/` later: `mix format --check-formatted` and `mix test`, plus the selected OpenAPI/schema lint command. No commands above currently run: there is no Gradle wrapper or Mix project yet.
 
-Continuous integration should use a compatible pinned JDK/SDK, unit tests/lint/build on Android changes, shared fixture checks on contract changes, and later Mix checks on web changes. Device acceptance cannot be replaced by hosted CI alone. Avoid real Google accounts in standard CI; credentials are only used in deliberate integration verification.
+Continuous integration must use a compatible pinned JDK/SDK and run the established automated suites on PRs. Device acceptance cannot be replaced by hosted CI alone. Avoid real Google accounts in standard CI; credentials are only used in deliberate integration verification.
+
+## Required GitHub Actions merge gate
+
+User requirement, agreed 2026-10-01: automated tests must run and pass through a GitHub Actions workflow before a PR can merge. No workflow or remote protection exists in the current documentation-only repository; implement and verify both in P0 alongside the runnable scaffold.
+
+- Trigger CI for every PR targeting `main`, including new commits and branch updates; also run on pushes to `main` to detect integration regressions. Start with all established suites on every PR rather than path-filtering required workflows. Optimize later only with verified coverage and an always-reported merge gate.
+- Android checks include the pure Kotlin/domain and app unit tests, lint and debug build. Add Room migration/integration and critical Compose instrumentation tests on a CI emulator as those suites are introduced. Real-phone audio/background evidence remains separately required where relevant.
+- When contracts exist, validate schemas/fixtures. When the Phoenix application exists, add ExUnit context/controller/LiveView and API contract tests plus formatting checks. A monorepo PR cannot omit an established required suite merely because its author believes the change is unrelated.
+- Use a stable, uniquely named final check such as `ci-required`. It runs even when dependencies fail and succeeds only when all mandatory jobs actually succeed. It must reject failed, cancelled, unexpectedly skipped or missing required jobs. Never use `continue-on-error` for required tests or turn a test failure into a successful status.
+- Configure `main` protection to require PRs, the Actions-produced final check, and an up-to-date branch. Apply the protection to administrators and prevent routine bypass. An earlier green run does not authorize merging later changes. Add future suites to the gate without weakening its success criteria.
+- Verify with a test PR containing a failing test: merge must be blocked; repair and rerun on the new revision, then verify eligibility. Record workflow paths, check names and protection settings in README. GitHub can treat skipped checks as acceptable, so the final gate must explicitly validate required job results.
+
+Check account/visibility support before remote setup: GitHub's branch protection for a private repository requires a supporting paid plan such as Pro; public repositories support it on Free. If unavailable, report the enforcement gap and obtain a user decision rather than claiming merges are technically blocked. This does not authorize buying a subscription or making the project public.
 
 ## Reporting
 

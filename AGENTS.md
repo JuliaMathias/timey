@@ -12,6 +12,7 @@
 - Commit as you go in small, logical, reviewable increments. Do not wait for an entire feature. Each commit must have a descriptive title AND a nonempty body explaining all changes, their purpose, and validation or remaining limitations.
 - Stage explicit paths. Inspect the staged diff; never include unrelated user changes, credentials, personal databases, or raw reference media. Do not amend, reset, rebase, or force-push another contributor's work without authorization.
 - Run the meaningful checks for each increment before committing. A scaffold or documentation commit can use structural/link checks; do not claim application tests ran when there is no application.
+- Once GitHub CI exists, every PR must run the applicable automated tests through GitHub Actions and pass the required merge check on the latest revision. Do not merge with failed, cancelled, missing, or still-running tests, bypass protections, or substitute local results for required CI. Configure this during P0; add web/API tests when that application exists.
 - A feature may span several coherent commits, but do not deliberately leave a broken build. End-of-task reports include commit IDs and actual verification results.
 
 ## Readability and documentation

@@ -6,6 +6,8 @@ Linked issue and requirement IDs. Describe concrete before/after behavior.
 
 Tests actually run and results, device demonstration, and unrun checks/limitations.
 
+- [ ] Required GitHub Actions tests/checks passed on the latest PR revision (link the run). Local results alone do not satisfy the merge gate.
+
 ## Documentation and learning
 
 Updated guides/comments and one relevant Kotlin/Android or Elixir concept.

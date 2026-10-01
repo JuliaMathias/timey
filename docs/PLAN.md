@@ -12,9 +12,11 @@ No calendar estimates yet: target-device background/cue tests and tool setup det
 
 Dependencies: approval of this plan; Android Studio/SDK installation; actual phone model/Android version and language preference.
 
-Task groups: scaffold compatible stable Kotlin/Compose Gradle project; pin toolchain/version catalog and wrapper; add runnable README/CI unit-build-lint checks. Build a tiny 2.2-second rep and Down/Up phase demonstration with fake-clock unit tests, real offline TTS, screen-off foreground playback and actionable notification. Measure cue delay/cancellation and evaluate persistent banner versus overlay on the user's device. Decide service type/wake-lock lifecycle; record device results and missing permission fallback. Install offline voice data if needed and verify airplane mode.
+Task groups: scaffold compatible stable Kotlin/Compose Gradle project; pin toolchain/version catalog and wrapper; add runnable README and GitHub Actions tests/lint/build with a stable required merge gate. Configure `main` protection so tests must run and pass before any PR merges; verify account support and a failing/passing test PR. Build a tiny 2.2-second rep and Down/Up phase demonstration with fake-clock unit tests, real offline TTS, screen-off foreground playback and actionable notification. Measure cue delay/cancellation and evaluate persistent banner versus overlay on the user's device. Decide service type/wake-lock lifecycle; record device results and missing permission fallback. Install offline voice data if needed and verify airplane mode.
 
 Gate: a debug APK runs on phone; phase progression stays correct while screen off and switching apps; obsolete voice cancels on skip; offline voice or explicit sound fallback works. Document measured limitations and chosen approach before building full UI. This is a disposable or reusable small vertical slice, not an excuse to build all features at once.
+
+CI gate: the automated tests pass in GitHub Actions, and a PR with failing tests demonstrably cannot merge. Protection/check configuration is documented; add instrumentation and shared-contract checks as those suites appear. Do not mark this gate complete based only on a local test run or workflow file.
 
 Learning: Gradle wrapper, app lifecycle, Compose state, monotonic time, coroutines, foreground service versus UI thread.
 
@@ -75,6 +77,8 @@ Requirements: R24 and desktop portions of R13-R16/R22-R23.
 Task groups: scaffold pinned Elixir/Erlang/Phoenix/Ecto SQLite app; contexts validate shared schemas/fixtures; implement local authenticated versioned API for all saved-content features. Define OpenAPI and maintain interactive reference/curl examples; document scopes/tokens, errors, ordering, revision conflicts, schema compatibility, pagination, import/export and history restore. Web Google OAuth client in same Cloud project and Drive sync adapter use tested lineage/history rules. API never operates the active phone engine.
 
 Gate: API can create a phased routine, find/copy a loop, insert a routine, edit/save/restore it, and sync it for Android use. Kotlin/Elixir fixture behavior agrees. ExUnit/context/controller and OpenAPI contract checks pass; docs correspond to actual endpoints. Test unauthenticated, invalid and stale-revision requests.
+
+Extend the required GitHub Actions gate with Phoenix/LiveView and API contract tests, formatting and cross-language fixture validation. Verify that a failing web/API job also blocks merging.
 
 Learning: familiar Ecto/Phoenix contexts, HTTP contracts and cross-language compatibility; Elixir functions always have docs/specs.
 

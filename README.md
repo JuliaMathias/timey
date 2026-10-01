@@ -46,3 +46,5 @@ P0 proves device risks; P1 builds contracts/storage/engine; P2 builds offline ed
 No run or build command is available until P0 scaffolding. The setup and testing guides clearly label future commands. When scaffolding exists, update this section with verified clone/setup/run/test instructions and actual feature status in the same commit.
 
 Read root and relevant scoped `AGENTS.md` before changes. Commit coherent increments with a descriptive title and complete body. Every feature needs meaningful tests and readable module/function documentation; Elixir functions require both `@doc` and `@spec`. Never claim a device behavior or test result without evidence.
+
+Before any PR merges, its automated tests must run and pass in GitHub Actions. P0 adds the actual workflow and configures required checks on `main`; P6 extends it with Phoenix/API tests. This is an agreed engineering requirement, not an already configured protection. See [the merge gate](docs/TESTING.md#required-github-actions-merge-gate).
