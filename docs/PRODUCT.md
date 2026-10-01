@@ -64,11 +64,15 @@ Leaving an editor after edits is a normal history-producing save, including when
 
 After a crash or reboot, reopening offers the saved workout paused with options to continue or restart. Explicit Stop clears the session and returns Home. Recover from persisted state without automatically playing audio or counting the interruption as active workout time; reboot invalidates old monotonic deadlines. P0/P3 verify recovery/checkpoint behavior on both phones.
 
+Architecture implications and alternatives: [backup history decision](decisions/0002-backup-history.md) and [workout recovery decision](decisions/0004-workout-recovery.md).
+
 ## Confirmed voice decisions
 
 Confirmed on 2026-10-01: support English and Portuguese, with English as default. In number-plus-selected-phase mode, announce the number at rep start and the phase name at its actual boundary: selecting Up for Down → Up produces "1" at the start of Down, then "Up" at the start of Up. If the selected phase starts the rep, the cues coincide; later phase names must not be announced early.
 
 Static keeps its fixed display but inherits voice counting direction from the globally configured default for creating new steps (countdown or count-up). It does not introduce a separate global Static counting preference. Retain the previously agreed per-step configuration support. The initial factory count direction and Portuguese locale remain open.
+
+See the [voice timing and inheritance decision](decisions/0003-voice-timing.md) for the domain-contract implications; speech language preferences are specified here.
 
 ## Confirmed target phones
 

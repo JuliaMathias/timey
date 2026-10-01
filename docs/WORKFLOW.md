@@ -8,6 +8,8 @@ Use one private GitHub repository, GitHub Issues for executable tasks, milestone
 
 Docs describe enduring requirements and decisions. Issues describe work and status. The board displays those issues; it is not a second backlog. Chats are discussion, not the source of truth for accepted behavior. Do not maintain a competing status table in several places.
 
+`PRODUCT.md` is the current behavior specification; `ARCHITECTURE.md` describes the current technical design; `PLAN.md` sequences delivery. Numbered records in `docs/decisions/` explain why durable architecture-shaping choices were made, which alternatives were considered and their consequences. Use its index/policy to decide when a choice needs a record. Language, color and other ordinary product preferences do not each need an ADR; choices affecting contracts, persistence, synchronization or runtime ownership do. Add/update the record and index alongside the relevant specification change. Mark replaced records superseded and link successors to retain decision history.
+
 Suggested board states: Backlog, Ready, In progress, Review, Done. Labels: android, web, contracts, sync, audio, design, bug, docs, learning. Use milestone P0-P7 from `PLAN.md`. Add blocked-by links and requirement IDs. One owner per issue. Begin with one implementation task at a time; add concurrency only for independent work after the contracts stabilize.
 
 ## After plan approval

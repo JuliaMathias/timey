@@ -28,7 +28,7 @@ Planning only. There is no runnable app, Gradle wrapper, Phoenix project, CI wor
 | `docs/SETUP_MAC.md` | Android Studio/SDK, emulator/phone, JDK, and later OAuth setup. |
 | `docs/LEARNING.md` | Learning alongside the project, with Kotlin/Elixir comparisons and debugging steps. |
 | `docs/SOURCES.md` | Official research sources and what each supports. |
-| `docs/decisions/` | Architecture decision records; repository layout is the first accepted decision. |
+| `docs/decisions/` | [Decision index and policy](docs/decisions/README.md), with records of architecture-shaping choices and their rationale. |
 | `docs/plans/TEMPLATE.md` | Resumable execution plan for a multi-session task. |
 | `.github/` | Task/bug issue templates and PR review template; no remote objects created. |
 | `.gitignore` | Excludes local build state, credentials, databases, and generated caches. |
