@@ -16,6 +16,7 @@ Name the relevant files, interfaces, current behavior, expected behavior, prereq
 - [ ] Implement the first coherent increment with meaningful tests and docs.
 - [ ] Commit with title and description after checking the staged diff.
 - [ ] Complete remaining increments and acceptance evidence.
+- [ ] Reread the entire remaining delivery plan and outstanding dependencies; record adjustments or "No adjustments needed" before closing the issue and starting the next task.
 
 ## Steps and validation
 
@@ -24,6 +25,10 @@ Specify exact working directories, commands, test inputs, expected behavior, and
 ## Decisions and discoveries
 
 Record date, decision, reason, alternatives, and whether it changes a requirement. Note failed approaches only when they explain a constraint another contributor needs.
+
+## Forward-plan review at issue completion
+
+Record the completed issue and evidence learned, the remaining phases/dependencies reviewed, and changes needed to future technical approach, ordering, risks, tests or acceptance gates. Link updated plan sections/docs/issues and explain why. If no adjustments are needed, state that explicitly with a reason. Flag proposed changes to agreed product behavior or user decisions for approval. Include this outcome in the completion handoff.
 
 ## Recovery and handoff
 

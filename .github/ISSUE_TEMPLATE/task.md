@@ -20,6 +20,7 @@ Requirement IDs, phase, included work, exclusions, dependencies, and owned files
 - [ ] Meaningful automated tests and relevant device checks.
 - [ ] Documentation, function comments, and learning explanation updated.
 - [ ] Small commits with titles and complete descriptions.
+- [ ] Entire remaining plan and outstanding dependencies reviewed; adjustments or "No adjustments needed" recorded in the completion note.
 
 ## Validation and learning
 

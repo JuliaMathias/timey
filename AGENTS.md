@@ -29,6 +29,7 @@
 - Use controllable clocks and fake cue/sync adapters. Do not rely on real sleep, external accounts, or a real TTS engine for ordinary unit tests.
 - Add device tests/manual evidence for Android lifecycle, screen-off timing, audio, permissions, and notification/overlay behavior. Unit tests alone do not establish device reliability.
 - Update requirements/architecture/plan and learning notes when decisions or behavior change. Never mark an acceptance criterion passed without evidence. Report missing tools and unrun checks clearly.
+- At completion of every issue, reread the entire remaining delivery plan and outstanding issue dependencies before closing the issue or starting the next one. Assess what the completed work changes about future scope, technical approach, ordering, risks, tests and acceptance gates. Update affected plans/docs/issues with evidence and rationale; record "No adjustments needed" when appropriate. Preserve agreed product requirements and flag proposed changes to user decisions for approval. Include the review outcome in the issue handoff/completion report.
 
 ## Product boundaries
 

@@ -106,6 +106,8 @@ Learning: compare Compose state flow with LiveView assigns/events; maintain both
 
 After approval, convert task groups to GitHub issues with these IDs and dependencies. Don't publish the entire plan as an unstructured single issue, and don't create hundreds of tasks before the first prototype teaches us anything. Use P0 evidence to refine later slices without quietly changing requirements. Track status in issues once migrated; this document retains scope/gates and links.
 
+At completion of every issue, reread the entire remaining plan and outstanding dependencies. Check whether the completed work changes technical assumptions, ordering, risk, test coverage or acceptance gates in any later phase. Update affected sections and future issues before moving on; record the evidence and rationale in the completed issue's note and execution plan, including an explicit "No adjustments needed" outcome when applicable. Preserve agreed requirements and seek approval for changes to user decisions. This review is part of issue completion, not an optional end-of-milestone activity.
+
 ## Approval checkpoint
 
 Confirm the phase order and proposed defaults in `PRODUCT.md`; select GitHub Issues plus optional Project board (recommended) or local-only tracking. After approval, obtain GitHub owner/name/visibility and migrate tasks. Install Android Studio using `SETUP_MAC.md`; begin P0 when authorized. Do not infer approval from this file's presence.

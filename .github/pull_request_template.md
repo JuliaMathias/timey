@@ -15,3 +15,7 @@ Updated guides/comments and one relevant Kotlin/Android or Elixir concept.
 ## Review considerations
 
 Migrations, sync compatibility, permissions, audio/lifecycle risks, and recovery if relevant.
+
+## Forward-plan review
+
+What does this issue's completed work change in the remaining plan? Record affected phases/dependencies, evidence and updates to future issues/docs, or "No adjustments needed" with a reason. Reconcile the review with the integrated result before closing the issue or starting the next task.

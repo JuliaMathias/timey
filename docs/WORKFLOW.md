@@ -32,7 +32,11 @@ Tests must run and pass in GitHub Actions before merging each PR. Require PRs an
 
 GitHub's documented branch protection availability depends on account plan and visibility: public repositories support it on Free, while private repositories require a supporting paid plan such as Pro. Verify the user's account capability before choosing final visibility; keep the CI merge requirement and explain any unresolved enforcement limitation. Do not change privacy or purchase a plan without the user's choice.
 
-Done means acceptance criteria met, tests passed or material limitations explicitly accepted, device evidence collected where required, documentation updated, and work integrated. A generated screen or a passing compile alone is insufficient.
+Done means acceptance criteria met, tests and required CI passed, material limitations explicitly accepted where applicable, device evidence collected where required, documentation updated, work integrated, and the forward-plan review recorded. A generated screen or a passing compile alone is insufficient.
+
+As each issue is completed, reread all remaining phases in `PLAN.md` and outstanding issue dependencies before closing it or beginning the next issue. Use the implementation, test results and device discoveries to assess future architecture, sequencing, scope, risks, validation and acceptance gates. Do not limit the review to the next task or the current milestone.
+
+Adjust affected plan sections, technical docs and future issue descriptions/dependencies when the evidence warrants it. Record the completed issue, discoveries, adjustments and reasons in its completion note and execution plan; if none are needed, explicitly record "No adjustments needed" and why. Keep issue status in GitHub once migrated rather than duplicating the backlog in Markdown. Routine technical refinements can proceed within approved scope; changes to agreed product behavior or user decisions must be presented for approval. Any resulting code/documentation changes follow the normal commit and PR/CI rules.
 
 ## Optional agent collaboration
 
