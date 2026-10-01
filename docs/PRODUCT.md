@@ -22,7 +22,7 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 | R04 | Three editor disclosure levels | Collapsed loop shows name/set count/duration; middle shows basic step configuration; full shows all settings. Open at middle. Buttons collapse all, expand all to middle, and fully expand all. Drag a collapsed loop as a whole. |
 | R05 | Configurable steps | Name, explicit role (prepare/work/rest/cooldown/custom), color, TIME or REPS, duration or rep count/pace, duplicate/delete/reorder, display, start cue, final cues, confirmation, skip-last-set. Decimal seconds supported without float timing drift. |
 | R06 | Repetition phases | Example: 10 reps with Down 2s + Up 4s totals 60s. Phases are named, ordered, addable/removable/reorderable, identical each rep, and sum to rep duration. Ordinary reps still support a single pace duration. |
-| R07 | Voice repetition and phase options | Off/every rep/last three; general default with per-step override. Numbers follow countdown or count-up. Modes: number only; number plus every phase; number plus a selected phase. Number always begins at rep start. Phase calls follow phase boundaries (selected-phase phrasing is a remaining detail below). Step-start voice can read the name. |
+| R07 | Voice repetition and phase options | Off/every rep/last three; general default with per-step override. Numbers follow countdown or count-up. Modes: number only; number plus every phase; number plus a selected phase. Number begins at rep start; selected phase name is spoken when that phase begins. Step-start voice can read the name. English and Portuguese supported, English default. |
 | R08 | Pleasant sound choices | Gong default, small curated bell/bowl/chime choices with previews and separately adjustable voice/sound volumes. Final-three time cues occur at remaining 3/2/1 seconds; rep cues occur at the start of the last three reps. Cue counts configurable. Use locally bundled assets with recorded licenses. |
 | R09 | Display and confirmation | Timed countdown reaches 0; timed count-up reaches target; rep countdown counts remaining reps and count-up completed reps. Auto advances at target; Manual freezes at target until checkmark, usable early. Static is manual and fixed, while cues still run. |
 | R10 | Playback controls | Previous/Next move one executed step across loop/set boundaries; restart-step starts its first rep/phase; all preserve paused/running state. Restart-routine asks confirmation and starts at routine beginning preserving state. Pause/resume and hold-to-exit; notification X completely ends the session. |
@@ -38,7 +38,7 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 | R20 | Search routines and loops | Search routine names and named loops across routines. Results show containing routine and allow editing, navigation and independent insertion/reuse. Search works offline. Search within current routine is included. |
 | R21 | Undo/redo | Undo/redo edits, deletion, movement, phase changes, and whole-routine insertion. Autosave doesn't erase undo within current editing session. New edit after undo clears redo. |
 | R22 | JSON import/export | Versioned portable format, validated before any mutation, preview/duplicate handling, full routine/settings export and selected routine export. Never export credentials or phone speech cache. |
-| R23 | General settings | Defaults for rep voice mode, sound/voice volume, voice language, simple colors and skip-final-rest, palette and theme. Settings sync where portable; device permissions/voice-engine IDs do not. Step overrides distinguish inherited value from explicit override. |
+| R23 | General settings | Defaults for new-step count direction, rep voice mode, sound/voice volume, voice language (English default; Portuguese also supported), simple colors and skip-final-rest, palette and theme. Static voice inherits the global new-step count direction unless overridden on the step; no separate Static direction default. Settings sync where portable; device permissions/voice-engine IDs do not. Step overrides distinguish inherited value from explicit override. |
 | R24 | Documented API, later | All saved-content creation and management through authenticated API: routines/types, loops, steps, phases, ordering/copies, conversion, settings, search, JSON import/export, history/restore. No running-timer control. OpenAPI plus examples and error/auth/version/conflict docs and tests. |
 | R25 | Modern accessible UI | Responsive Android layouts, clear hierarchy, light/dark/system themes, readable timer typography, sufficient contrast, large controls and screen-reader labels. Color never carries the only meaning. Computer editor later uses space for easier editing. |
 
@@ -47,15 +47,20 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 - Backup retention means the previous 120 hours, using UTC timestamps; device displays local times. Keep every explicit save in that window, not five snapshots. Exit-triggered save is an autosave for history purposes.
 - Collapse affects view state only. Middle exposes step name, role, duration/reps, phases summary and color; Full reveals cues, display, confirmation and skip settings. Final layout is reviewed during UI design.
 - Regular custom steps cycle independently of fixed prepare/rest colors. Default cooldown/finish colors are configurable too. Confirm exact palette during design.
-- Phase mode 'number + selected phase' speaks the number at rep start and the selected phase at its actual start. If selected phase is first, combine them ('1 down'); later phases don't shift the number. Confirm whether the user instead wants the selected phase name combined early at every rep start.
-- Countdown speaks remaining reps; Count-up speaks upcoming rep ordinal (1, 2, ...) at rep start while screen may initially show 0 completed. Static needs a separate underlying count-direction preference, proposed countdown default. Resolve this before cue implementation.
+- Countdown speaks remaining reps; Count-up speaks upcoming rep ordinal (1, 2, ...) at rep start while screen may initially show 0 completed. Confirm the display/announcement distinction during player review.
 - Empty names, zero rep count, zero/negative active durations and invalid phases are rejected. Set count one + skip-on-last-set may remove a step entirely: warn rather than silently clear the flag. All-skipped/empty routines cannot play.
 - Import is copying with fresh IDs by default; full backup restoration preserves identity through the restore flow. Runtime is unchanged by import, editing or sync.
 - An interrupted process restores a session paused after reconciliation; reboot invalidates monotonic deadlines and offers restart/recovery, not automatic background workout resumption. Clarify during reliability prototype.
 
 ## Open questions before affected phases
 
-Speech language(s); selected-phase wording and Static voice direction; acceptable minimum phase length and speech-overlap policy; stop/restore behavior after force-stop/reboot; required exact banner appearance versus a reliable notification/optional overlay. These do not prevent reviewing the project plan.
+Portuguese locale (Brazil/Portugal); initial global new-step count direction; acceptable minimum phase length and speech-overlap policy; stop/restore behavior after force-stop/reboot; required exact banner appearance versus a reliable notification/optional overlay. These do not prevent reviewing the project plan.
+
+## Confirmed voice decisions
+
+Confirmed on 2026-10-01: support English and Portuguese, with English as default. In number-plus-selected-phase mode, announce the number at rep start and the phase name at its actual boundary: selecting Up for Down → Up produces "1" at the start of Down, then "Up" at the start of Up. If the selected phase starts the rep, the cues coincide; later phase names must not be announced early.
+
+Static keeps its fixed display but inherits voice counting direction from the globally configured default for creating new steps (countdown or count-up). It does not introduce a separate global Static counting preference. Retain the previously agreed per-step configuration support. The initial factory count direction and Portuguese locale remain open.
 
 ## Confirmed target phones
 

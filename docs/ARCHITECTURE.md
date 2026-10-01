@@ -22,7 +22,7 @@ Proposed packages: `domain/model`, `domain/validation`, `domain/playback`, `data
 - Advanced payload: ordered loops. Loop has stable UUID, name, set count and ordered steps. A library search indexes loops through their containing routine rather than inventing independently linked reusable objects.
 - Step: UUID, name, explicit role, time or repetition payload, color, display/confirmation, start cue, final cue settings, voice inheritance/overrides and skip-last-set.
 - Repetition: count and either a pace duration or an ordered nonempty phase list. Phase has UUID/name/duration. Integer milliseconds throughout; decimal seconds are an input/output presentation.
-- Portable settings: palette, role colors, theme, voice language/preferences and sound volumes. Local-only settings: selected installed voice, permissions, device/account session, speech cache and editor disclosure/undo state.
+- Portable settings: palette, role colors, theme, new-step count direction, voice language/preferences (English default; Portuguese supported) and sound volumes. Static voice inherits the global new-step count direction unless overridden on the step; do not add an independent Static direction default. Local-only settings: selected installed voice, permissions, device/account session, speech cache and editor disclosure/undo state.
 - Session: immutable execution snapshot and cursor (loop/set/step/rep/phase), status, remaining/elapsed offsets and monotonic baseline. Keep it outside cloud content.
 - Explicit-save history: immutable snapshot, unique save ID, recorded UTC time, source device and checksum. Use five-day retention independent of current state.
 
@@ -52,11 +52,13 @@ Persist checkpoints for process recreation and propose paused recovery. Distingu
 
 TextToSpeech initialization, language/voice availability, engine performance and speech length vary by device. Choose an installed voice with no network requirement. Offer setup/download guidance before an offline session; missing voice data cannot magically be supplied while offline. Sound fallback works without TTS. Do not add a cloud TTS service or an AI subscription.
 
+Support English and Portuguese; English is the default. Verify installed offline voice availability in both languages on both target phones. The Portuguese locale is a remaining user choice. For Static display, resolve inherited direction from the global new-step count-direction setting when creating the playback snapshot, respecting step overrides.
+
 Create a cue planner separate from the clock: step name at step start, rep number at rep start, selected/all phase names at actual boundaries, last-N cue policy based on time/reps. Global defaults resolve into step overrides when building the playback snapshot. Cancel old utterances on navigation/restart/stop; never wait for speech completion to advance the engine.
 
 P0 measures live synthesis latency. If short cues cannot meet timing, pre-synthesize common numbers/names/phases to app-private files using `synthesizeToFile`, with completion listeners. Key cache by text/voice/language/rate; invalidate when these change and generate only necessary phrases with bounded cache size. SoundPool or a suitable local audio player schedules prepared clips. This is an option to validate, not a guarantee of sample-accurate Android playback.
 
-Resolve speech-overlap with a documented policy: don't queue stale speech, prioritize current rep/phase information, and warn when a selected phrase cannot fit its phase. Preview demonstrates this before exercise. Test 2.2-second reps and the shortest approved phases, speaker/Bluetooth, music ducking/interruption, screen-off and airplane mode. Language and selected-phase wording remain review questions.
+Resolve speech-overlap with a documented policy: don't queue stale speech, prioritize current rep/phase information, and warn when a selected phrase cannot fit its phase. Preview demonstrates this before exercise. Test 2.2-second reps and the shortest approved phases, speaker/Bluetooth, music ducking/interruption, screen-off and airplane mode. Selected-phase behavior is confirmed: number at rep start, phase name at its actual boundary; voice-overlap policy and Portuguese locale remain review questions.
 
 Bundle a small gong/bell/bowl/chime set with local license/attribution evidence. Source and audition assets during audio phase. Do not hotlink sounds or imitate proprietary recordings. Sound/voice volume and audio focus behavior have separate controls/tests.
 
