@@ -106,6 +106,8 @@ Learning: compare Compose state flow with LiveView assigns/events; maintain both
 
 After approval, convert task groups to GitHub issues with these IDs and dependencies. Don't publish the entire plan as an unstructured single issue, and don't create hundreds of tasks before the first prototype teaches us anything. Use P0 evidence to refine later slices without quietly changing requirements. Track status in issues once migrated; this document retains scope/gates and links.
 
+For every issue needing manual validation, include complete issue-specific test instructions per `TESTING.md`: setup/build, exact test data, numbered actions with expected results, variants/pass-fail criteria, evidence and cleanup. Refine them against the implemented UI before asking the user to test; record results or blocked/unrun cases. Otherwise document why manual testing is not required.
+
 At completion of every issue, reread the entire remaining plan and outstanding dependencies. Check whether the completed work changes technical assumptions, ordering, risk, test coverage or acceptance gates in any later phase. Update affected sections and future issues before moving on; record the evidence and rationale in the completed issue's note and execution plan, including an explicit "No adjustments needed" outcome when applicable. Preserve agreed requirements and seek approval for changes to user decisions. This review is part of issue completion, not an optional end-of-milestone activity.
 
 ## Approval checkpoint

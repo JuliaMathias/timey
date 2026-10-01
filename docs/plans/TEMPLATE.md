@@ -22,6 +22,8 @@ Name the relevant files, interfaces, current behavior, expected behavior, prereq
 
 Specify exact working directories, commands, test inputs, expected behavior, and device demonstration where needed. Record actual results as work happens; never invent counts or mark checks run before execution.
 
+For required manual checks, place complete executable instructions in the issue itself and keep them consistent with this plan: prerequisites/build, exact data/settings, numbered actions and expected observations, variants/pass-fail criteria, evidence capture and cleanup/recovery. Record the issue location and actual results; if no manual checks are needed, explain why.
+
 ## Decisions and discoveries
 
 Record date, decision, reason, alternatives, and whether it changes a requirement. Note failed approaches only when they explain a constraint another contributor needs.

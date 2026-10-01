@@ -7,6 +7,7 @@ Linked issue and requirement IDs. Describe concrete before/after behavior.
 Tests actually run and results, device demonstration, and unrun checks/limitations.
 
 - [ ] Required GitHub Actions tests/checks passed on the latest PR revision (link the run). Local results alone do not satisfy the merge gate.
+- [ ] Required manual-test procedures are complete in the issue and match this build; link actual results and identify unrun/blocked cases, or explain why manual tests are unnecessary.
 
 ## Documentation and learning
 

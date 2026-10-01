@@ -29,6 +29,19 @@ Use the user's actual phone for at least one full real routine, and an emulator 
 
 Check airplane mode; screen on/off; app background/another app; running/paused notification and banner dismissal; stop/return Home; permission denial; music/headphones/Bluetooth; rotation/large text/TalkBack; battery saver/idle; process kill and separately force-stop/reboot recovery. Verify wake resources release after stop/finish and waiting, and measure actual timing/audio drift against the P0-agreed tolerance. Hardware-specific results are not universal Android guarantees.
 
+## Complete manual-test instructions in each issue
+
+Whenever a feature or fix needs manual validation, its issue must contain a procedure the user can execute without reconstructing setup from chat. The matrix above identifies scenarios, not complete instructions. Each affected issue supplies the following, kept current as implementation changes:
+
+1. **Purpose and prerequisites:** requirement/acceptance criterion being checked; phone versus emulator; build/commit and how to obtain/install it; required permissions, offline voice, accounts/accessories and initial network/app state. Link verified installation instructions and name any issue-specific setup.
+2. **Exact test data:** routine name, loop/set/step/rep/phase durations, cue/display settings, or a supplied fixture/import file. Use disposable test content and specify the starting screen and saved/running/paused state.
+3. **Numbered actions and observations:** exact buttons/screens/commands, with the expected result after each action. Define durations/waits and distinguish app dismissal, process kill, force-stop and reboot where relevant. Use actual implemented labels; avoid ambiguous instructions such as "try background mode."
+4. **Variants and pass/fail:** required online/offline, permission, pause/run or accessory variants; observable success/failure criteria and the agreed timing tolerance/measurement method when timing matters. Do not invent a tolerance or present unvalidated OS behavior as guaranteed.
+5. **Evidence and result recording:** model/OS, build/commit, relevant voice/permission settings, expected versus actual results, pass/fail/blocked/not run per case, and requested redacted logs/screenshots or measurements. Explain how to capture any non-obvious evidence.
+6. **Cleanup and recovery:** stop the timer, restore changed network/permission/accessibility settings, and remove disposable content if appropriate. Tests involving reinstall/data clearing/account changes must explain data impact and how to preserve/restore user content; never casually clear the user's real database.
+
+Keep the executable instructions in the issue body, even if reusable setup is linked. A generic checklist or link to this strategy is insufficient. If manual tests are unnecessary, write "Not required" with the reason. Missing device/account access means blocked or not run, never passed. Manual evidence complements the mandatory automated GitHub Actions checks; it does not waive them.
+
 ## Expected commands after scaffolding
 
 From `android/`: `./gradlew testDebugUnitTest lintDebug assembleDebug`. With emulator/phone: `./gradlew connectedDebugAndroidTest`. Confirm task names in P0 and update docs if modules/flavors change. JVM domain-module task is added once that module exists.
