@@ -28,4 +28,3 @@ Record date, decision, reason, alternatives, and whether it changes a requiremen
 ## Recovery and handoff
 
 Describe safe retries, migrations/rollback, changed paths, commits, remaining work, and any missing device/tool/account access. Record the latest update date and next concrete action.
-

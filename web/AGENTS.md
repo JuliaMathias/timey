@@ -10,4 +10,3 @@ Inherit the repository rules. Implementation is deferred until the phone release
 - Add ExUnit context/controller tests and meaningful LiveView interaction tests. Use fake Drive transport for normal tests. Test Ecto/SQLite migrations and transaction boundaries.
 - Keep OAuth/client secrets and access tokens out of logs, repo, and exports. Use a Google web OAuth client belonging to the same Cloud project as Android; API authentication is separate from Google credentials.
 - At scaffolding, document verified `mix setup`, `mix phx.server`, `mix format --check-formatted`, and `mix test` commands. These commands are not available in this directory yet.
-

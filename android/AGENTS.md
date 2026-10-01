@@ -12,4 +12,3 @@ Inherit the repository rules. This directory will contain the Android applicatio
 - Test engine transitions using fake time; test ViewModel state and critical Compose interactions. Instrumented/device tests are necessary for audio, screen-off playback, permission denial, and notifications.
 - At scaffolding, add/verify these commands in README: `./gradlew testDebugUnitTest lintDebug assembleDebug`; with a device, `./gradlew connectedDebugAndroidTest`. Until the wrapper exists these are intended commands, not runnable checks.
 - Preserve paused/running state for previous/next/restart. Cancel obsolete cues on navigation and stop. Always release wake/audio resources on stop and failures.
-

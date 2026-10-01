@@ -50,4 +50,3 @@ Example:
 
     Validation: fake-clock tests cover phase boundaries, pause, and early next.
     Device audio validation remains part of the separate cue integration task.
-

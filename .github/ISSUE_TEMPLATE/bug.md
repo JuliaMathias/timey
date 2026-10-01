@@ -21,4 +21,3 @@ Logs/screenshots with account credentials and personal content removed.
 - [ ] Regression test reproduces the fault and passes after repair.
 - [ ] Relevant real-device behavior verified.
 - [ ] Related requirements/docs updated if necessary.
-

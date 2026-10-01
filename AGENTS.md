@@ -47,4 +47,3 @@
 
 - Check offline operation, monotonic timing, cue cancellation, database migrations, sync races, deletion/conflict preservation, backup retention, permissions, accessibility, and documentation/tests.
 - Confirm every commit has a title/body and every new function follows the language documentation rules. Keep review findings concrete and tied to observable behavior.
-

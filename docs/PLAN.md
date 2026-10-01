@@ -1,0 +1,107 @@
+# Delivery plan
+
+Status: draft for user approval. Repository layout approved; no application code or remote issues created. Updated 2026-10-01.
+
+## Outcome and sequencing
+
+Deliver a reliable, readable Android app first, including offline editing/playback, phases/voice, Google Drive sync and five-day explicit-save history. Only after phone acceptance, build the documented API and Phoenix web editor. Preserve stable IDs R01-R25 from `PRODUCT.md` when creating issues. The milestones below are task groups; each is split into small tested increments after approval.
+
+No calendar estimates yet: target-device background/cue tests and tool setup determine the difficult parts. Progress is measured by demonstrations and passing acceptance, not generated code volume.
+
+## P0: Environment, foundation and risk prototypes
+
+Dependencies: approval of this plan; Android Studio/SDK installation; actual phone model/Android version and language preference.
+
+Task groups: scaffold compatible stable Kotlin/Compose Gradle project; pin toolchain/version catalog and wrapper; add runnable README/CI unit-build-lint checks. Build a tiny 2.2-second rep and Down/Up phase demonstration with fake-clock unit tests, real offline TTS, screen-off foreground playback and actionable notification. Measure cue delay/cancellation and evaluate persistent banner versus overlay on the user's device. Decide service type/wake-lock lifecycle; record device results and missing permission fallback. Install offline voice data if needed and verify airplane mode.
+
+Gate: a debug APK runs on phone; phase progression stays correct while screen off and switching apps; obsolete voice cancels on skip; offline voice or explicit sound fallback works. Document measured limitations and chosen approach before building full UI. This is a disposable or reusable small vertical slice, not an excuse to build all features at once.
+
+Learning: Gradle wrapper, app lifecycle, Compose state, monotonic time, coroutines, foreground service versus UI thread.
+
+## P1: Routine contracts, local data and timer engine
+
+Requirements: R01-R03, R05-R06, R09-R10, R18; foundations for R13-R16/R22-R24.
+
+Task groups: define versioned model/schema and shared fixtures; validate types/durations/names/phases; model simple-to-advanced copying equivalence; implement deterministic loop/set/step/rep/phase cursor, skip-last semantics, display projections and manual wait. Add pause/resume, previous/next, restart step/routine and stop cancellation contracts. Room repositories, schema/migrations, atomic saves, portable settings and session checkpoints. Separate editor drafts from valid playable records. No HTTP service yet.
+
+Gate: fake-clock tests cover all timing boundaries, manual early completion/clamping/static, navigation state, skipped sets and phased repetitions. Room tests verify persistence/reopen and rollback. Valid routine export/import round-trips in contract fixtures. Engine independent of speech/network/UI.
+
+Learning: Kotlin data/sealed classes, nullability, immutable snapshots, interfaces/fakes, Room transactions and migrations; compare repositories to Ecto contexts.
+
+## P2: Routine library and modern offline editors
+
+Requirements: R02-R06, R17-R23, R25; saving part of R13.
+
+Task groups: design/review readable light/dark/system UI; Home/quickstart; Simple editor and safe Advanced-copy conversion; named-loop Advanced editor with three disclosure states and bulk controls; drag/reorder loops/steps/phases; independent copy insertion from routines and searchable loops. Automatic palette with explicit prepare/rest roles; duplicate/delete; global/per-step settings. Search library/current routine, undo/redo, JSON import/export validation/preview. Local autosave every 60s on dirty content and flush on exit with draft recovery and explicit Save action.
+
+Gate: edit a prehab routine, insert it before lower-body mobility, undo/redo, collapse/drag/reopen at middle, save/kill/reopen in airplane mode. Search loops finds containing routine and reuse copies preserve colors with new IDs. Invalid import doesn't partially mutate DB; Simple conversion cannot overwrite source. Compose interactions and accessibility checks pass.
+
+Learning: StateFlow/ViewModels, unidirectional data flow, Compose forms and semantics, persistence versus UI state, transactional undo.
+
+## P3: Complete phone player, audio and background behavior
+
+Requirements: R07-R12, R23/R25; uses prototypes from P0 and engine from P1.
+
+Task groups: resolve voice numbering/selected-phase wording; configurable rep Off/Every/Last-three default and overrides; step-name start voice; phase/all/selected announcements. Curate and license pleasant local sounds with previews and separate volumes. Implement cue planner/cache if latency measurements require it; preview mode. Player context/current-next/estimated totals; controls and confirmed full restart; finish/restart. Complete foreground notification and banner/overlay behavior, permission handling, screen-off resources and recovery policies. Test headphones/music/audio focus and stale-cue cancellation.
+
+Gate: an actual offline workout with phased reps and manual steps runs correctly with screen off and another app open; all controls work from app/notification and optional panel. Stop cancels audio and returns Home. Short-phase voice behavior is tested and explained; no timing waits for speech. Screen readers and large text retain usable controls. Document force-stop/reboot limits.
+
+Learning: service ownership, audio focus, offline TTS, asynchronous callbacks, cancellation and resource cleanup.
+
+## P4: Google Drive sync, backups and new-device recovery
+
+Requirements: R13-R16, R22-R23; no Phoenix dependency.
+
+Task groups: create user's Google Cloud/OAuth configuration guide and Android authorization; implement account isolation/local credential storage; validate Drive app-data access and revision protocol. Add unique WorkManager sync and immediate best-effort trigger after saves; latest autosave coalescing, pending explicit-save history, visible status and Sync now. Reconcile revisions/conflicts/deletions, retention cleanup, backup browser/restore and fresh-device onboarding. Verify retries, pagination, account revoke/switch, corrupt exports, in-flight edits and duplicate uploads. OAuth credentials setup requires user account actions at this phase; local development proceeds with fakes.
+
+Gate: edit offline with multiple autosaves and explicit saves; reconnect uploads latest content plus all in-window explicit backups without replaying autosaves. A fresh install/device restores current routines/settings. Concurrent changes preserve both; deletion isn't silently undone. Restore writes a new revision; expiry never deletes current data. Tests use fake Drive/clock; separately verify real-account flow on device and safe test data.
+
+Learning: OAuth identity versus authorization, background work constraints, idempotency, revision lineage, conflict resolution and restore testing.
+
+## P5: Phone release acceptance and readable handoff
+
+Requirements: all phone requirements R01-R23/R25.
+
+Task groups: full real-device acceptance matrix and regressions; performance/battery measurements; accessibility and visual review; migration/import/restore rehearsals. Produce a signed personal-use APK and explain installation/update. Securely back up signing key outside Git so updates can retain app data. Complete README, troubleshooting, module/function docs and learning walkthrough. CI runs relevant checks; no secrets/private DBs/media in artifacts. Validate all requirement coverage rather than stopping at basic timer MVP.
+
+Gate: user can use Timey daily without a web server; all agreed phone features demonstrated, known OS limits explained and accepted, setup/test docs reproducible. User accepts phone milestone before web/API implementation begins.
+
+Learning: debug versus release APKs, signing keys, CI evidence, profiling and interpreting regressions.
+
+## P6: Documented Phoenix API and sync-compatible backend
+
+Requirements: R24 and desktop portions of R13-R16/R22-R23.
+
+Task groups: scaffold pinned Elixir/Erlang/Phoenix/Ecto SQLite app; contexts validate shared schemas/fixtures; implement local authenticated versioned API for all saved-content features. Define OpenAPI and maintain interactive reference/curl examples; document scopes/tokens, errors, ordering, revision conflicts, schema compatibility, pagination, import/export and history restore. Web Google OAuth client in same Cloud project and Drive sync adapter use tested lineage/history rules. API never operates the active phone engine.
+
+Gate: API can create a phased routine, find/copy a loop, insert a routine, edit/save/restore it, and sync it for Android use. Kotlin/Elixir fixture behavior agrees. ExUnit/context/controller and OpenAPI contract checks pass; docs correspond to actual endpoints. Test unauthenticated, invalid and stale-revision requests.
+
+Learning: familiar Ecto/Phoenix contexts, HTTP contracts and cross-language compatibility; Elixir functions always have docs/specs.
+
+## P7: Phoenix LiveView computer editor
+
+Requirements: editor parity for R02-R08/R13/R17-R23/R25, excluding live playback control.
+
+Task groups: spacious responsive routine/loop search and editors with drag, three states, phase/cue configuration, undo/redo, independent insertion and Simple→Advanced copy; global settings, autosave/status/history and Drive conflicts. Reuse contexts from API, not HTTP requests from LiveView to itself. Provide local run instructions; remote hosting remains optional/separate decision.
+
+Gate: create/edit a large routine on Mac, sync and run it offline on phone. LiveView tests cover changes, autosave and conflict UI. API and UI produce equivalent records. Desktop shutdown doesn't affect Android.
+
+Learning: compare Compose state flow with LiveView assigns/events; maintain both clients through shared contracts.
+
+## Coverage and issue migration
+
+| Requirements | Main milestone(s) |
+| --- | --- |
+| R01-R03, R05-R06, R09-R10, R18 | P1, P2, P3 |
+| R04, R17, R19-R22, R25 | P2, P3, P5 |
+| R07-R08, R11-R12 | P0 prototype, P3 complete, P5 verified |
+| R13 | P2 local, P4 cloud, P6-P7 desktop |
+| R14-R16 | P4, P5, P6-P7 |
+| R23 | P1 settings model, P2 UI, P3 audio, P4 sync, P7 desktop |
+| R24 | P6 |
+
+After approval, convert task groups to GitHub issues with these IDs and dependencies. Don't publish the entire plan as an unstructured single issue, and don't create hundreds of tasks before the first prototype teaches us anything. Use P0 evidence to refine later slices without quietly changing requirements. Track status in issues once migrated; this document retains scope/gates and links.
+
+## Approval checkpoint
+
+Confirm the phase order and proposed defaults in `PRODUCT.md`; select GitHub Issues plus optional Project board (recommended) or local-only tracking. After approval, obtain GitHub owner/name/visibility and migrate tasks. Install Android Studio using `SETUP_MAC.md`; begin P0 when authorized. Do not infer approval from this file's presence.

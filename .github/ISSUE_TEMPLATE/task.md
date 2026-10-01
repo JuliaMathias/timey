@@ -24,4 +24,3 @@ Requirement IDs, phase, included work, exclusions, dependencies, and owned files
 ## Validation and learning
 
 Commands/demo, failure cases, and the Kotlin/Android concept this task teaches.
-
