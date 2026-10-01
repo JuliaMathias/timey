@@ -27,3 +27,4 @@ Keep the index and links current. Specifications describe current behavior; reco
 | [0002: Backup history](0002-backup-history.md) | Accepted policy; implementation pending | Five backup dates, save kinds, shared timezone and cleanup eligibility. |
 | [0003: Voice timing](0003-voice-timing.md) | Accepted semantics; implementation pending | Rep-start numbers, phase-boundary names and Static count-direction inheritance. |
 | [0004: Workout recovery](0004-workout-recovery.md) | Accepted behavior; implementation pending | Paused recovery after crash/reboot and explicit Stop clearing the session. |
+| [0005: Short-phase cues](0005-short-phase-cues.md) | Accepted policy; implementation pending | Warn about speech fit, preempt unfinished speech for newer cues, keep timer pace. |

@@ -10,7 +10,7 @@ No calendar estimates yet: target-device background/cue tests and tool setup det
 
 ## P0: Environment, foundation and risk prototypes
 
-Dependencies: approval of this plan; Android Studio/SDK installation; access to the confirmed Galaxy S24 Ultra and S22 Ultra (both Android 16; exact models/One UI in `PRODUCT.md`). Speech languages are English (default) and Portuguese; confirm the Portuguese locale before selecting its voice.
+Dependencies: approval of this plan; Android Studio/SDK installation; access to the confirmed Galaxy S24 Ultra and S22 Ultra (both Android 16; exact models/One UI in `PRODUCT.md`). Speech languages are English (default) and Brazilian Portuguese (pt-BR).
 
 Task groups: scaffold compatible stable Kotlin/Compose Gradle project; pin toolchain/version catalog and wrapper; add runnable README and GitHub Actions tests/lint/build with a stable required merge gate. Configure `main` protection so tests must run and pass before any PR merges; verify account support and a failing/passing test PR. Build a tiny 2.2-second rep and Down/Up phase demonstration with fake-clock unit tests, real offline TTS, screen-off foreground playback and actionable notification. Measure cue delay/cancellation and evaluate persistent banner versus overlay on the user's device. Decide service type/wake-lock lifecycle; record device results and missing permission fallback. Install offline voice data if needed and verify airplane mode.
 
@@ -18,7 +18,7 @@ Gate: a debug APK runs on phone; phase progression stays correct while screen of
 
 CI gate: the automated tests pass in GitHub Actions, and a PR with failing tests demonstrably cannot merge. Protection/check configuration is documented; add instrumentation and shared-contract checks as those suites appear. Do not mark this gate complete based only on a local test run or workflow file.
 
-Device scope: run the timing, offline English/Portuguese speech, screen-off and notification/banner prototype checks on both confirmed phones. Record differences instead of assuming one Samsung result covers the other.
+Device scope: run the timing, offline English/Brazilian Portuguese speech, screen-off and notification/banner prototype checks on both confirmed phones. Measure cue preemption and short-phase preview warnings while timer pace stays unchanged. Record differences instead of assuming one Samsung result covers the other.
 
 Learning: Gradle wrapper, app lifecycle, Compose state, monotonic time, coroutines, foreground service versus UI thread.
 
@@ -49,6 +49,8 @@ Learning: StateFlow/ViewModels, unidirectional data flow, Compose forms and sema
 Requirements: R07-R12, R23/R25; uses prototypes from P0 and engine from P1.
 
 Task groups: verify voice numbering/display distinction; configurable rep Off/Every/Last-three default and overrides; step-name start voice; phase/all/selected announcements with number at rep start and selected phase at its actual boundary. Support English by default and Portuguese; Static voice inherits the global new-step count direction. Curate and license pleasant local sounds with previews and separate volumes. Implement cue planner/cache if latency measurements require it; preview mode. Player context/current-next/estimated totals; controls and confirmed full restart; finish/restart. Complete foreground notification and banner/overlay behavior, permission handling, screen-off resources and recovery policies. Test headphones/music/audio focus and stale-cue cancellation.
+
+Confirmed defaults: Brazilian Portuguese for the Portuguese option, count-up for new steps and Every rep voice. Permit short phases, warn in preview when speech will not fit, and let the newest cue interrupt unfinished speech without changing timer pace. Group simultaneous number/phase cues; test stale callback cancellation. These are implementation requirements, not unresolved user choices.
 
 Gate: an actual offline workout with phased reps and manual steps runs correctly with screen off and another app open; all controls work from app/notification and optional panel. Stop cancels audio and returns Home. Short-phase voice behavior is tested and explained; no timing waits for speech. Screen readers and large text retain usable controls. Document force-stop/reboot limits.
 
