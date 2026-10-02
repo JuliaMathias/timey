@@ -7,7 +7,7 @@ Status: installation verified 2026-10-02 after the user completed Android Studio
 This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub CLI 2.86.0 are available. On 2026-10-02, verified:
 
 - Android Studio at `/Applications/Android Studio.app`; bundle version 2026.2, build `262.9437.185.2621.16467767`.
-- Bundled Java executable runs successfully: OpenJDK 25.0.3. Gradle compatibility and CI JDK selection still need validation when scaffolding; installation alone does not establish build compatibility.
+- Bundled Java executable runs successfully: OpenJDK 25.0.3. The scaffold pins Gradle 9.6.0 and CI Java 25.0.3; build validation is recorded in the Android foundation execution plan.
 - SDK at `~/Library/Android/sdk`, platform `android-37.0`, Build-Tools 36.0.0, Platform-Tools 37.0.1, emulator and system image installed.
 - AVD `Medium_Phone_API_37.0` is configured and now boots successfully after the storage fix and a cold boot with four virtual CPU cores. `adb devices` reports `emulator-5554 device`, `sys.boot_completed=1`, Android 17. Physical-phone connection remains unverified.
 - SDK Command-line Tools are installed and execute with Studio's bundled Java. `sdkmanager --version` delegates to Android CLI and reports version 1.0.16486076; prefer current documented CLI commands when scripting SDK setup.
@@ -33,7 +33,7 @@ export PATH="$ANDROID_HOME/platform-tools:$PATH"
 export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 ```
 
-Then verify `java -version` and `adb version` in a new terminal. A wrapper comes with the project in P0; don't run Gradle commands in this documentation-only repository yet. Later, from `android/`, start with `./gradlew testDebugUnitTest lintDebug assembleDebug`. Task names and exact JDK guidance will be verified and added to README during scaffolding.
+Then verify `java -version` and `adb version` in a new terminal. The checked-in wrapper is now available. From `android/`, run `./gradlew testDebugUnitTest lintDebug assembleDebug`, then `./gradlew connectedDebugAndroidTest` with the emulator or a phone connected. See README and the foundation execution plan for results and limitations.
 
 ## Connect your Android phone
 

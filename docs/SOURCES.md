@@ -38,3 +38,13 @@ Checked 2026-10-01 using official documentation. These sources support platform 
 
 - [GitHub CLI: Projects](https://cli.github.com/manual/gh_project) — Project commands require the `project` authorization scope; repository access alone does not grant it. Refresh authorization with `gh auth refresh -h github.com -s project`.
 - [GitHub: REST Project views](https://docs.github.com/en/rest/projects/views) — create a board with explicit Status columns using `vertical_group_by`; the created Timey view was verified through API responses.
+
+## Android foundation compatibility checked 2026-10-02
+
+- [AGP 9.4 compatibility](https://developer.android.com/build/releases/agp-9-4-0-release-notes): supports API 37; requires Gradle 9.6.0, Build-Tools 36.0.0 and JDK 17 minimum.
+- [Built-in Kotlin](https://developer.android.com/build/migrate-to-built-in-kotlin): AGP 9 replaces the separate kotlin-android plugin. Official Google Maven AGP 9.4.0 POM pins Kotlin 2.2.10; match the Compose compiler plugin.
+- [Gradle Java matrix](https://docs.gradle.org/current/userguide/compatibility.html): Java 25 is supported starting with Gradle 9.1.0; local JBR and CI use Java 25.0.3, with app bytecode 17.
+- [Activity releases](https://developer.android.com/jetpack/androidx/releases/activity) and [Compose BOM](https://developer.android.com/develop/ui/compose/bom): stable Activity 1.13.0 and Google Maven stable BOM 2026.09.00. BOM pins UI/test library versions together, independently of the compiler plugin.
+- [Emulator runner's maintainer documentation](https://github.com/ReactiveCircus/android-emulator-runner): Ubuntu KVM setup and API/architecture/working-directory inputs for instrumentation CI.
+- [Gradle Actions](https://github.com/gradle/actions) and [setup-java](https://github.com/actions/setup-java): wrapper validation/build caching and selected CI runtime. Action references are pinned by immutable Git commits.
+- [Android Auto Backup rules](https://developer.android.com/identity/data/autobackup): explicit modern data-extraction exclusions for cloud backup and device transfer; allowBackup alone is insufficient on some manufacturers.

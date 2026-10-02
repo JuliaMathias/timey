@@ -1,6 +1,6 @@
 # Android-specific instructions
 
-Inherit the repository rules. This directory will contain the Android application; it is not scaffolded yet.
+Inherit the repository rules. This directory contains the initial Android application scaffold. Feature status and verified commands are in README.
 
 - Use Kotlin, Jetpack Compose, Material 3, coroutines/Flow, ViewModels, Room, and WorkManager. Pin compatible stable versions when scaffolding; use the committed Gradle wrapper and version catalog. No global Gradle/Kotlin installation is needed.
 - Start with one app module and clear packages. Extract the platform-independent timer/model into a small Kotlin module when it improves isolated tests; avoid one Gradle module per screen.
@@ -10,5 +10,5 @@ Inherit the repository rules. This directory will contain the Android applicatio
 - Add KDoc to every class/module and function, including private functions. Explain lifecycle/cancellation behavior and ownership of resources.
 - Persist edits locally before networking. Test Room transactions and migrations with the actual database. Keep credentials and local SDK paths outside Git.
 - Test engine transitions using fake time; test ViewModel state and critical Compose interactions. Instrumented/device tests are necessary for audio, screen-off playback, permission denial, and notifications.
-- At scaffolding, add/verify these commands in README: `./gradlew testDebugUnitTest lintDebug assembleDebug`; with a device, `./gradlew connectedDebugAndroidTest`. Until the wrapper exists these are intended commands, not runnable checks.
+- At scaffolding, add/verify these commands in README: `./gradlew testDebugUnitTest lintDebug assembleDebug`; with a device, `./gradlew connectedDebugAndroidTest`. The wrapper exists; record actual results separately from available commands.
 - Preserve paused/running state for previous/next/restart. Cancel obsolete cues on navigation and stop. Always release wake/audio resources on stop and failures.

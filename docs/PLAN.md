@@ -1,6 +1,6 @@
 # Delivery plan
 
-Status: approved by the user on 2026-10-01; implementation not started. Repository layout and GitHub Issues/milestones/Project board selected; no application code; public JuliaMathias/timey repository created on 2026-10-02 and eight milestone trackers and four initial P0 tasks created. Updated 2026-10-01.
+Status: approved by the user on 2026-10-01; P0 Android foundation in progress. Repository layout and GitHub Issues/milestones/Project board selected; initial scaffold in development; public JuliaMathias/timey repository created on 2026-10-02 and eight milestone trackers and four initial P0 tasks created. Updated 2026-10-01.
 
 ## Outcome and sequencing
 
@@ -146,7 +146,7 @@ Initial P0 tasks:
 - [#11: Prototype phased reps and offline speech on both phones](https://github.com/JuliaMathias/timey/issues/11)
 - [#12: Prototype screen-off playback and draggable overlay](https://github.com/JuliaMathias/timey/issues/12)
 
-The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done; #9 is Ready and dependent work is Backlog. The project retains default private visibility. Required CI/branch protection remains task #10, not an already enforced merge gate. See [migration handoff](plans/github-migration.md).
+The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done; #9 is In progress and dependent work is Backlog. The project retains default private visibility. Required CI/branch protection remains task #10, not an already enforced merge gate. See [migration handoff](plans/github-migration.md).
 
 ## Approval checkpoint
 

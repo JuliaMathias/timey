@@ -1,6 +1,6 @@
 # Testing and acceptance strategy
 
-Every feature ships with meaningful tests. Use the smallest level that proves behavior, plus device evidence where Android or audio is involved. A passing compile is not a feature test. Current documentation-only work has no application test suite; validate links, requirement coverage and Git diffs instead.
+Every feature ships with meaningful tests. Use the smallest level that proves behavior, plus device evidence where Android or audio is involved. A passing compile is not a feature test. The initial Android foundation has two Compose instrumentation cases for launch/network-permission absence and Activity recreation. JVM timing tests follow in #11; never describe a NO-SOURCE task as passing behavioral cases. Also validate documentation links and Git diffs.
 
 ## Automated levels
 
@@ -48,15 +48,15 @@ Keep the executable instructions in the issue body, even if reusable setup is li
 
 ## Expected commands after scaffolding
 
-From `android/`: `./gradlew testDebugUnitTest lintDebug assembleDebug`. With emulator/phone: `./gradlew connectedDebugAndroidTest`. Confirm task names in P0 and update docs if modules/flavors change. JVM domain-module task is added once that module exists.
+From `android/`: `./gradlew testDebugUnitTest lintDebug assembleDebug`. With emulator/phone: `./gradlew clean connectedDebugAndroidTest`, followed by `python3 ../scripts/verify_android_tests.py app/build/reports/androidTests/connected/debug/index.html`. The result guard rejects missing/zero/skipped/failed execution even if Gradle exits zero; cleaning prevents stale reports. Run its six regression cases from root with `python3 -m unittest discover -s scripts -p 'test_*.py'`. Confirm task names in P0 and update docs if modules/flavors change. JVM domain-module task is added once that module exists.
 
-From `web/` later: `mix format --check-formatted` and `mix test`, plus the selected OpenAPI/schema lint command. No commands above currently run: there is no Gradle wrapper or Mix project yet.
+From `web/` later: `mix format --check-formatted` and `mix test`, plus the selected OpenAPI/schema lint command. The Android wrapper now exists; see README and the foundation execution plan for actual check results. The web commands remain future commands: no Mix project exists.
 
 Continuous integration must use a compatible pinned JDK/SDK and run the established automated suites on PRs. Device acceptance cannot be replaced by hosted CI alone. Avoid real Google accounts in standard CI; credentials are only used in deliberate integration verification.
 
 ## Required GitHub Actions merge gate
 
-User requirement, agreed 2026-10-01: automated tests must run and pass through a GitHub Actions workflow before a PR can merge. No workflow or remote protection exists in the current documentation-only repository; implement and verify both in P0 alongside the runnable scaffold.
+User requirement, agreed 2026-10-01: automated tests must run and pass through a GitHub Actions workflow before a PR can merge. The Android workflow is being introduced alongside the scaffold; verify its runs and remote enforcement in #10 before merging.
 
 - Trigger CI for every PR targeting `main`, including new commits and branch updates; also run on pushes to `main` to detect integration regressions. Start with all established suites on every PR rather than path-filtering required workflows. Optimize later only with verified coverage and an always-reported merge gate.
 - Android checks include the pure Kotlin/domain and app unit tests, lint and debug build. Add Room migration/integration and critical Compose instrumentation tests on a CI emulator as those suites are introduced. Real-phone audio/background evidence remains separately required where relevant.

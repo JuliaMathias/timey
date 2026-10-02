@@ -35,3 +35,9 @@ The goal is a codebase you can understand and debug, not just a generated APK. R
 5. Run the relevant checks, explain the cause in plain language, update docs if behavior changed, and commit with title/body and real validation.
 
 Every meaningful delivery includes one short learning note explaining a relevant concept or debugging choice. Module/KDoc/Elixir docs explain contracts and boundaries; this guide holds broader teaching material so source files remain readable. Ask for a walkthrough whenever a change is difficult to trace; do not accept unexplained abstractions as necessary.
+
+## P0 foundation: Activity recreation and Compose
+
+`MainActivity` is Android's entry screen. Android can destroy and recreate it when configuration changes; it is not a permanent process like an OTP supervisor. `setContent` installs a Compose tree, where functions describe what should be visible. Our recreation test restarts the actual Activity and checks that the screen remains usable. This is why the future workout clock must belong to the playback service/engine, not to a screen that Android may replace.
+
+The Gradle wrapper is the repository's build entry point, similar in purpose to running Mix tasks. The Android plugin compiles/packages the APK; the SDK provides Android APIs; the JDK runs the build. These are separate tools. AGP 9 includes Kotlin support, while the Compose compiler plugin is still explicit.

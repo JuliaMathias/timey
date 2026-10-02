@@ -34,3 +34,4 @@ Keep the index and links current. Specifications describe current behavior; reco
 | [0009: Movable background panel](0009-movable-background-panel.md) | Accepted requirement; implementation pending | Required draggable overlay with notification fallback and one service-owned timer. |
 | [0010: Local recovery drafts](0010-local-recovery-drafts.md) | Accepted behavior; implementation pending | Recover unfinished invalid edits locally without saving invalid routines or syncing drafts. |
 | [0011: Per-routine history](0011-per-routine-history.md) | Accepted scope; implementation pending | Independent routine history budgets, full current-library/settings sync and full-library JSON export. |
+| [0012: Android foundation toolchain](0012-android-foundation-toolchain.md) | Accepted engineering choice; validation in progress | Android 16 minimum, API 37 target, pinned wrapper/compiler/UI dependencies and CI runtime. |
