@@ -7,7 +7,7 @@ Status: installation verified 2026-10-02 after the user completed Android Studio
 This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub CLI 2.86.0 are available. On 2026-10-02, verified:
 
 - Android Studio at `/Applications/Android Studio.app`; bundle version 2026.2, build `262.9437.185.2621.16467767`.
-- Bundled Java executable runs successfully: OpenJDK 25.0.3. Gradle compatibility and CI JDK selection still need validation when scaffolding; installation alone does not establish build compatibility.
+- Bundled Java executable runs successfully: OpenJDK 25.0.3. The scaffold pins Gradle 9.6.0 and CI Java 25.0.3; build validation is recorded in the Android foundation execution plan.
 - SDK at `~/Library/Android/sdk`, platform `android-37.0`, Build-Tools 36.0.0, Platform-Tools 37.0.1, emulator and system image installed.
 - AVD `Medium_Phone_API_37.0` is configured and now boots successfully after the storage fix and a cold boot with four virtual CPU cores. `adb devices` reports `emulator-5554 device`, `sys.boot_completed=1`, Android 17. Physical-phone connection remains unverified.
 - SDK Command-line Tools are installed and execute with Studio's bundled Java. `sdkmanager --version` delegates to Android CLI and reports version 1.0.16486076; prefer current documented CLI commands when scripting SDK setup.
@@ -33,7 +33,7 @@ export PATH="$ANDROID_HOME/platform-tools:$PATH"
 export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 ```
 
-Then verify `java -version` and `adb version` in a new terminal. A wrapper comes with the project in P0; don't run Gradle commands in this documentation-only repository yet. Later, from `android/`, start with `./gradlew testDebugUnitTest lintDebug assembleDebug`. Task names and exact JDK guidance will be verified and added to README during scaffolding.
+Then verify `java -version` and `adb version` in a new terminal. The checked-in wrapper is now available. From `android/`, run `./gradlew testDebugUnitTest lintDebug assembleDebug`, then `./gradlew connectedDebugAndroidTest` with the emulator or a phone connected. See README and the foundation execution plan for results and limitations.
 
 ## Connect your Android phone
 
@@ -77,3 +77,21 @@ The diagnostic launch reported automatic RAM increase to 4096 MB for API 37 and 
 The original one-core AVD remained offline and Studio timed out after five minutes. Verified Hypervisor.Framework acceleration, adequate available memory and 32–34 GiB disk headroom. Restarted the stopped AVD using `-no-snapshot-load -no-snapshot-save -cores 4 -show-kernel`, preserving userdata and snapshots. Android reached boot completion around 142 seconds; adb then reported `device`, `sys.boot_completed=1` and Android 17.
 
 Persisted `hw.cpu.ncore=4` in the local AVD config for future Studio launches, keeping the prior config in a temporary local backup. The runtime automatically uses 4096 MB RAM for API 37. Cold boot and CPU count changed together; do not claim an isolated core-count diagnosis. No virtual-device wipe or SDK reinstall was performed. Emulator boot is now verified; application build/install and physical-phone checks remain task #9 work.
+
+### Boot completion versus usable development device
+
+During scaffold testing, API 37 sometimes lost Activity/package services. After restarting, individual properties/services responded but full `adb shell getprop` enumeration hung, preventing Gradle's device-property collection. Changing to the documented SwiftShader renderer did not fix full enumeration; no permanent graphics change is recorded. A boot-complete flag alone therefore does not establish a usable Gradle test device. Hosted API 36 instrumentation is passing; both physical-phone runs remain unverified. Direct adb installation and the actual AndroidJUnitRunner completed both screen tests successfully (172.575 seconds). This is a real local test pass, but not a successful Gradle connected-test command; the property-fetching limitation remains. No device properties or test outcomes were fabricated.
+
+If this installed emulator still reports unknown API level/unresponsive properties in Studio, create an Android 16 / API 36 Google APIs ARM64 AVD using Device Manager (+ → Create virtual device → choose a phone → select/download an ARM64 Android 16 system image). Keep the existing AVD; no wipe is required. Record download/disk usage and actual boot/test evidence. This alternative image is not installed by this task. The phone matching API 36 is also a valid development target after USB authorization.
+
+### Invalid JAVA_HOME from an existing shell profile
+
+On this Mac, `~/.zshrc` contains an old `export JAVA_HOME=/opt/jdk-17.0.8+7`; that directory is not installed. A newly started shell can restore this value even after Java was exported in another session. Studio's bundled Java executable is verified at `/Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java`. From `android/`, pass the correct values directly to each Gradle invocation:
+
+```sh
+env JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" \
+    ANDROID_HOME="$HOME/Library/Android/sdk" \
+    ./gradlew testDebugUnitTest lintDebug assembleDebug
+```
+
+This exact command passes locally. `env` supplies variables for that command and its children; it does not rely on earlier exports surviving across terminal sessions. Use the same prefix for connected tests. For a permanent interactive-shell setting, replace the stale JAVA_HOME line in `~/.zshrc` with the quoted Studio path and open a new terminal; no profile edit is required to use the command above.

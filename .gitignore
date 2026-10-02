@@ -20,3 +20,4 @@ oauth*.json
 *.sqlite*
 **/tts-cache/
 **/captures/
+__pycache__/

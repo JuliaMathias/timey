@@ -1,12 +1,14 @@
 # Technical architecture
 
-Status: proposed design, awaiting plan approval. Monorepo choice approved 2026-10-01. Current repository contains documentation only.
+Status: delivery plan and monorepo approved 2026-10-01. Android foundation implementation is in progress; the remaining layers below are planned, not shipped.
 
 ## Repository and boundaries
 
-One repository contains `android/`, later `web/`, and shared `docs/` and `contracts/`. Builds and release versions are independent. Share JSON schemas and behavioral fixtures, not executable Kotlin/Elixir code. Continuous integration runs relevant paths plus shared-contract checks. A future split is possible if ownership/distribution diverges; it would require versioned contract releases and cross-repository compatibility checks.
+One repository contains `android/`, later `web/`, and shared `docs/` and `contracts/`. Builds and release versions are independent. Share JSON schemas and behavioral fixtures, not executable Kotlin/Elixir code. Continuous integration runs all established mandatory suites on each PR; add shared-contract checks when contracts exist. A future split is possible if ownership/distribution diverges; it would require versioned contract releases and cross-repository compatibility checks.
 
 Android: Kotlin, Compose/Material 3, ViewModels, StateFlow/coroutines, Room/SQLite, WorkManager, platform TTS and foreground-service/notification adapters. Start with clear packages in one app module; extract the pure Kotlin domain/engine to a small module for isolated JVM tests. Prefer explicit constructor injection initially. Use Kotlin serialization for portable documents. Pin compatible stable AGP/Kotlin/Compose/Room versions in the version catalog when scaffolding; commit Gradle wrapper and use its checksum. Do not guess version compatibility from release numbers.
+
+Foundation build/device scope is recorded in [ADR 0012](decisions/0012-android-foundation-toolchain.md). System cloud backup and device-transfer extraction exclude app data; Drive and explicit exports will own content recovery so local drafts/credentials are not transferred implicitly.
 
 Later web: Phoenix LiveView, Ecto/SQLite, application contexts, REST controllers and OpenAPI docs. Local Mac hosting is sufficient initially. UI and API share contexts; all domain behavior is independently tested against cross-language fixtures. No permanent web host is needed for Android Drive sync.
 
