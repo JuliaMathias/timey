@@ -48,3 +48,4 @@ Checked 2026-10-01 using official documentation. These sources support platform 
 - [Emulator runner's maintainer documentation](https://github.com/ReactiveCircus/android-emulator-runner): Ubuntu KVM setup and API/architecture/working-directory inputs for instrumentation CI.
 - [Gradle Actions](https://github.com/gradle/actions) and [setup-java](https://github.com/actions/setup-java): wrapper validation/build caching and selected CI runtime. Action references are pinned by immutable Git commits.
 - [Android Auto Backup rules](https://developer.android.com/identity/data/autobackup): explicit modern data-extraction exclusions for cloud backup and device transfer; allowBackup alone is insufficient on some manufacturers.
+- [Android SDK setup action](https://github.com/android-actions/setup-android): explicit command-line SDK installation/PATH setup for hosted runners; pinned action and command-line-tools build 15859902. Hosted CI initially had no sdkmanager on PATH.

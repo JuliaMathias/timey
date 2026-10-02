@@ -23,3 +23,7 @@ The foundation has no Internet permission/account gate and accurately labels uni
 ## Recovery and handoff
 
 Use the checked-in wrapper from `android/`, with Studio's bundled Java and the installed SDK. Never clear the user's phone data to test. Update #9 with exact implemented-screen manual instructions before requesting phone tests. Review the entire remaining delivery plan and outstanding dependencies at completion; do not close #9 based only on the emulator.
+
+## CI/protection progress
+
+PR #13 created. First CI run 37037106035 failed because hosted runners had no sdkmanager on PATH; adding explicit pinned SDK setup rather than assuming a preinstalled path. Main protection was applied and read back: `ci-required` bound to GitHub Actions app 15368, strict up-to-date checks, PR required with zero required approvals for the sole owner, administrator enforcement, conversation resolution, force pushes/deletions disabled. Failed PR currently reports merge state blocked. Synthetic behavioral-failure/repaired revision verification still pending.
