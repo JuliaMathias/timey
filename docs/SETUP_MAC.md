@@ -1,10 +1,18 @@
 # Mac development setup
 
-Status: guide only, checked 2026-10-01. No tools installed or account settings changed by this task. See [sources](SOURCES.md) for official installation references. Use current stable compatible releases when P0 begins rather than copying an old version number from a document.
+Status: installation verified 2026-10-02 after the user completed Android Studio setup. This agent did not install tools. See [sources](SOURCES.md) for official installation references. Use current stable compatible releases when P0 begins rather than copying an old version number from a document.
 
 ## What is already present
 
-This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub CLI 2.86.0 are available. Android Studio and Android SDK were not found in the usual `/Applications/Android Studio.app`, `~/Applications/Android Studio.app`, and `~/Library/Android/sdk` locations. That is not an exhaustive inventory. `/usr/bin/java` is a macOS launcher, not proof of an installed usable JDK. Available disk/RAM were not checked. Authenticated GitHub API access as JuliaMathias was subsequently verified on 2026-10-02.
+This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub CLI 2.86.0 are available. On 2026-10-02, verified:
+
+- Android Studio at `/Applications/Android Studio.app`; bundle version 2026.2, build `262.9437.185.2621.16467767`.
+- Bundled Java executable runs successfully: OpenJDK 25.0.3. Gradle compatibility and CI JDK selection still need validation when scaffolding; installation alone does not establish build compatibility.
+- SDK at `~/Library/Android/sdk`, platform `android-37.0`, Build-Tools 36.0.0, Platform-Tools 37.0.1, emulator and system image installed.
+- AVD `Medium_Phone_API_37.0` is configured. `adb devices` returned no connected/running devices; emulator launch and phone authorization remain unverified.
+- SDK Command-line Tools are not installed. Install the latest package from SDK Manager → SDK Tools before command-line SDK management is needed.
+
+Available disk/RAM were not checked. Authenticated GitHub API access and Projects authorization as JuliaMathias were verified on 2026-10-02.
 
 ## Install Android tools first
 
