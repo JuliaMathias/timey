@@ -1,6 +1,6 @@
 # Testing and acceptance strategy
 
-Every feature ships with meaningful tests. Use the smallest level that proves behavior, plus device evidence where Android or audio is involved. A passing compile is not a feature test. The initial Android foundation has two Compose instrumentation cases for launch/network-permission absence and Activity recreation. JVM timing tests follow in #11; never describe a NO-SOURCE task as passing behavioral cases. Also validate documentation links and Git diffs.
+Every feature ships with meaningful tests. Use the smallest level that proves behavior, plus device evidence where Android or audio is involved. A passing compile is not a feature test. The initial Android foundation has two Compose instrumentation cases for launch/network-permission absence and Activity recreation. Issue #11 adds eleven fake-clock JVM cases and three render/action instrumentation cases; never describe a NO-SOURCE task as passing behavioral cases. Also validate documentation links and Git diffs.
 
 ## Automated levels
 
@@ -48,7 +48,7 @@ Keep the executable instructions in the issue body, even if reusable setup is li
 
 ## Expected commands after scaffolding
 
-From `android/`: `./gradlew testDebugUnitTest lintDebug assembleDebug`. With emulator/phone: `./gradlew clean connectedDebugAndroidTest`, followed by `python3 ../scripts/verify_android_tests.py app/build/reports/androidTests/connected/debug/index.html`. The result guard rejects missing/zero/skipped/failed execution even if Gradle exits zero; cleaning prevents stale reports. Run its six regression cases from root with `python3 -m unittest discover -s scripts -p 'test_*.py'`. Confirm task names in P0 and update docs if modules/flavors change. JVM domain-module task is added once that module exists.
+From `android/`: `./gradlew testDebugUnitTest lintDebug assembleDebug`. With emulator/phone: `./gradlew clean connectedDebugAndroidTest`, followed by `python3 ../scripts/verify_android_tests.py app/build/reports/androidTests/connected/debug/index.html 5`. The result guard rejects missing/zero/skipped/failed execution even if Gradle exits zero; cleaning prevents stale reports. Run its seven regression cases from root with `python3 -m unittest discover -s scripts -p 'test_*.py'`. Confirm task names in P0 and update docs if modules/flavors change. JVM domain-module task is added once that module exists.
 
 From `web/` later: `mix format --check-formatted` and `mix test`, plus the selected OpenAPI/schema lint command. The Android wrapper now exists; see README and the foundation execution plan for actual check results. The web commands remain future commands: no Mix project exists.
 

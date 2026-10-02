@@ -82,7 +82,7 @@ jobs:
           script: |
             rm -rf app/build/reports/androidTests/connected
             ./gradlew connectedDebugAndroidTest --stacktrace
-            python3 ../scripts/verify_android_tests.py app/build/reports/androidTests/connected/debug/index.html
+            python3 ../scripts/verify_android_tests.py app/build/reports/androidTests/connected/debug/index.html 5
       - name: Upload device test reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

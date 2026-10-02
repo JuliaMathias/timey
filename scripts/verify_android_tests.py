@@ -31,7 +31,7 @@ def verify_report(report: Path, minimum_tests: int = 2) -> int:
 def main() -> None:
     """Read the specified AGP report and exit nonzero if results cannot establish a pass."""
     try:
-        count = verify_report(Path(sys.argv[1]))
+        count = verify_report(Path(sys.argv[1]), int(sys.argv[2]) if len(sys.argv) > 2 else 2)
     except (IndexError, OSError, ValueError) as error:
         sys.exit(f"Android test verification failed: {error}")
     print(f"Verified {count} executed instrumentation tests; no failures or skips.")
