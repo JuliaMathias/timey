@@ -1,10 +1,10 @@
 # Project management and agent workflow
 
-Status: proposed management system; repository layout approved on 2026-10-01. No remote repository, issues, or board has been created.
+Status: GitHub Issues, phase milestones and a Project board selected on 2026-10-01; repository layout approved. Delivery plan approval and remote repository details remain pending. No remote repository, issues, or board has been created.
 
-## Recommended system
+## Selected system
 
-Use one private GitHub repository, GitHub Issues for executable tasks, milestones for phases, and one optional GitHub Project board. GitHub is not technically necessary: local Markdown and Git are enough to start. It is useful here because human decisions, issue dependencies, code review, and automated checks can live together. We do not need Linear, Jira, Notion, or an agent orchestration service for this scope.
+Use one GitHub repository, GitHub Issues for executable tasks, milestones for phases, and one GitHub Project board. Private visibility is recommended but still requires confirmation with the owner/name and required branch-protection capability. GitHub is not technically necessary: local Markdown and Git are enough to start. It is useful here because human decisions, issue dependencies, code review, and automated checks can live together. We do not need Linear, Jira, Notion, or an agent orchestration service for this scope.
 
 Docs describe enduring requirements and decisions. Issues describe work and status. The board displays those issues; it is not a second backlog. Chats are discussion, not the source of truth for accepted behavior. Do not maintain a competing status table in several places.
 
@@ -16,7 +16,7 @@ Suggested board states: Backlog, Ready, In progress, Review, Done. Labels: andro
 
 1. Confirm GitHub owner and repository name/visibility (recommend private `timey`), then create/push the repository under explicit user authorization. Do not guess the account or expose reference media.
 2. Create milestone issues from the task groups in `PLAN.md`, split into small tasks with observable acceptance criteria and meaningful tests. Preserve requirement IDs, dependencies, scope, and learning objectives.
-3. Create the Project board if the user wants it. Add existing issues rather than copying their descriptions into new cards. Record issue URLs back in the plan.
+3. Create the selected Project board. Add existing issues rather than copying their descriptions into new cards. Record issue URLs back in the plan.
 4. Start P0 only after plan approval. Later phases remain visible but do not block the first runnable phone prototype.
 5. As part of P0, add GitHub Actions tests and protect `main` so PRs cannot merge until the required checks pass. Verify enforcement with a deliberately failing test PR followed by a passing revision. Record the actual required check names and settings; do not merely add a workflow file and assume it blocks merges.
 

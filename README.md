@@ -4,7 +4,7 @@ A personal Android interval timer for named exercise loops, paced repetitions an
 
 ## Current state
 
-Planning only. There is no runnable app, Gradle wrapper, Phoenix project, CI workflow, or GitHub remote yet. The monorepo layout is approved; the delivery plan and management system await approval. Do not interpret planned features as shipped features.
+Planning only. There is no runnable app, Gradle wrapper, Phoenix project, CI workflow, or GitHub remote yet. The monorepo layout is approved; GitHub Issues, phase milestones and a Project board are selected; the delivery plan still awaits approval. Do not interpret planned features as shipped features.
 
 ## Start here
 

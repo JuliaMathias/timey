@@ -1,6 +1,6 @@
 # Delivery plan
 
-Status: draft for user approval. Repository layout approved; no application code or remote issues created. Updated 2026-10-01.
+Status: draft for user approval. Repository layout and GitHub Issues/milestones/Project board selected; no application code or remote issues created. Updated 2026-10-01.
 
 ## Outcome and sequencing
 
@@ -126,4 +126,4 @@ At completion of every issue, reread the entire remaining plan and outstanding d
 
 ## Approval checkpoint
 
-Confirm the phase order and proposed defaults in `PRODUCT.md`; select GitHub Issues plus optional Project board (recommended) or local-only tracking. After approval, obtain GitHub owner/name/visibility and migrate tasks. Install Android Studio using `SETUP_MAC.md`; begin P0 when authorized. Do not infer approval from this file's presence.
+GitHub Issues, phase milestones and a Project board are selected. Approve the delivery plan and its phase order, then confirm GitHub owner/name/visibility and required branch-protection capability before creating the remote repository and migrating tasks. Install Android Studio using `SETUP_MAC.md`; begin P0 when authorized. Do not infer approval from this file's presence.
