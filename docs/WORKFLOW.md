@@ -50,6 +50,12 @@ No agents or extra tools are required for planning. Default to one integrating a
 
 An agent handoff records: goal and requirement IDs; base/current commit; changed paths; decisions; checks and results; reproduction/demo steps; remaining work and blockers. A reviewer does not rewrite the owner's files silently. Never spawn agents solely to fill available slots.
 
+## Merge policy
+
+The user selected squash and merge on 2026-10-02. GitHub allows squash merging only; merge commits and rebase merging are disabled. Continue making small logical commits with complete titles and bodies on each issue branch. After review and required latest-revision CI pass, squash the PR into one commit on `main`. Keep PRs small enough that this commit represents one coherent change.
+
+GitHub defaults the squash title to the PR title and the body to the PR description. Before merging, check that these describe the final change completely, including purpose, validation and remaining limitations; remove stale progress notes and unfilled template text. Do not leave an empty squash description. Existing history is preserved; never rewrite earlier merged commits to apply this policy retroactively. Start new work from current `main`, rather than reusing a squashed branch.
+
 ## Commit format
 
 Title: imperative description of one logical increment, optionally prefixed with `android:`, `docs:`, or `web:`.
