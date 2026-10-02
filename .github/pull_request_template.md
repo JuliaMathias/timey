@@ -5,6 +5,8 @@ Linked issue and requirement IDs. Describe concrete before/after behavior.
 - [ ] GitHub Development sidebar association with the issue is verified; a text-only reference is insufficient.
 - [ ] Work uses a branch dedicated to the linked issue (`codex/issue-<number>-<short-description>`) and this PR targets `main`; unrelated issue changes are excluded.
 
+- [ ] Issue project Status and native parent/blocking relationships are current and verified; Review is used only when user review/approval is the sole remaining gate.
+
 ## Validation
 
 Tests actually run and results, device demonstration, and unrun checks/limitations.
@@ -15,6 +17,8 @@ Tests actually run and results, device demonstration, and unrun checks/limitatio
 ## Documentation and learning
 
 Updated guides/comments and one relevant Kotlin/Android or Elixir concept.
+
+- [ ] Immediately after opening this PR, a file-by-file learning walkthrough was sent in the current project chat, covering every changed path, its role/changes/purpose/connections, relevant concepts and tests/limitations; material revisions are explained too. Exempt only for PRs consisting entirely of documentation/workflow changes; state that exemption when applicable.
 
 ## Review considerations
 

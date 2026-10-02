@@ -16,6 +16,14 @@ Steps, routine example without private data, Android version/device, app version
 
 Logs/screenshots with account credentials and personal content removed.
 
+## Project status and relationships
+
+- Add this issue to the Timey project and verify its existing scope/type labels.
+- Initial Status: Ready or Backlog, with the prerequisite/scope/setup reason.
+- Parent issue: set the native parent/sub-issue link, or explain why no parent applies.
+- Blocked by / blocks: set native dependency links and verify both ends, or explain why none apply. Ordinary related references are context, not invented dependencies.
+- Set In progress at start; Review only when user review/approval is the sole remaining gate; Done when closed. Pending CI or manual/device evidence remains In progress.
+
 ## Acceptance
 
 - [ ] Regression test reproduces the fault and passes after repair.

@@ -51,6 +51,10 @@
 
 ## Agents and research
 
+- Maintain the Timey project board as part of each issue action: add every new issue and deliberately select Ready when it can start or Backlog when prerequisites/scope/setup block it; set In progress when work starts; set Review only when user review/approval is the sole remaining gate; set Done when the issue closes. Verify each status remotely. An open PR or pending manual/device tests do not by themselves qualify for Review.
+- At issue creation and scope/handoff changes, inspect the plan and existing issues, set applicable native parent/sub-issue and blocked-by/blocking relationships, explain their rationale (or why none apply), and verify both ends. Text references alone are insufficient. Distinguish hierarchy from prerequisites, preserve existing relationships, and avoid cycles. Reassess dependents after a blocker closes.
+- Immediately after opening each new PR that is not entirely documentation/workflow changes, send a file-by-file learning walkthrough in the current project chat. Account for every changed path; explain its role, changes, purpose, connections and relevant Kotlin/Android concepts in plain language, plus tests/limitations. Link the PR/files and update the explanation for material revisions. A PR description or short completion summary is not a substitute. Mixed implementation/documentation PRs require the walkthrough.
+
 - Assign appropriate existing GitHub labels whenever creating an issue, as part of creation rather than a later cleanup. Use labels matching its scope/type (for example `android`, `audio`, `sync`, `web`, `docs`, `bug`, or `phase`); verify the created issue has them. Do not leave new issues unlabeled.
 
 - One owner integrates each task. Delegate only when explicitly authorized for that task. When authorized, assign bounded work, acceptance criteria, file ownership, and base revision; isolate concurrent edits in worktrees when appropriate.

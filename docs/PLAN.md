@@ -146,7 +146,7 @@ Initial P0 tasks:
 - [#11: Prototype phased reps and offline speech on Phone 2](https://github.com/JuliaMathias/timey/issues/11)
 - [#12: Prototype screen-off playback and draggable overlay](https://github.com/JuliaMathias/timey/issues/12)
 
-The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done; #9 is In progress, #10 is Done, and remaining dependent work is Backlog. The project retains default private visibility. Required CI and main protection were implemented and verified in #10 through failing/repaired test PR #14; scaffold/CI PR #13 merged only after all final-revision checks passed. See [migration handoff](plans/github-migration.md).
+The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done. Maintain current status and native parent/blocking relationships per [WORKFLOW.md](WORKFLOW.md#project-status-and-issue-relationships); the board holds live state rather than this historical migration snapshot. The project retains default private visibility. Required CI and main protection were implemented and verified in #10 through failing/repaired test PR #14; scaffold/CI PR #13 merged only after all final-revision checks passed. See [migration handoff](plans/github-migration.md).
 
 ## Approval checkpoint
 
