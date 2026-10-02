@@ -10,6 +10,8 @@ Docs describe enduring requirements and decisions. Issues describe work and stat
 
 `PRODUCT.md` is the current behavior specification; `ARCHITECTURE.md` describes the current technical design; `PLAN.md` sequences delivery. Numbered records in `docs/decisions/` explain why durable architecture-shaping choices were made, which alternatives were considered and their consequences. Use its index/policy to decide when a choice needs a record. Language, color and other ordinary product preferences do not each need an ADR; choices affecting contracts, persistence, synchronization or runtime ownership do. Add/update the record and index alongside the relevant specification change. Mark replaced records superseded and link successors to retain decision history.
 
+Every new GitHub issue must receive appropriate existing labels when it is created. Select labels for its actual scope/type: for example `android` and `audio` for speech work, `docs` for workflow/documentation changes, `bug` for defects, and `phase` for milestone trackers. Verify the labels after creation; do not defer labeling until later or leave an issue unlabeled.
+
 Suggested board states: Backlog, Ready, In progress, Review, Done. Labels: android, web, contracts, sync, audio, design, bug, docs, learning. Use milestone P0-P7 from `PLAN.md`. Add blocked-by links and requirement IDs. One owner per issue. Begin with one implementation task at a time; add concurrency only for independent work after the contracts stabilize.
 
 ## After plan approval

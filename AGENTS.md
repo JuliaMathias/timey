@@ -51,6 +51,8 @@
 
 ## Agents and research
 
+- Assign appropriate existing GitHub labels whenever creating an issue, as part of creation rather than a later cleanup. Use labels matching its scope/type (for example `android`, `audio`, `sync`, `web`, `docs`, `bug`, or `phase`); verify the created issue has them. Do not leave new issues unlabeled.
+
 - One owner integrates each task. Delegate only when explicitly authorized for that task. When authorized, assign bounded work, acceptance criteria, file ownership, and base revision; isolate concurrent edits in worktrees when appropriate.
 - Shared contracts require one owner; coordinate before editing them. Agents return changed paths, commits, tests, risks, and remaining work. Do not use chat history as the only handoff.
 - Verify changing platform rules and library compatibility from official sources. Record material sources and decisions. Never install tools or create external services merely because this guide mentions them.
