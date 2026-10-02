@@ -6,7 +6,7 @@ A personal Android interval timer for named exercise loops, paced repetitions an
 
 Delivery plan approved on 2026-10-01. The [public GitHub repository](https://github.com/JuliaMathias/timey), [eight milestones](https://github.com/JuliaMathias/timey/milestones), [twelve issues](https://github.com/JuliaMathias/timey/issues) and [Timey board](https://github.com/users/JuliaMathias/projects/7/views/3) are created. The board uses Backlog → Ready → In progress → Review → Done and currently retains GitHub's private visibility; sign in as its owner to view it.
 
-Implementation has not started. Android Studio/SDK installation is verified; command-line tools and emulator/device launch remain under [task #9](https://github.com/JuliaMathias/timey/issues/9). There is no runnable app, Gradle wrapper, Phoenix project or CI workflow yet. Required CI and merge enforcement are tracked in [task #10](https://github.com/JuliaMathias/timey/issues/10). Do not interpret planned features as shipped features.
+Implementation has not started. Android Studio/SDK installation is verified; emulator launch is blocked by insufficient disk space; physical-device verification remains under [task #9](https://github.com/JuliaMathias/timey/issues/9). There is no runnable app, Gradle wrapper, Phoenix project or CI workflow yet. Required CI and merge enforcement are tracked in [task #10](https://github.com/JuliaMathias/timey/issues/10). Do not interpret planned features as shipped features.
 
 ## Start here
 

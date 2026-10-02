@@ -10,9 +10,9 @@ This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub
 - Bundled Java executable runs successfully: OpenJDK 25.0.3. Gradle compatibility and CI JDK selection still need validation when scaffolding; installation alone does not establish build compatibility.
 - SDK at `~/Library/Android/sdk`, platform `android-37.0`, Build-Tools 36.0.0, Platform-Tools 37.0.1, emulator and system image installed.
 - AVD `Medium_Phone_API_37.0` is configured. `adb devices` returned no connected/running devices; emulator launch and phone authorization remain unverified.
-- SDK Command-line Tools are not installed. Install the latest package from SDK Manager → SDK Tools before command-line SDK management is needed.
+- SDK Command-line Tools installation directory now exists following the user's additional setup. Tool execution has not yet been verified.
 
-Available disk/RAM were not checked. Authenticated GitHub API access and Projects authorization as JuliaMathias were verified on 2026-10-02.
+Subsequent startup diagnosis on 2026-10-02 confirmed 16 GiB RAM and insufficient free disk for the configured emulator: startup reported 4568.97 MB available versus 12288 MB needed for its userdata partition. The emulator exits before boot. Authenticated GitHub API access and Projects authorization as JuliaMathias were verified on 2026-10-02.
 
 ## Install Android tools first
 
@@ -58,3 +58,16 @@ Install compatible Erlang/OTP, Elixir, and Phoenix dependencies at P6, with vers
 ## First guided session
 
 Check Studio/SDK/JDK, boot emulator, connect the phone, create the minimal scaffold, run one test and the APK, then inspect one Compose screen and one timer transition together. Each step should have an observable result. Diagnose failed setup before adding more libraries.
+
+## Emulator startup failure: insufficient disk space
+
+On 2026-10-02, the user saw “The emulator process … has terminated.” A bounded headless launch of the existing AVD, without loading/saving snapshots or wiping device data, exited with code 1 and reported:
+
+```text
+Not enough space to create userdata partition.
+Available: 4568.97 MB … need 12288.00 MB.
+```
+
+This is the confirmed failure, rather than a guessed graphics or installation problem. Free enough space to satisfy the 12 GiB userdata allocation with additional headroom for builds (around 20 GiB free is a practical next target), then retry the same AVD. Choose which personal files to move/remove yourself; no cleanup was performed by the agent. Alternatively connect one of the confirmed physical phones through USB debugging to continue setup without allocating emulator userdata.
+
+The diagnostic launch reported automatic RAM increase to 4096 MB for API 37 and successful system/GPU checks. Those checks do not establish boot success: userdata creation failed first. Record a successful boot/device connection only after retry evidence.
