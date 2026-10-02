@@ -23,7 +23,7 @@ class FoundationScreenTest {
     @Test
     fun launchesIntoOfflineFoundationWithoutInternetPermission() {
         compose.onNodeWithText("Timey").assertIsDisplayed()
-        compose.onNodeWithText("Intentionally wrong heading").assertIsDisplayed()
+        compose.onNodeWithText("Your time, your pace").assertIsDisplayed()
         compose.onNodeWithText("An interval timer that works offline.").assertIsDisplayed()
         val context = compose.activity
         val info = context.packageManager.getPackageInfo(context.packageName, PackageManager.GET_PERMISSIONS)
@@ -34,7 +34,7 @@ class FoundationScreenTest {
     @Test
     fun recreationKeepsFoundationAvailable() {
         compose.activityRule.scenario.recreate()
-        compose.onNodeWithText("Intentionally wrong heading").assertIsDisplayed()
+        compose.onNodeWithText("Your time, your pace").assertIsDisplayed()
         compose.onNodeWithText(
             "The app foundation is ready. Routine editing and playback are coming next.",
         ).performScrollTo().assertIsDisplayed()
