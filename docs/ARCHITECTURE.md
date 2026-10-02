@@ -49,6 +49,8 @@ Rep count-up projects the current rep ordinal (1 immediately at step start), not
 
 Previous/Next use executed-step occurrences, including set boundaries; restart-step resets its rep/phase; restart-routine resets full cursor after confirmation. Preserve paused/running intent. Stop cancels timing/audio, releases resources, clears resumable session, and makes Home the entry screen. Editing/sync never modifies the session snapshot.
 
+The #11 P0 diagnostic currently hosts the pure rep engine in a ViewModel, with foreground-only polling and pause on Activity stop (except rotation). This is a temporary measurement slice, not the production background runtime. Its TTS adapter owns offline voice selection and fenced callbacks, while the engine owns progression. #12 must move the polling/session owner into the foreground service and retain the same cancellation boundary.
+
 ## Background runtime and banner
 
 Start a foreground service from an explicit foreground Start action. Publish a notification with pause/resume/stop and state. Select a valid service type during P0; `specialUse` is a candidate for an interval timer, while `mediaPlayback` only fits actual qualifying playback. Never mislabel a timer as health tracking or data sync to evade restrictions. Platform requirements vary by target SDK.

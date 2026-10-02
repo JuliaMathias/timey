@@ -2,5 +2,5 @@
     <string name="app_name">Timey</string>
     <string name="foundation_heading">Your time, your pace</string>
     <string name="foundation_message">An interval timer that works offline.</string>
-    <string name="foundation_status">The app foundation is ready. Routine editing and playback are coming next.</string>
+    <string name="foundation_status">The rep diagnostic is ready. Routine editing and background playback are coming next.</string>
 </resources>

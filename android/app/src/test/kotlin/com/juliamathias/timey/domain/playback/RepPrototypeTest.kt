@@ -125,6 +125,15 @@ class RepPrototypeTest {
         clock.time = 2_199; assertEquals(1, engine.poll().rep)
     }
 
+    /** Late completion remains clamped while diagnostics retain actual observation lateness. */
+    @Test fun delayedFinishReportsLatenessWithoutSpeakingMissedCues() {
+        engine.start(PrototypeFixtures.a)
+        clock.time = 23_000; engine.poll()
+        assertEquals(22_000L, engine.state.elapsedMs)
+        assertEquals(1_000L, engine.finishLatenessMs)
+        assertEquals(1, cues.emitted.size)
+    }
+
     /** Invalid and unbounded diagnostic inputs cannot create playable schedules. */
     @Test fun invalidFixturesRejected() {
         for (phases in listOf(emptyList(), listOf(RepPhase("Pace", 0)), listOf(RepPhase("", 1)))) {

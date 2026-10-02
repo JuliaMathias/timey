@@ -52,6 +52,8 @@ class RepPrototype(private val clock: MonotonicClock, private val cues: RepCueAd
     private var anchorMs = 0L
     private var offsetMs = 0L
     private var lastBoundary = -1L
+    var finishLatenessMs: Long = 0
+        private set
     var state = RepState(RepStatus.IDLE, 0, 1, 0)
         private set
 
@@ -60,6 +62,7 @@ class RepPrototype(private val clock: MonotonicClock, private val cues: RepCueAd
         cues.cancel()
         fixture = value.copy(phases = value.phases.toList())
         offsetMs = 0
+        finishLatenessMs = 0
         anchorMs = clock.nowMs()
         lastBoundary = -1
         state = RepState(RepStatus.RUNNING, 0, 1, 0)
@@ -69,8 +72,10 @@ class RepPrototype(private val clock: MonotonicClock, private val cues: RepCueAd
     /** Reconciles every elapsed boundary, emitting only the cue for the current boundary. */
     fun poll(): RepState {
         if (state.status != RepStatus.RUNNING) return state
-        val elapsed = (offsetMs + clock.nowMs() - anchorMs).coerceIn(0, fixture.totalMs)
+        val actualElapsed = offsetMs + clock.nowMs() - anchorMs
+        val elapsed = actualElapsed.coerceIn(0, fixture.totalMs)
         if (elapsed == fixture.totalMs) {
+            finishLatenessMs = (actualElapsed - fixture.totalMs).coerceAtLeast(0)
             state = RepState(RepStatus.FINISHED, elapsed, fixture.reps, fixture.phases.lastIndex)
             cues.cancel()
             return state
