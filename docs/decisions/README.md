@@ -29,3 +29,5 @@ Keep the index and links current. Specifications describe current behavior; reco
 | [0004: Workout recovery](0004-workout-recovery.md) | Accepted behavior; implementation pending | Paused recovery after crash/reboot and explicit Stop clearing the session. |
 | [0005: Short-phase cues](0005-short-phase-cues.md) | Accepted policy; implementation pending | Warn about speech fit, preempt unfinished speech for newer cues, keep timer pace. |
 | [0006: Routine import](0006-additive-routine-import.md) | Accepted policy; implementation pending | Independent routine copies with fresh IDs; separate identity-preserving restore. |
+| [0007: Dormant skip preference](0007-dormant-skip-preference.md) | Accepted semantics; implementation pending | Keep stored skip-last choice inactive at one set and reactivate at multiple sets. |
+| [0008: Current rep display](0008-current-rep-display.md) | Accepted semantics; implementation pending | Rep count-up shows 1 immediately; completion still waits for the final rep duration. |

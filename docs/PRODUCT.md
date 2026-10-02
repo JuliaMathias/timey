@@ -8,7 +8,7 @@ Timey is a personal Android interval timer with flexible exercise routines. The 
 
 A routine is Simple or Advanced. An Advanced routine contains ordered loops. A loop has a name, a positive set count, and ordered steps; it cannot contain other loops. A step uses either a fixed time or a number of paced repetitions. A repetition can contain ordered named phases with individual durations. Phases repeat identically for every repetition; they are not nested loops.
 
-Three sets of A/B execute A, B, A, B, A, B. A step marked skip-on-last-set is omitted on its containing loop's last pass; this can apply to any step. Countdown/Count-up define the displayed number. Manual confirmation does not delay starting: timing begins immediately, but reaching the target waits for the checkmark. The checkmark is usable early. Static keeps its configured value visible while timing/cues run, then continues waiting for confirmation. Navigation preserves paused/running state.
+Three sets of A/B execute A, B, A, B, A, B. An Advanced step marked skip-on-last-set is omitted on its containing loop's last pass when the loop has multiple sets; the stored preference is inactive for a single-set loop. This can apply to any step. Countdown/Count-up define the displayed number; rep count-up shows the current rep starting at 1, whereas timed count-up shows elapsed time starting at 0. Manual confirmation does not delay starting: timing begins immediately, but reaching the target waits for the checkmark. The checkmark is usable early. Static keeps its configured value visible while timing/cues run, then continues waiting for confirmation. Navigation preserves paused/running state.
 
 The reference app replaces Advanced content when Simple is saved. Timey deliberately avoids that behavior: types are separate, and conversion creates a new Advanced routine.
 
@@ -20,11 +20,11 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 | R02 | Quickstart and Simple routines | Sets, work, rest, preparation, cooldown, naming and saving. Zero preparation/rest/cooldown omit those stages. Skip-final-rest is a configurable general default. Total includes repetitions and selected omissions. |
 | R03 | Named loops | Create/rename/duplicate/delete/reorder loops, edit set count, show repeat indicator above one set. A/B ×3 follows the sequence above. No nested loops. |
 | R04 | Three editor disclosure levels | Collapsed loop shows name/set count/duration. Middle shows step name, role, duration/reps, phase summary and color. Full also shows sound/voice, display, confirmation and skip settings. Open at middle. Buttons collapse all, expand all to middle, and fully expand all. Drag a collapsed loop as a whole. |
-| R05 | Configurable steps | Name, explicit role (prepare/work/rest/cooldown/custom), color, TIME or REPS, duration or rep count/pace, duplicate/delete/reorder, display, start cue, final cues, confirmation, skip-last-set. Skip-on-last-set control is disabled when the containing loop has one set. Existing enabled flags when reducing set count/importing require the policy below to be clarified. Decimal seconds supported without float timing drift. |
+| R05 | Configurable steps | Name, explicit role (prepare/work/rest/cooldown/custom), color, TIME or REPS, duration or rep count/pace, duplicate/delete/reorder, display, start cue, final cues, confirmation, skip-last-set. Disable skip-on-last-set control at one set; preserve any stored choice but make it inactive until multiple sets return, including imported single-set loops. Decimal seconds supported without float timing drift. |
 | R06 | Repetition phases | Example: 10 reps with Down 2s + Up 4s totals 60s. Phases are named, ordered, addable/removable/reorderable, identical each rep, and sum to rep duration. Ordinary reps still support a single pace duration. |
 | R07 | Voice repetition and phase options | Off/every rep/last three; Every rep is the initial global default, with per-step override. Numbers follow countdown or count-up. Modes: number only; number plus every phase; number plus a selected phase. Number begins at rep start; selected phase name is spoken when that phase begins. Step-start voice can read the name. English and Brazilian Portuguese (pt-BR) supported, English default. |
 | R08 | Pleasant sound choices | Gong default, small curated bell/bowl/chime choices with previews and separately adjustable voice/sound volumes. Final-three time cues occur at remaining 3/2/1 seconds; rep cues occur at the start of the last three reps. Cue counts configurable. Use locally bundled assets with recorded licenses. |
-| R09 | Display and confirmation | Timed countdown reaches 0; timed count-up reaches target; rep countdown counts remaining reps and count-up completed reps. Auto advances at target; Manual freezes at target until checkmark, usable early. Static is manual and fixed, while cues still run. |
+| R09 | Display and confirmation | Timed countdown reaches 0; timed count-up starts at 0 and reaches target. Rep countdown counts remaining reps; count-up shows current rep starting at 1 immediately. Reaching displayed rep N is the start of the final rep, not completion; Auto advances only after its duration/phases finish. Manual freezes at target until checkmark, usable early. Static is manual and fixed, while cues still run. |
 | R10 | Playback controls | Previous/Next move one executed step across loop/set boundaries; restart-step starts its first rep/phase; all preserve paused/running state. Restart-routine asks confirmation and starts at routine beginning preserving state. Pause/resume and hold-to-exit; notification X completely ends the session. |
 | R11 | Playback context and preview | Show current loop, set, rep, phase, next step and remaining routine time. Label time as estimated when manual waits affect it. Completion offers exit/restart. Short preview exercises selected voice/phase/sound configuration without full playback. |
 | R12 | Background phone behavior | Screen-off/other-app playback and actionable ongoing notification. Running banner stays visible or reappears after dismissal; paused banner can disappear/stay dismissed. Pause/resume and stop work outside app. Stop returns app to Home. Reproduce the useful behavior with supported APIs; exact OS rendering is device-dependent and tested early. |
@@ -44,12 +44,11 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 
 ## Proposed defaults to review, not previously confirmed requirements
 
-- Countdown speaks remaining reps; Count-up speaks upcoming rep ordinal (1, 2, ...) at rep start while screen may initially show 0 completed. Confirm the display/announcement distinction during player review.
 - Empty names, zero rep count, zero/negative active durations and invalid phases are rejected. All-skipped/empty routines cannot play. Temporary invalid edits remain recoverable as drafts rather than valid runnable records.
 
 ## Open questions before affected phases
 
-Initial home timezone value; required exact banner appearance versus a reliable notification/optional overlay; treatment of enabled skip-last flags when a loop is reduced to one set or imported from legacy content. Proposed numbering/validation details above still need review; exact palette/layout is reviewed during design. Timing/audio tolerances and platform/storage implementation choices are measured/decided in the relevant phase rather than inferred from these user preferences.
+Required exact banner appearance versus a reliable notification/optional overlay. Proposed validation details above still need review; exact palette/layout is reviewed during design. Timing/audio tolerances and platform/storage implementation choices are measured/decided in the relevant phase rather than inferred from these user preferences.
 
 ## Confirmed editor and import decisions
 
@@ -57,7 +56,7 @@ Confirmed on 2026-10-01: Middle shows step name, role, duration/reps, phase summ
 
 Normal JSON routine import creates independent copies, preserving source content/colors while assigning new routine/loop/step/phase IDs; existing routines are not overwritten. Backup restoration is separate and preserves identity, with revision/conflict safeguards. Neither flow changes an active workout snapshot. See [the import decision](decisions/0006-additive-routine-import.md).
 
-Disable the Advanced step's skip-on-last-set option when its loop has one set; do not merely warn while allowing it to be enabled. Existing flags during a set-count reduction or legacy import need a follow-up choice. This does not remove the already agreed Simple routine final-rest omission: Simple-to-Advanced conversion must preserve execution without depending on enabling a disabled one-set option.
+Disable the Advanced step's skip-on-last-set option when its loop has one set; do not merely warn while allowing it to be enabled. Preserve an existing choice during set-count reduction or import, but make it inactive for one set; it becomes effective again when there are multiple sets. This does not remove the already agreed Simple routine final-rest omission: Simple-to-Advanced conversion must preserve execution without depending on an inactive Advanced flag. See [the dormant skip decision](decisions/0007-dormant-skip-preference.md).
 
 ## Confirmed saving and recovery decisions
 
@@ -65,7 +64,7 @@ Confirmed on 2026-10-01: retain all saved versions from the five most recent dat
 
 Cleanup is eligible only after a successful save of new changes, including minute autosave and imports/restores that change data. A minute autosave still creates no backup date or snapshot; it only triggers cleanup against dates already containing backups. Merely typing, opening the app, reconnecting, or passage of time does not trigger cleanup. Sync retained offline snapshots regardless of elapsed age. Current data and sync lineage are separate from history cleanup.
 
-Leaving an editor after edits is a normal history-producing save, including when a minute autosave already persisted those edits. Opening and leaving without changes creates no backup. The initial home timezone value remains to choose; both devices and the later web client use the shared preference, not independent local date cutoffs.
+Leaving an editor after edits is a normal history-producing save, including when a minute autosave already persisted those edits. Opening and leaving without changes creates no backup. Initialize the home timezone from the first phone, sync it, and keep it fixed until the user changes it. Both devices and the later web client use that shared preference, not independent local date cutoffs; restoring on another device must not replace it with that device's zone.
 
 After a crash or reboot, reopening offers the saved workout paused with options to continue or restart. Explicit Stop clears the session and returns Home. Recover from persisted state without automatically playing audio or counting the interruption as active workout time; reboot invalidates old monotonic deadlines. P0/P3 verify recovery/checkpoint behavior on both phones.
 
@@ -76,6 +75,8 @@ Architecture implications and alternatives: [backup history decision](decisions/
 Confirmed on 2026-10-01: support English and Brazilian Portuguese (pt-BR), with English as default. Initial global defaults are count-up for new steps and Every rep for repetition voice; both remain configurable with step overrides. In number-plus-selected-phase mode, announce the number at rep start and the phase name at its actual boundary: selecting Up for Down → Up produces "1" at the start of Down, then "Up" at the start of Up. If the selected phase starts the rep, the cues coincide; later phase names must not be announced early.
 
 Static keeps its fixed display but inherits voice counting direction from the globally configured default for creating new steps (initially count-up). It does not introduce a separate global Static counting preference. Retain the previously agreed per-step configuration support.
+
+Rep count-up displays 1 immediately when the first rep starts, then the current rep number at each later rep boundary, matching the spoken ordinal. Finish only after the last rep's full duration/phases, not when N first appears. Timed count-up still starts at zero elapsed seconds. See [the rep display decision](decisions/0008-current-rep-display.md).
 
 Short phases are allowed. When speech cannot fit, warn in preview rather than changing the phase duration. At a newer cue, interrupt unfinished speech in favor of the current cue; do not queue obsolete announcements or slow the timer. Device measurements validate latency and warning behavior, not a promised hard minimum phase duration.
 
