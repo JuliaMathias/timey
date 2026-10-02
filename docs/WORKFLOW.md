@@ -1,6 +1,6 @@
 # Project management and agent workflow
 
-Status: GitHub Issues, phase milestones and a Project board selected on 2026-10-01; repository layout approved. Delivery plan approved on 2026-10-01; public repository [JuliaMathias/timey](https://github.com/JuliaMathias/timey) created on 2026-10-02. Eight milestones and twelve issues are created; the [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created and populated.
+Status: GitHub Issues, phase milestones and a Project board selected on 2026-10-01; repository layout approved. Delivery plan approved on 2026-10-01; public repository [JuliaMathias/timey](https://github.com/JuliaMathias/timey) created on 2026-10-02. Eight milestones and the initial twelve delivery issues were created; the [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created and populated.
 
 ## Selected system
 

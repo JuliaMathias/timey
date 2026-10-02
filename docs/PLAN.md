@@ -126,7 +126,7 @@ At completion of every issue, reread the entire remaining plan and outstanding d
 
 ## GitHub migration
 
-Created 2026-10-02 in the public [JuliaMathias/timey repository](https://github.com/JuliaMathias/timey). GitHub Issues is now the task-status source of truth; this table is a navigation index. Phase trackers retain approved scope and acceptance gates. Split later phases into implementing child tasks when their dependencies and earlier evidence are available. CI/protection task #10 is complete; #9 remains open for phone/setup evidence.
+Created 2026-10-02 in the public [JuliaMathias/timey repository](https://github.com/JuliaMathias/timey). GitHub Issues is now the task-status source of truth; this table is a navigation index. Phase trackers retain approved scope and acceptance gates. Split later phases into implementing child tasks when their dependencies and earlier evidence are available. Scaffold/setup task #9 and CI/protection task #10 are complete; #11 and #12 retain the remaining P0 phone prototype gates.
 
 | Phase | Milestone | Tracker |
 | --- | --- | --- |
@@ -146,8 +146,8 @@ Initial P0 tasks:
 - [#11: Prototype phased reps and offline speech on Phone 2](https://github.com/JuliaMathias/timey/issues/11)
 - [#12: Prototype screen-off playback and draggable overlay](https://github.com/JuliaMathias/timey/issues/12)
 
-The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done. Maintain current status and native parent/blocking relationships per [WORKFLOW.md](WORKFLOW.md#project-status-and-issue-relationships); the board holds live state rather than this historical migration snapshot. The project retains default private visibility. Required CI and main protection were implemented and verified in #10 through failing/repaired test PR #14; scaffold/CI PR #13 merged only after all final-revision checks passed. See [migration handoff](plans/github-migration.md).
+The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains the phase trackers, implementation tasks and maintenance issues. Columns are Backlog, Ready, In progress, Review and Done. Maintain current status and native parent/blocking relationships per [WORKFLOW.md](WORKFLOW.md#project-status-and-issue-relationships); the board holds live state rather than this historical migration snapshot. The project retains default private visibility. Required CI and main protection were implemented and verified in #10 through failing/repaired test PR #14; scaffold/CI PR #13 merged only after all final-revision checks passed. See [migration handoff](plans/github-migration.md).
 
 ## Approval checkpoint
 
-GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. The public JuliaMathias/timey repository was created on 2026-10-02; eight milestone trackers and four P0 tasks are created; the linked Project board is created and populated. Verify actual required branch protection in P0 alongside its CI workflow. The scaffold and CI are integrated; complete the remaining phone/local-emulator checks in #9 using `SETUP_MAC.md`. Phone acceptance remains required before API/web implementation.
+GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. The public JuliaMathias/timey repository was created on 2026-10-02; eight milestone trackers and four P0 tasks are created; the linked Project board is created and populated. Verify actual required branch protection in P0 alongside its CI workflow. The scaffold and CI are integrated; complete the remaining phone prototype checks in #11 and #12 using their issue-specific procedures. Phone acceptance remains required before API/web implementation.
