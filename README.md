@@ -37,7 +37,7 @@ Versioned portable schemas and compatibility fixtures will be added under `contr
 
 ## Planned stack and delivery
 
-Kotlin + Jetpack Compose for Android UI, a deterministic Kotlin timer engine, Room for local records, Android offline text-to-speech and local sound assets, a foreground playback service, and WorkManager for deferred Drive sync. Exact compatible versions and permissions are validated and pinned in P0. Google is optional for local use.
+Kotlin + Jetpack Compose for Android UI, a deterministic Kotlin timer engine, Room for local records, Android offline text-to-speech and local sound assets, a foreground playback service with a movable panel over other apps, and WorkManager for deferred Drive sync. Exact compatible versions and permissions are validated and pinned in P0. Google is optional for local use.
 
 P0 proves device risks; P1 builds contracts/storage/engine; P2 builds offline editors; P3 completes playback/audio/background controls; P4 adds Drive sync/history/new-device recovery; P5 accepts and signs the complete phone app. P6 adds the documented Phoenix API; P7 adds the computer editor. See the plan for acceptance gates.
 

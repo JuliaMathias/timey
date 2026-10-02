@@ -6,7 +6,7 @@ Inherit the repository rules. This directory will contain the Android applicatio
 - Start with one app module and clear packages. Extract the platform-independent timer/model into a small Kotlin module when it improves isolated tests; avoid one Gradle module per screen.
 - Follow unidirectional state flow: screens render state and send actions; ViewModels/repositories manage state. Composables do not own the active workout clock or call Drive directly.
 - Use integer milliseconds for durations, including decimal rep seconds. Inject a monotonic clock. Wall-clock UTC timestamps are for sync/history, never active countdown timing.
-- Keep background execution, notification controls, speech/sound, and optional overlay adapters outside the engine. Use WorkManager for deferred sync, never interval pacing.
+- Keep background execution, notification controls, speech/sound, and movable overlay adapters outside the engine. Use WorkManager for deferred sync, never interval pacing.
 - Add KDoc to every class/module and function, including private functions. Explain lifecycle/cancellation behavior and ownership of resources.
 - Persist edits locally before networking. Test Room transactions and migrations with the actual database. Keep credentials and local SDK paths outside Git.
 - Test engine transitions using fake time; test ViewModel state and critical Compose interactions. Instrumented/device tests are necessary for audio, screen-off playback, permission denial, and notifications.

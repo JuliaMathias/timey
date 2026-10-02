@@ -39,6 +39,7 @@
 - Sync versioned structured records, not a live SQLite file. Autosaves coalesce; explicit-save backups survive reconnect. Preserve both versions on conflicts and prevent deleted records from reappearing.
 - Runtime takes an immutable routine snapshot. No editing/sync mutation may change a running workout. Timer progression never depends on speech completion or UI frame ticks.
 - Simple and Advanced are separate routine types; converting creates an Advanced copy. Loops are named, ordered, repeatable, and not nested; rep phases are not nested loops.
+- Provide the required movable panel over other apps when overlay access is granted, with notification controls as permission-denial fallback. The panel renders service state; it never owns a separate timer.
 - Do not infer technical implementation from screenshots (for example, whether the banner uses heads-up notifications or an overlay). Verify on the actual target phone.
 
 ## Agents and research

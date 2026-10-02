@@ -27,7 +27,7 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 | R09 | Display and confirmation | Timed countdown reaches 0; timed count-up starts at 0 and reaches target. Rep countdown counts remaining reps; count-up shows current rep starting at 1 immediately. Reaching displayed rep N is the start of the final rep, not completion; Auto advances only after its duration/phases finish. Manual freezes at target until checkmark, usable early. Static is manual and fixed, while cues still run. |
 | R10 | Playback controls | Previous/Next move one executed step across loop/set boundaries; restart-step starts its first rep/phase; all preserve paused/running state. Restart-routine asks confirmation and starts at routine beginning preserving state. Pause/resume and hold-to-exit; notification X completely ends the session. |
 | R11 | Playback context and preview | Show current loop, set, rep, phase, next step and remaining routine time. Label time as estimated when manual waits affect it. Completion offers exit/restart. Short preview exercises selected voice/phase/sound configuration without full playback. |
-| R12 | Background phone behavior | Screen-off/other-app playback and actionable ongoing notification. Running banner stays visible or reappears after dismissal; paused banner can disappear/stay dismissed. Pause/resume and stop work outside app. Stop returns app to Home. Reproduce the useful behavior with supported APIs; exact OS rendering is device-dependent and tested early. |
+| R12 | Background phone behavior | Screen-off/other-app playback, actionable ongoing notification, and a required movable panel over other apps when overlay access is granted. Dragging changes panel position without changing playback. Running panel persists or returns after dismissal; paused panel can disappear/stay dismissed. Pause/resume and stop work outside app. Stop removes the panel and returns app to Home. Permission denial/revocation uses notification controls as fallback; protected Android surfaces may hide overlays. |
 | R13 | Save/autosave | Explicit save; changed edits autosave locally every 60s. Leaving an edited session performs a normal save and creates history, including edits already persisted by minute autosave. An editor opened and closed unchanged creates no backup. Saves are transactional. Online saves request sync; offline autosaves coalesce into latest changes for reconnect. Saving does not block on cloud. |
 | R14 | Google Drive sync and new devices | Authorize same Google account on a new device, download latest synced routines/settings, then use locally. Reconnect sends latest content plus pending explicit-save history; retries preserve edits. No need to replay each autosave. |
 | R15 | Conflicts and deletions | Concurrent edits preserve both versions and let user choose/keep both. Deletes are recorded so offline devices cannot silently resurrect them. Account switching never uploads one account's private data into another without an explicit choice. |
@@ -48,7 +48,7 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 
 ## Open questions before affected phases
 
-Required exact banner appearance versus a reliable notification/optional overlay. Proposed validation details above still need review; exact palette/layout is reviewed during design. Timing/audio tolerances and platform/storage implementation choices are measured/decided in the relevant phase rather than inferred from these user preferences.
+Proposed validation details above still need review; exact palette/layout and panel appearance are reviewed during design. The movable overlay requirement is confirmed. Timing/audio tolerances and platform/storage implementation choices are measured/decided in the relevant phase rather than inferred from these user preferences.
 
 ## Confirmed editor and import decisions
 
@@ -57,6 +57,10 @@ Confirmed on 2026-10-01: Middle shows step name, role, duration/reps, phase summ
 Normal JSON routine import creates independent copies, preserving source content/colors while assigning new routine/loop/step/phase IDs; existing routines are not overwritten. Backup restoration is separate and preserves identity, with revision/conflict safeguards. Neither flow changes an active workout snapshot. See [the import decision](decisions/0006-additive-routine-import.md).
 
 Disable the Advanced step's skip-on-last-set option when its loop has one set; do not merely warn while allowing it to be enabled. Preserve an existing choice during set-count reduction or import, but make it inactive for one set; it becomes effective again when there are multiple sets. This does not remove the already agreed Simple routine final-rest omission: Simple-to-Advanced conversion must preserve execution without depending on an inactive Advanced flag. See [the dormant skip decision](decisions/0007-dormant-skip-preference.md).
+
+## Confirmed background panel decision
+
+A persistent, draggable panel over other apps is required, rather than relying solely on notifications. Request separate Android overlay access with clear setup guidance; provide notification controls when access is denied or revoked. Preserve the agreed running/paused dismissal and Stop behavior. Android restrictions can hide it on protected surfaces; verify supported behavior on both phones in P0 and P3. See [the movable panel decision](decisions/0009-movable-background-panel.md).
 
 ## Confirmed saving and recovery decisions
 

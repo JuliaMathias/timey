@@ -31,3 +31,4 @@ Keep the index and links current. Specifications describe current behavior; reco
 | [0006: Routine import](0006-additive-routine-import.md) | Accepted policy; implementation pending | Independent routine copies with fresh IDs; separate identity-preserving restore. |
 | [0007: Dormant skip preference](0007-dormant-skip-preference.md) | Accepted semantics; implementation pending | Keep stored skip-last choice inactive at one set and reactivate at multiple sets. |
 | [0008: Current rep display](0008-current-rep-display.md) | Accepted semantics; implementation pending | Rep count-up shows 1 immediately; completion still waits for the final rep duration. |
+| [0009: Movable background panel](0009-movable-background-panel.md) | Accepted requirement; implementation pending | Required draggable overlay with notification fallback and one service-owned timer. |

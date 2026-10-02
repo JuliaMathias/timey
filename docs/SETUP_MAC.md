@@ -31,7 +31,7 @@ Then verify `java -version` and `adb version` in a new terminal. A wrapper comes
 
 Enable Developer options (usually tapping Build number repeatedly), enable USB debugging, connect a data-capable USB cable, and accept the computer's debugging authorization on the phone. Mac does not require an extra OEM USB driver. Confirm the device is listed by `adb devices` and select it as Android Studio's Run target. Enable wireless debugging later if useful; USB is simpler for first setup.
 
-Run the debug APK from Android Studio after P0 scaffolding. It may request notification permission; an optional overlay requires a separate explicit system setting. Permission prompts must explain the relevant feature and offer a usable fallback. Record phone model/Android version before choosing background-service and banner behavior.
+Run the debug APK from Android Studio after P0 scaffolding. It may request notification permission; the movable background panel requires separate draw-over-other-apps access through an explicit system setting. Permission prompts must explain the relevant feature and offer a usable fallback. Record phone model/Android version when validating background-service and movable-panel behavior.
 
 Install/download an offline voice for your desired language using the phone's text-to-speech engine settings, whose location varies by manufacturer. Then verify the app's voice in airplane mode. Not all voices work offline. Choose an available offline voice or sound-only fallback; do not assume the emulator's voice is representative of the phone.
 
