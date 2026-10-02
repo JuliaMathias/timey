@@ -46,11 +46,13 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 
 Names are required in saved records. If the user supplies no name, generate a readable numbered name such as "Set 1". Track whether a name was generated or user-provided; generated names appear in the interface/search but are never spoken. Rep-number announcements remain independently configured. Preserve this distinction through copies, imports, sync and the later API rather than guessing from the name text.
 
-Sets, reps and active durations must be positive. Empty or invalid routines cannot be saved or played; Save, minute autosave, editor-exit save and API/import validation must enforce this consistently. Do not overwrite a previously valid routine, create history or trigger cleanup from a failed validation. Zero in an optional Simple prepare/rest/cooldown field means omit that stage, not save a zero-duration active step; reconfirm this existing omission rule if the user intends otherwise.
+Sets, reps and active durations must be positive. Empty or invalid routines cannot be saved or played; Save, minute autosave, editor-exit save and API/import validation must enforce this consistently. Do not overwrite a previously valid routine, create history or trigger cleanup from a failed validation. Zero in an optional Simple prepare/rest/cooldown field means omit that stage, not save a zero-duration active step. This omission rule is confirmed.
+
+Keep unfinished invalid edits as a local recovery draft, including when leaving the editor. Drafts are separate from saved routines: they cannot play, enter saved-version history or sync. Keep the last valid saved routine intact and recover the unfinished work when editing resumes. See [the draft decision](decisions/0010-local-recovery-drafts.md).
 
 ## Open questions before affected phases
 
-Whether incomplete invalid edits may be retained in a separate local recovery draft remains unconfirmed; this is different from saving a routine and must not be assumed after the user's rejection of invalid saves. Also decide history snapshot scope: individual routines versus whole library/settings. Exact palette/layout and panel appearance are reviewed during design. Timing/audio tolerances and platform/storage implementation choices are measured/decided in the relevant phase.
+Decide history snapshot scope: individual routines versus whole library/settings. Exact palette/layout and panel appearance are reviewed during design. Timing/audio tolerances and platform/storage implementation choices are measured/decided in the relevant phase.
 
 ## Confirmed editor and import decisions
 
