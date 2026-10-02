@@ -146,8 +146,8 @@ Initial P0 tasks:
 - [#11: Prototype phased reps and offline speech on both phones](https://github.com/JuliaMathias/timey/issues/11)
 - [#12: Prototype screen-off playback and draggable overlay](https://github.com/JuliaMathias/timey/issues/12)
 
-Project board creation is pending GitHub Projects authorization (`project` scope). Required CI/branch protection remains task #10, not an already enforced merge gate. See [migration handoff](plans/github-migration.md).
+The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done; #9 is Ready and dependent work is Backlog. The project retains default private visibility. Required CI/branch protection remains task #10, not an already enforced merge gate. See [migration handoff](plans/github-migration.md).
 
 ## Approval checkpoint
 
-GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. The public JuliaMathias/timey repository was created on 2026-10-02; eight milestone trackers and four P0 tasks are created; Project board access needs additional GitHub authorization. Verify actual required branch protection in P0 alongside its CI workflow. Complete Android Studio setup using `SETUP_MAC.md` to unblock P0. Phone acceptance remains required before API/web implementation.
+GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. The public JuliaMathias/timey repository was created on 2026-10-02; eight milestone trackers and four P0 tasks are created; the linked Project board is created and populated. Verify actual required branch protection in P0 alongside its CI workflow. Complete Android Studio setup using `SETUP_MAC.md` to unblock P0. Phone acceptance remains required before API/web implementation.

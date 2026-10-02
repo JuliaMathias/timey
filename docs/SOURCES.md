@@ -37,3 +37,4 @@ Checked 2026-10-01 using official documentation. These sources support platform 
 ## GitHub migration follow-up, checked 2026-10-02
 
 - [GitHub CLI: Projects](https://cli.github.com/manual/gh_project) — Project commands require the `project` authorization scope; repository access alone does not grant it. Refresh authorization with `gh auth refresh -h github.com -s project`.
+- [GitHub: REST Project views](https://docs.github.com/en/rest/projects/views) — create a board with explicit Status columns using `vertical_group_by`; the created Timey view was verified through API responses.

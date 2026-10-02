@@ -43,7 +43,7 @@ App-data is hidden from normal Drive browsing; Timey's JSON export is the user-r
 
 ## GitHub and later Elixir tools
 
-Git and `gh` are already installed. The approved public repository is JuliaMathias/timey. GitHub API access is verified; Project board creation additionally needs `gh auth refresh -h github.com -s project` and completion of the authorization flow. No project-management tool installation is necessary now.
+Git and `gh` are already installed. The approved public repository is JuliaMathias/timey. GitHub API access and additional Projects authorization were verified on 2026-10-02; the repository, milestones, issues and board are created. No project-management tool installation is necessary now.
 
 Install compatible Erlang/OTP, Elixir, and Phoenix dependencies at P6, with versions pinned then. The proposed web database is SQLite, so PostgreSQL is not currently required. Follow the generated project's requirements at that time; Node.js is only needed if the chosen asset tooling needs it. Android development does not require Xcode, Docker, or Elixir. We will not install optional tools speculatively.
 
