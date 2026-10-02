@@ -2,6 +2,8 @@
 
 Linked issue and requirement IDs. Describe concrete before/after behavior.
 
+- [ ] GitHub Development sidebar association with the issue is verified; a text-only reference is insufficient.
+
 ## Validation
 
 Tests actually run and results, device demonstration, and unrun checks/limitations.
