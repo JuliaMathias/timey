@@ -1,6 +1,6 @@
 # Project management and agent workflow
 
-Status: GitHub Issues, phase milestones and a Project board selected on 2026-10-01; repository layout approved. Delivery plan approval and remote repository details remain pending. No remote repository, issues, or board has been created.
+Status: GitHub Issues, phase milestones and a Project board selected on 2026-10-01; repository layout approved. Delivery plan approved on 2026-10-01; remote repository details remain pending. No remote repository, issues, or board has been created.
 
 ## Selected system
 

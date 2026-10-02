@@ -4,11 +4,11 @@ A personal Android interval timer for named exercise loops, paced repetitions an
 
 ## Current state
 
-Planning only. There is no runnable app, Gradle wrapper, Phoenix project, CI workflow, or GitHub remote yet. The monorepo layout is approved; GitHub Issues, phase milestones and a Project board are selected; the delivery plan still awaits approval. Do not interpret planned features as shipped features.
+Delivery plan approved on 2026-10-01; implementation has not started. There is no runnable app, Gradle wrapper, Phoenix project, CI workflow, or GitHub remote yet. The monorepo layout is approved; GitHub Issues, phase milestones and a Project board are selected; the delivery plan is approved. GitHub owner/name/visibility and tool setup remain to be confirmed. Do not interpret planned features as shipped features.
 
 ## Start here
 
-1. Review [the delivery plan](docs/PLAN.md) and [confirmed requirements and proposed defaults](docs/PRODUCT.md).
+1. Review [the delivery plan](docs/PLAN.md) and [confirmed requirements](docs/PRODUCT.md).
 2. Read [the architecture](docs/ARCHITECTURE.md) for timing, offline speech, storage, sync, and later API decisions.
 3. Follow [Mac setup](docs/SETUP_MAC.md) when ready to install the Android tools. Installation has not been performed by this planning task.
 4. Use [the workflow](docs/WORKFLOW.md), [testing strategy](docs/TESTING.md), and [learning guide](docs/LEARNING.md) during implementation.

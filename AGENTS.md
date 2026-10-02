@@ -5,7 +5,7 @@
 - Read `README.md`, `docs/PRODUCT.md`, `docs/PLAN.md`, and the relevant parts of `docs/ARCHITECTURE.md` before implementing behavior. Read `docs/WORKFLOW.md` for task ownership and review.
 - Explicit user instructions take precedence. Distinguish confirmed requirements from proposed defaults and unresolved questions. Do not silently change either into the other.
 - Read `android/AGENTS.md` before touching Android and `web/AGENTS.md` before touching Elixir, even when your working directory is the repository root.
-- Current scope is planning. Do not begin application implementation or create remote issues until the user approves the plan. Android comes first; Phoenix and the documented HTTP API come later.
+- The user approved the delivery plan on 2026-10-01. Confirm GitHub owner/name/visibility before remote creation, and complete environment setup to begin P0. Android comes first; Phoenix and the documented HTTP API follow phone acceptance. Do not interpret plan approval as permission to install tools or create unrelated external services.
 
 ## Git discipline
 

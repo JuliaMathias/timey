@@ -1,16 +1,16 @@
 # Delivery plan
 
-Status: draft for user approval. Repository layout and GitHub Issues/milestones/Project board selected; no application code or remote issues created. Updated 2026-10-01.
+Status: approved by the user on 2026-10-01; implementation not started. Repository layout and GitHub Issues/milestones/Project board selected; no application code or remote issues created. Updated 2026-10-01.
 
 ## Outcome and sequencing
 
-Deliver a reliable, readable Android app first, including offline editing/playback, phases/voice, Google Drive sync and per-routine saved-version history across each routine's five most recent backup dates (manual/edited-session exit saves; cleanup after successful new-change saves). Only after phone acceptance, build the documented API and Phoenix web editor. Preserve stable IDs R01-R25 from `PRODUCT.md` when creating issues. The milestones below are task groups; each is split into small tested increments after approval.
+Deliver a reliable, readable Android app first, including offline editing/playback, phases/voice, Google Drive sync and per-routine saved-version history across each routine's five most recent backup dates (manual/edited-session exit saves; cleanup after successful new-change saves). Only after phone acceptance, build the documented API and Phoenix web editor. Preserve stable IDs R01-R25 from `PRODUCT.md` when creating issues. The milestones below are task groups; each is split into small tested increments during issue migration.
 
 No calendar estimates yet: target-device background/cue tests and tool setup determine the difficult parts. Progress is measured by demonstrations and passing acceptance, not generated code volume.
 
 ## P0: Environment, foundation and risk prototypes
 
-Dependencies: approval of this plan; Android Studio/SDK installation; access to the confirmed Galaxy S24 Ultra and S22 Ultra (both Android 16; exact models/One UI in `PRODUCT.md`). Speech languages are English (default) and Brazilian Portuguese (pt-BR).
+Dependencies: plan approval (complete); Android Studio/SDK installation; access to the confirmed Galaxy S24 Ultra and S22 Ultra (both Android 16; exact models/One UI in `PRODUCT.md`). Speech languages are English (default) and Brazilian Portuguese (pt-BR).
 
 Task groups: scaffold compatible stable Kotlin/Compose Gradle project; pin toolchain/version catalog and wrapper; add runnable README and GitHub Actions tests/lint/build with a stable required merge gate. Configure `main` protection so tests must run and pass before any PR merges; verify account support and a failing/passing test PR. Build a tiny 2.2-second rep and Down/Up phase demonstration with fake-clock unit tests, real offline TTS, screen-off foreground playback and actionable notification. Measure cue delay/cancellation and prototype the required persistent draggable overlay alongside notification controls on both phones. Decide service type/wake-lock lifecycle; record device results and missing permission fallback. Install offline voice data if needed and verify airplane mode.
 
@@ -118,7 +118,7 @@ Learning: compare Compose state flow with LiveView assigns/events; maintain both
 | R23 | P1 settings model, P2 UI, P3 audio, P4 sync, P7 desktop |
 | R24 | P6 |
 
-After approval, convert task groups to GitHub issues with these IDs and dependencies. Don't publish the entire plan as an unstructured single issue, and don't create hundreds of tasks before the first prototype teaches us anything. Use P0 evidence to refine later slices without quietly changing requirements. Track status in issues once migrated; this document retains scope/gates and links.
+With approval recorded, convert task groups to GitHub issues with these IDs and dependencies. Don't publish the entire plan as an unstructured single issue, and don't create hundreds of tasks before the first prototype teaches us anything. Use P0 evidence to refine later slices without quietly changing requirements. Track status in issues once migrated; this document retains scope/gates and links.
 
 For every issue needing manual validation, include complete issue-specific test instructions per `TESTING.md`: setup/build, exact test data, numbered actions with expected results, variants/pass-fail criteria, evidence and cleanup. Refine them against the implemented UI before asking the user to test; record results or blocked/unrun cases. Otherwise document why manual testing is not required.
 
@@ -126,4 +126,4 @@ At completion of every issue, reread the entire remaining plan and outstanding d
 
 ## Approval checkpoint
 
-GitHub Issues, phase milestones and a Project board are selected. Approve the delivery plan and its phase order, then confirm GitHub owner/name/visibility and required branch-protection capability before creating the remote repository and migrating tasks. Install Android Studio using `SETUP_MAC.md`; begin P0 when authorized. Do not infer approval from this file's presence.
+GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. Confirm GitHub owner/name/visibility and required branch-protection capability before creating the remote repository and migrating tasks. Complete Android Studio setup using `SETUP_MAC.md` to unblock P0. Phone acceptance remains required before API/web implementation.

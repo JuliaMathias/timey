@@ -1,6 +1,6 @@
 # Timey product specification
 
-Status: requirements agreed in conversation; delivery plan and proposed defaults awaiting approval. Last updated: 2026-10-01.
+Status: product requirements and Android-first delivery plan approved on 2026-10-01; implementation pending. Last updated: 2026-10-01.
 
 Timey is a personal Android interval timer with flexible exercise routines. The phone works independently offline. Later, a Phoenix LiveView editor and documented API make large routines easier to create on a computer. There are no ads or subscriptions in scope.
 
