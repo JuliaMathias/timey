@@ -42,13 +42,15 @@ The reference app replaces Advanced content when Simple is saved. Timey delibera
 | R24 | Documented API, later | All saved-content creation and management through authenticated API: routines/types, loops, steps, phases, ordering/copies, conversion, settings, search, JSON import/export, history/restore. No running-timer control. OpenAPI plus examples and error/auth/version/conflict docs and tests. |
 | R25 | Modern accessible UI | Responsive Android layouts, clear hierarchy, light/dark/system themes, readable timer typography, sufficient contrast, large controls and screen-reader labels. Color never carries the only meaning. Computer editor later uses space for easier editing. |
 
-## Proposed defaults to review, not previously confirmed requirements
+## Confirmed validation and generated names
 
-- Empty names, zero rep count, zero/negative active durations and invalid phases are rejected. All-skipped/empty routines cannot play. Temporary invalid edits remain recoverable as drafts rather than valid runnable records.
+Names are required in saved records. If the user supplies no name, generate a readable numbered name such as "Set 1". Track whether a name was generated or user-provided; generated names appear in the interface/search but are never spoken. Rep-number announcements remain independently configured. Preserve this distinction through copies, imports, sync and the later API rather than guessing from the name text.
+
+Sets, reps and active durations must be positive. Empty or invalid routines cannot be saved or played; Save, minute autosave, editor-exit save and API/import validation must enforce this consistently. Do not overwrite a previously valid routine, create history or trigger cleanup from a failed validation. Zero in an optional Simple prepare/rest/cooldown field means omit that stage, not save a zero-duration active step; reconfirm this existing omission rule if the user intends otherwise.
 
 ## Open questions before affected phases
 
-Proposed validation details above still need review; exact palette/layout and panel appearance are reviewed during design. The movable overlay requirement is confirmed. Timing/audio tolerances and platform/storage implementation choices are measured/decided in the relevant phase rather than inferred from these user preferences.
+Whether incomplete invalid edits may be retained in a separate local recovery draft remains unconfirmed; this is different from saving a routine and must not be assumed after the user's rejection of invalid saves. Also decide history snapshot scope: individual routines versus whole library/settings. Exact palette/layout and panel appearance are reviewed during design. Timing/audio tolerances and platform/storage implementation choices are measured/decided in the relevant phase.
 
 ## Confirmed editor and import decisions
 
