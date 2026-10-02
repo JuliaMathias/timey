@@ -50,11 +50,13 @@ Open `android/` in Android Studio, let Gradle sync, choose the running emulator 
 For terminal builds on this Mac:
 
 ```sh
-export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
-export ANDROID_HOME="$HOME/Library/Android/sdk"
 cd android
-./gradlew testDebugUnitTest lintDebug assembleDebug
-./gradlew clean connectedDebugAndroidTest
+env JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" \
+    ANDROID_HOME="$HOME/Library/Android/sdk" \
+    ./gradlew testDebugUnitTest lintDebug assembleDebug
+env JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" \
+    ANDROID_HOME="$HOME/Library/Android/sdk" \
+    ./gradlew clean connectedDebugAndroidTest
 python3 ../scripts/verify_android_tests.py app/build/reports/androidTests/connected/debug/index.html
 ```
 

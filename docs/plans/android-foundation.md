@@ -47,3 +47,9 @@ Reviewed the entire P0–P7 plan and open task dependencies. Refinement needed: 
 ## Local direct-run evidence
 
 At a4d06df, `adb -s emulator-5554 install -r` succeeded for app-debug.apk and app-debug-androidTest.apk. `adb -s emulator-5554 shell am instrument -w -r com.juliamathias.timey.test/androidx.test.runner.AndroidJUnitRunner` executed both FoundationScreenTest cases with status code 0 and ended `OK (2 tests)` in 172.575 seconds, INSTRUMENTATION_CODE -1. This verifies the actual API 37 app launch and recreation with Espresso 3.7. Gradle connected tests remain blocked by full getprop enumeration; hosted API 36 Gradle/instrumentation pass is separate evidence. No Samsung tests have run.
+
+## Gate repair verified and Mac shell discovery
+
+Synthetic repaired revision 8370c8e: [CI 37038639425](https://github.com/JuliaMathias/timey/actions/runs/37038639425) passes all three jobs; downloaded report verifies two tests, zero failures/skips. Non-draft PR #14 changed from blocked to clean/merge-eligible. Closed it without merging and deleted only its dedicated remote branch. No protection bypass was used.
+
+User encountered JAVA_HOME=/opt/jdk-17.0.8+7. Read-only inspection found that stale export in the user's .zshrc; Studio Java exists. The command-scoped `env JAVA_HOME=... ANDROID_HOME=... ./gradlew testDebugUnitTest lintDebug assembleDebug` passes in four seconds. Update README/Mac guide/#9 to use this robust form; the user's profile remains editable through their own normal setup. Physical phone access is still pending. Final real-PR CI reruns after this documentation increment before integration.

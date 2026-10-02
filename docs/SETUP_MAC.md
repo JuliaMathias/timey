@@ -83,3 +83,15 @@ Persisted `hw.cpu.ncore=4` in the local AVD config for future Studio launches, k
 During scaffold testing, API 37 sometimes lost Activity/package services. After restarting, individual properties/services responded but full `adb shell getprop` enumeration hung, preventing Gradle's device-property collection. Changing to the documented SwiftShader renderer did not fix full enumeration; no permanent graphics change is recorded. A boot-complete flag alone therefore does not establish a usable Gradle test device. Hosted API 36 instrumentation is passing; both physical-phone runs remain unverified. Direct adb installation and the actual AndroidJUnitRunner completed both screen tests successfully (172.575 seconds). This is a real local test pass, but not a successful Gradle connected-test command; the property-fetching limitation remains. No device properties or test outcomes were fabricated.
 
 If this installed emulator still reports unknown API level/unresponsive properties in Studio, create an Android 16 / API 36 Google APIs ARM64 AVD using Device Manager (+ → Create virtual device → choose a phone → select/download an ARM64 Android 16 system image). Keep the existing AVD; no wipe is required. Record download/disk usage and actual boot/test evidence. This alternative image is not installed by this task. The phone matching API 36 is also a valid development target after USB authorization.
+
+### Invalid JAVA_HOME from an existing shell profile
+
+On this Mac, `~/.zshrc` contains an old `export JAVA_HOME=/opt/jdk-17.0.8+7`; that directory is not installed. A newly started shell can restore this value even after Java was exported in another session. Studio's bundled Java executable is verified at `/Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java`. From `android/`, pass the correct values directly to each Gradle invocation:
+
+```sh
+env JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" \
+    ANDROID_HOME="$HOME/Library/Android/sdk" \
+    ./gradlew testDebugUnitTest lintDebug assembleDebug
+```
+
+This exact command passes locally. `env` supplies variables for that command and its children; it does not rely on earlier exports surviving across terminal sessions. Use the same prefix for connected tests. For a permanent interactive-shell setting, replace the stale JAVA_HOME line in `~/.zshrc` with the quoted Studio path and open a new terminal; no profile edit is required to use the command above.
