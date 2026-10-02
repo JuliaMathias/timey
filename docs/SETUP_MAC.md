@@ -9,10 +9,10 @@ This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub
 - Android Studio at `/Applications/Android Studio.app`; bundle version 2026.2, build `262.9437.185.2621.16467767`.
 - Bundled Java executable runs successfully: OpenJDK 25.0.3. Gradle compatibility and CI JDK selection still need validation when scaffolding; installation alone does not establish build compatibility.
 - SDK at `~/Library/Android/sdk`, platform `android-37.0`, Build-Tools 36.0.0, Platform-Tools 37.0.1, emulator and system image installed.
-- AVD `Medium_Phone_API_37.0` is configured. `adb devices` returned no connected/running devices; emulator launch and phone authorization remain unverified.
-- SDK Command-line Tools installation directory now exists following the user's additional setup. Tool execution has not yet been verified.
+- AVD `Medium_Phone_API_37.0` is configured and now boots successfully after the storage fix and a cold boot with four virtual CPU cores. `adb devices` reports `emulator-5554 device`, `sys.boot_completed=1`, Android 17. Physical-phone connection remains unverified.
+- SDK Command-line Tools are installed and execute with Studio's bundled Java. `sdkmanager --version` delegates to Android CLI and reports version 1.0.16486076; prefer current documented CLI commands when scripting SDK setup.
 
-Subsequent startup diagnosis on 2026-10-02 confirmed 16 GiB RAM and insufficient free disk for the configured emulator: startup reported 4568.97 MB available versus 12288 MB needed for its userdata partition. The emulator exits before boot. Authenticated GitHub API access and Projects authorization as JuliaMathias were verified on 2026-10-02.
+Startup diagnosis confirmed 16 GiB RAM and initially insufficient disk (4568.97 MB available versus 12288 MB needed). After the user freed space, 32–34 GiB was available and userdata creation succeeded. The subsequent five-minute boot timeout was resolved by a cold boot with four virtual CPU cores; this does not prove which change alone resolved it. Authenticated GitHub API access and Projects authorization as JuliaMathias were verified on 2026-10-02.
 
 ## Install Android tools first
 
@@ -71,3 +71,9 @@ Available: 4568.97 MB … need 12288.00 MB.
 This is the confirmed failure, rather than a guessed graphics or installation problem. Free enough space to satisfy the 12 GiB userdata allocation with additional headroom for builds (around 20 GiB free is a practical next target), then retry the same AVD. Choose which personal files to move/remove yourself; no cleanup was performed by the agent. Alternatively connect one of the confirmed physical phones through USB debugging to continue setup without allocating emulator userdata.
 
 The diagnostic launch reported automatic RAM increase to 4096 MB for API 37 and successful system/GPU checks. Those checks do not establish boot success: userdata creation failed first. Record a successful boot/device connection only after retry evidence.
+
+### Five-minute boot timeout after freeing space
+
+The original one-core AVD remained offline and Studio timed out after five minutes. Verified Hypervisor.Framework acceleration, adequate available memory and 32–34 GiB disk headroom. Restarted the stopped AVD using `-no-snapshot-load -no-snapshot-save -cores 4 -show-kernel`, preserving userdata and snapshots. Android reached boot completion around 142 seconds; adb then reported `device`, `sys.boot_completed=1` and Android 17.
+
+Persisted `hw.cpu.ncore=4` in the local AVD config for future Studio launches, keeping the prior config in a temporary local backup. The runtime automatically uses 4096 MB RAM for API 37. Cold boot and CPU count changed together; do not claim an isolated core-count diagnosis. No virtual-device wipe or SDK reinstall was performed. Emulator boot is now verified; application build/install and physical-phone checks remain task #9 work.
