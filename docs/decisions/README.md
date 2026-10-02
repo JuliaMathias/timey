@@ -28,3 +28,4 @@ Keep the index and links current. Specifications describe current behavior; reco
 | [0003: Voice timing](0003-voice-timing.md) | Accepted semantics; implementation pending | Rep-start numbers, phase-boundary names and Static count-direction inheritance. |
 | [0004: Workout recovery](0004-workout-recovery.md) | Accepted behavior; implementation pending | Paused recovery after crash/reboot and explicit Stop clearing the session. |
 | [0005: Short-phase cues](0005-short-phase-cues.md) | Accepted policy; implementation pending | Warn about speech fit, preempt unfinished speech for newer cues, keep timer pace. |
+| [0006: Routine import](0006-additive-routine-import.md) | Accepted policy; implementation pending | Independent routine copies with fresh IDs; separate identity-preserving restore. |

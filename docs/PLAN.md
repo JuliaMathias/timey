@@ -30,6 +30,8 @@ Task groups: define versioned model/schema and shared fixtures; validate types/d
 
 Gate: fake-clock tests cover all timing boundaries, manual early completion/clamping/static, navigation state, skipped sets and phased repetitions. Room tests verify persistence/reopen and rollback. Valid routine export/import round-trips in contract fixtures. Engine independent of speech/network/UI.
 
+Contract gate: normal imports generate independent copies with remapped IDs and unchanged existing routines. Resolve existing skip-last flags on reducing/importing a single-set loop before locking validation. Simple-to-Advanced conversion still preserves one-set final-rest omission.
+
 Learning: Kotlin data/sealed classes, nullability, immutable snapshots, interfaces/fakes, Room transactions and migrations; compare repositories to Ecto contexts.
 
 ## P2: Routine library and modern offline editors
@@ -41,6 +43,8 @@ Task groups: design/review readable light/dark/system UI; Home/quickstart; Simpl
 Exit saving is a normal history-producing save even when a minute autosave already persisted the edited content. Keep session edit tracking separate from database dirty state; an unchanged editor exit creates no backup. Successful saves of new changes, including autosaves/imports/restores, trigger history cleanup; failed or unsaved edits do not. Add the synced configurable home timezone to settings.
 
 Gate: edit a prehab routine, insert it before lower-body mobility, undo/redo, collapse/drag/reopen at middle, save/kill/reopen in airplane mode. Search loops finds containing routine and reuse copies preserve colors with new IDs. Invalid import doesn't partially mutate DB; Simple conversion cannot overwrite source. Compose interactions and accessibility checks pass.
+
+Editor gate: verify the agreed Middle/Full fields, cooldown palette cycling with only Prepare/Rest fixed colors, additive JSON imports and a disabled skip-last control for one-set loops. Exact visual styling is reviewed during design; these behaviors are confirmed.
 
 Learning: StateFlow/ViewModels, unidirectional data flow, Compose forms and semantics, persistence versus UI state, transactional undo.
 

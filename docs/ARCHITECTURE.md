@@ -30,6 +30,10 @@ Store routines transactionally in Room with child rows or a versioned payload pl
 
 In P1 create `contracts/routine.schema.json` and representative fixture JSON for simple, repeated loops, skipped final steps, phased reps and manual/static modes. Include conversion equivalence and validation failures. No HTTP implementation is needed for this contract. Timestamps are UTC ISO-8601, durations integer milliseconds, ordering explicit, IDs UUIDs. Use unknown-field/version migration rules to avoid accidental data loss.
 
+Normal routine JSON import is additive copying: remap routine/loop/step/phase IDs together, keep content/order/colors, and leave existing routines untouched. Backup restore is a distinct identity-preserving operation under revision/conflict rules, not an option silently applied during import. Validate before mutation and commit each accepted import atomically. Explicit portable-settings import behavior must be presented separately from adding routine copies; do not infer permission to replace preferences from routine import. See [ADR 0006](decisions/0006-additive-routine-import.md).
+
+Editor disclosure: Middle exposes name/role/duration-or-reps/phase-summary/color; Full adds sound/voice/display/confirmation/skip settings. New work/custom/cooldown steps cycle colors; Prepare/Rest use fixed configurable colors. Imported/copied colors survive. Disable skip-last configuration for single-set loops; decide handling of existing flags on set-count reduction/legacy import before finalizing validators. Simple conversion must preserve final-rest omission, including a one-set routine, without relying on enabling that disabled Advanced control.
+
 ## Deterministic timer and session control
 
 Engine states: idle, running, paused, awaiting confirmation, finished, stopped. Compute progression from injected monotonic elapsed time, not repeated 'subtract one' operations. Pause stores offsets; resume anchors a new deadline. Rendering ticks only refresh the display. A delayed callback reconciles all crossed boundaries, reaches the correct current state, and drops obsolete cue events instead of playing a burst of missed speech.
