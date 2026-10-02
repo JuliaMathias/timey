@@ -1,6 +1,6 @@
 # Execution plan: Android foundation and CI
 
-Status: active. Owner: primary agent. Base revision: 1b0f426. Issues: #9 and #10.
+Status: scaffold and CI integrated; #9 device/setup evidence remains active. Owner: primary agent. Base revision: 1b0f426. Issues: #9 and #10.
 
 ## Purpose and scope
 
@@ -53,3 +53,7 @@ At a4d06df, `adb -s emulator-5554 install -r` succeeded for app-debug.apk and ap
 Synthetic repaired revision 8370c8e: [CI 37038639425](https://github.com/JuliaMathias/timey/actions/runs/37038639425) passes all three jobs; downloaded report verifies two tests, zero failures/skips. Non-draft PR #14 changed from blocked to clean/merge-eligible. Closed it without merging and deleted only its dedicated remote branch. No protection bypass was used.
 
 User encountered JAVA_HOME=/opt/jdk-17.0.8+7. Read-only inspection found that stale export in the user's .zshrc; Studio Java exists. The command-scoped `env JAVA_HOME=... ANDROID_HOME=... ./gradlew testDebugUnitTest lintDebug assembleDebug` passes in four seconds. Update README/Mac guide/#9 to use this robust form; the user's profile remains editable through their own normal setup. Physical phone access is still pending. Final real-PR CI reruns after this documentation increment before integration.
+
+## Integration and task handoff
+
+[Final CI 37039572771](https://github.com/JuliaMathias/timey/actions/runs/37039572771) passed every mandatory job on 964e862. [PR #13](https://github.com/JuliaMathias/timey/pull/13) merged with commit be46b01 under protection, preserving five logical implementation/documentation commits (b6f5a0c through 964e862). #10 closed and board set Done; #9 stays In progress. The user's current blocker was the stale JAVA_HOME, for which the exact command-scoped workaround is verified and documented. Next: connect/install/check both phones per #9, resolve local Gradle emulator enumeration or use a separately created API 36 AVD, then #11's timing/offline-speech prototype. No change to agreed product scope or Android-before-web gate.

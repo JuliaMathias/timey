@@ -1,6 +1,6 @@
 # Delivery plan
 
-Status: approved by the user on 2026-10-01; P0 Android foundation in progress. Repository layout and GitHub Issues/milestones/Project board selected; initial scaffold in development; public JuliaMathias/timey repository created on 2026-10-02 and eight milestone trackers and four initial P0 tasks created. Updated 2026-10-01.
+Status: approved by the user on 2026-10-01; P0 Android foundation in progress. Repository layout and GitHub Issues/milestones/Project board selected; initial scaffold in development; public JuliaMathias/timey repository created on 2026-10-02 and eight milestone trackers and four initial P0 tasks created. Updated 2026-10-02.
 
 ## Outcome and sequencing
 
@@ -126,7 +126,7 @@ At completion of every issue, reread the entire remaining plan and outstanding d
 
 ## GitHub migration
 
-Created 2026-10-02 in the public [JuliaMathias/timey repository](https://github.com/JuliaMathias/timey). GitHub Issues is now the task-status source of truth; this table is a navigation index. Phase trackers retain approved scope and acceptance gates. Split later phases into implementing child tasks when their dependencies and earlier evidence are available. No implementation issue is complete.
+Created 2026-10-02 in the public [JuliaMathias/timey repository](https://github.com/JuliaMathias/timey). GitHub Issues is now the task-status source of truth; this table is a navigation index. Phase trackers retain approved scope and acceptance gates. Split later phases into implementing child tasks when their dependencies and earlier evidence are available. CI/protection task #10 is complete; #9 remains open for phone/setup evidence.
 
 | Phase | Milestone | Tracker |
 | --- | --- | --- |
@@ -146,8 +146,8 @@ Initial P0 tasks:
 - [#11: Prototype phased reps and offline speech on both phones](https://github.com/JuliaMathias/timey/issues/11)
 - [#12: Prototype screen-off playback and draggable overlay](https://github.com/JuliaMathias/timey/issues/12)
 
-The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done; #9 is In progress and dependent work is Backlog. The project retains default private visibility. Required CI/branch protection remains task #10, not an already enforced merge gate. See [migration handoff](plans/github-migration.md).
+The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done; #9 is In progress, #10 is Done, and remaining dependent work is Backlog. The project retains default private visibility. Required CI and main protection were implemented and verified in #10 through failing/repaired test PR #14; scaffold/CI PR #13 merged only after all final-revision checks passed. See [migration handoff](plans/github-migration.md).
 
 ## Approval checkpoint
 
-GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. The public JuliaMathias/timey repository was created on 2026-10-02; eight milestone trackers and four P0 tasks are created; the linked Project board is created and populated. Verify actual required branch protection in P0 alongside its CI workflow. Complete Android Studio setup using `SETUP_MAC.md` to unblock P0. Phone acceptance remains required before API/web implementation.
+GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. The public JuliaMathias/timey repository was created on 2026-10-02; eight milestone trackers and four P0 tasks are created; the linked Project board is created and populated. Verify actual required branch protection in P0 alongside its CI workflow. The scaffold and CI are integrated; complete the remaining phone/local-emulator checks in #9 using `SETUP_MAC.md`. Phone acceptance remains required before API/web implementation.
