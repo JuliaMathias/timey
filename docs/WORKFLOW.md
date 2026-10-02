@@ -30,7 +30,9 @@ Implement and test a coherent increment, update its documentation, inspect the d
 
 When manual validation is needed, write complete instructions in the issue before requesting the user's test: prerequisites/build installation, exact fixtures/settings, numbered actions and expected results, variants/pass-fail criteria, evidence and cleanup. Update them to match the implemented UI. Use the procedure requirements in `TESTING.md`; "test on your phone" is insufficient. Record actual results and outstanding cases before closing the issue. If none are needed, state why.
 
-When a remote exists, use a feature branch per issue and a small PR. Link the issue and include actual validation. Commits are local by default; commit authorization is not automatic permission to publish or merge. A review checks the behavior against the issue, not just style.
+All repository changes must use a branch dedicated to a GitHub issue and a PR targeting `main`. This includes code, documentation, bug fixes and maintenance. Create an issue first if the work has no existing issue. Start from current `main` and name the branch `codex/issue-<number>-<short-description>` (for example, `codex/issue-11-phased-reps`). Do not implement directly on `main`, reuse a merged branch for new work, or combine unrelated issues in one branch.
+
+Keep making small logical commits with complete titles and bodies on that branch. Open a small linked PR, using `Closes #<number>` only when it completes the issue; otherwise use `Refs #<number>` and describe the remaining work. Integrate through the PR after required latest-revision CI passes. Link the issue and include actual validation. Commits are local by default; commit authorization is not automatic permission to publish or merge. A review checks the behavior against the issue, not just style.
 
 Tests must run and pass in GitHub Actions before merging each PR. Require PRs and an up-to-date branch, require the stable CI gate from GitHub Actions, and apply protections to administrators too, without a routine bypass. Failed, cancelled, missing, or pending tests block merge. Local checks remain useful but do not replace this requirement. See `TESTING.md` for suite coverage and enforcement details.
 
@@ -47,6 +49,12 @@ Adjust affected plan sections, technical docs and future issue descriptions/depe
 No agents or extra tools are required for planning. Default to one integrating agent. When the user authorizes parallel agents, useful independent assignments are engine/model work, editor/UI work, and bounded device/review research after interfaces are agreed. Each receives an issue, exact file ownership, base revision, dependencies, tests, and delivery format. Shared schema changes have one owner. Use independent worktrees to avoid competing indexes/commits.
 
 An agent handoff records: goal and requirement IDs; base/current commit; changed paths; decisions; checks and results; reproduction/demo steps; remaining work and blockers. A reviewer does not rewrite the owner's files silently. Never spawn agents solely to fill available slots.
+
+## Merge policy
+
+The user selected squash and merge on 2026-10-02. GitHub allows squash merging only; merge commits and rebase merging are disabled. Continue making small logical commits with complete titles and bodies on each issue branch. After review and required latest-revision CI pass, squash the PR into one commit on `main`. Keep PRs small enough that this commit represents one coherent change.
+
+GitHub defaults the squash title to the PR title and the body to the PR description. Before merging, check that these describe the final change completely, including purpose, validation and remaining limitations; remove stale progress notes and unfilled template text. Do not leave an empty squash description. Existing history is preserved; never rewrite earlier merged commits to apply this policy retroactively. Start new work from current `main`, rather than reusing a squashed branch.
 
 ## Commit format
 

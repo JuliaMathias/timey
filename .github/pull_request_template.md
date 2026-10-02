@@ -2,6 +2,8 @@
 
 Linked issue and requirement IDs. Describe concrete before/after behavior.
 
+- [ ] Work uses a branch dedicated to the linked issue (`codex/issue-<number>-<short-description>`) and this PR targets `main`; unrelated issue changes are excluded.
+
 ## Validation
 
 Tests actually run and results, device demonstration, and unrun checks/limitations.
