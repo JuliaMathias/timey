@@ -3,6 +3,7 @@
 Linked issue and requirement IDs. Describe concrete before/after behavior.
 
 - [ ] GitHub Development sidebar association with the issue is verified; a text-only reference is insufficient.
+- [ ] Work uses a branch dedicated to the linked issue (`codex/issue-<number>-<short-description>`) and this PR targets `main`; unrelated issue changes are excluded.
 
 ## Validation
 
