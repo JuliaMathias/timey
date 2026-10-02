@@ -32,6 +32,8 @@ When manual validation is needed, write complete instructions in the issue befor
 
 When a remote exists, use a feature branch per issue and a small PR. Link the issue and include actual validation. Commits are local by default; commit authorization is not automatic permission to publish or merge. A review checks the behavior against the issue, not just style.
 
+Every PR working on an issue must have a real GitHub Development association with that issue, verified in the sidebar; a `Refs #<number>` text reference alone is insufficient. Link it using GitHub’s Development selector, and retain the issue reference and scope in the PR description. Timey disables automatic closure of merged linked issues so partial PRs stay associated without prematurely completing an issue. Close an issue explicitly only after its acceptance criteria, required CI, manual evidence where needed and forward-plan review are complete.
+
 Tests must run and pass in GitHub Actions before merging each PR. Require PRs and an up-to-date branch, require the stable CI gate from GitHub Actions, and apply protections to administrators too, without a routine bypass. Failed, cancelled, missing, or pending tests block merge. Local checks remain useful but do not replace this requirement. See `TESTING.md` for suite coverage and enforcement details.
 
 GitHub's documented branch protection availability depends on account plan and visibility: public repositories support it on Free, while private repositories require a supporting paid plan such as Pro. Verify the user's account capability before choosing final visibility; keep the CI merge requirement and explain any unresolved enforcement limitation. Do not change privacy or purchase a plan without the user's choice.
