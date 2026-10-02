@@ -64,7 +64,7 @@ Disable the Advanced step's skip-on-last-set option when its loop has one set; d
 
 ## Confirmed background panel decision
 
-A persistent, draggable panel over other apps is required, rather than relying solely on notifications. Request separate Android overlay access with clear setup guidance; provide notification controls when access is denied or revoked. Preserve the agreed running/paused dismissal and Stop behavior. Android restrictions can hide it on protected surfaces; verify supported behavior on both phones in P0 and P3. See [the movable panel decision](decisions/0009-movable-background-panel.md).
+A persistent, draggable panel over other apps is required, rather than relying solely on notifications. Request separate Android overlay access with clear setup guidance; provide notification controls when access is denied or revoked. Preserve the agreed running/paused dismissal and Stop behavior. Android restrictions can hide it on protected surfaces; verify supported behavior on Phone 2 in P0 and P3. See [the movable panel decision](decisions/0009-movable-background-panel.md).
 
 ## Confirmed saving and recovery decisions
 
@@ -76,7 +76,7 @@ Cleanup is eligible only after a successful save of new changes, including minut
 
 Leaving an editor after edits is a normal history-producing save, including when a minute autosave already persisted those edits. Opening and leaving without changes creates no backup. Initialize the home timezone from the first phone, sync it, and keep it fixed until the user changes it. Both devices and the later web client use that shared preference, not independent local date cutoffs; restoring on another device must not replace it with that device's zone.
 
-After a crash or reboot, reopening offers the saved workout paused with options to continue or restart. Explicit Stop clears the session and returns Home. Recover from persisted state without automatically playing audio or counting the interruption as active workout time; reboot invalidates old monotonic deadlines. P0/P3 verify recovery/checkpoint behavior on both phones.
+After a crash or reboot, reopening offers the saved workout paused with options to continue or restart. Explicit Stop clears the session and returns Home. Recover from persisted state without automatically playing audio or counting the interruption as active workout time; reboot invalidates old monotonic deadlines. P0/P3 verify recovery/checkpoint behavior on Phone 2.
 
 Architecture implications and alternatives: [backup history decision](decisions/0002-backup-history.md) and [workout recovery decision](decisions/0004-workout-recovery.md).
 
@@ -98,12 +98,12 @@ The [short-phase cue decision](decisions/0005-short-phase-cues.md) records the a
 
 Reported by the user on 2026-10-01; verify current software versions when recording device-test evidence:
 
-| Phone | Model | Android | One UI |
-| --- | --- | --- | --- |
-| Samsung Galaxy S24 Ultra | SM-S928B/DS | 16 | 8.5 |
-| Samsung Galaxy S22 Ultra | SM-S908E | 16 | 8.0 |
+| Identifier | Phone | Model | Android | One UI |
+| --- | --- | --- | --- | --- |
+| Phone 1 | Samsung Galaxy S24 Ultra | SM-S928B/DS | 16 | 8.5 |
+| Phone 2 | Samsung Galaxy S22 Ultra | SM-S908E | 16 | 8.0 |
 
-Both are target devices for development and acceptance. Android minimum-version support outside these phones remains an engineering choice to record during P0.
+Both remain supported compatibility targets. On 2026-10-02, the user limited physical testing and acceptance to Phone 2 because Phone 1 has a damaged USB port. Phone 1 does not block delivery: retain Android 16 compatibility and record its device-specific behavior as unverified rather than inferring a pass from Phone 2. Do not require wireless debugging on Phone 1. Use an emulator or isolated test client alongside Phone 2 for cross-client sync tests. Android minimum-version support outside these phones remains an engineering choice to record during P0.
 
 ## Reference evidence
 

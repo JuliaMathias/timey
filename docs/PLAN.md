@@ -10,15 +10,15 @@ No calendar estimates yet: target-device background/cue tests and tool setup det
 
 ## P0: Environment, foundation and risk prototypes
 
-Dependencies: plan approval (complete); Android Studio/SDK installation; access to the confirmed Galaxy S24 Ultra and S22 Ultra (both Android 16; exact models/One UI in `PRODUCT.md`). Speech languages are English (default) and Brazilian Portuguese (pt-BR).
+Dependencies: plan approval (complete); Android Studio/SDK installation; access to Phone 2 (Galaxy S22 Ultra) for physical tests; Phone 1 (Galaxy S24 Ultra) remains a compatibility target with a damaged USB port (both Android 16; exact models/One UI in `PRODUCT.md`). Speech languages are English (default) and Brazilian Portuguese (pt-BR).
 
-Task groups: scaffold compatible stable Kotlin/Compose Gradle project; pin toolchain/version catalog and wrapper; add runnable README and GitHub Actions tests/lint/build with a stable required merge gate. Configure `main` protection so tests must run and pass before any PR merges; verify account support and a failing/passing test PR. Build a tiny 2.2-second rep and Down/Up phase demonstration with fake-clock unit tests, real offline TTS, screen-off foreground playback and actionable notification. Measure cue delay/cancellation and prototype the required persistent draggable overlay alongside notification controls on both phones. Decide service type/wake-lock lifecycle; record device results and missing permission fallback. Install offline voice data if needed and verify airplane mode.
+Task groups: scaffold compatible stable Kotlin/Compose Gradle project; pin toolchain/version catalog and wrapper; add runnable README and GitHub Actions tests/lint/build with a stable required merge gate. Configure `main` protection so tests must run and pass before any PR merges; verify account support and a failing/passing test PR. Build a tiny 2.2-second rep and Down/Up phase demonstration with fake-clock unit tests, real offline TTS, screen-off foreground playback and actionable notification. Measure cue delay/cancellation and prototype the required persistent draggable overlay alongside notification controls on Phone 2. Decide service type/wake-lock lifecycle; record device results and missing permission fallback. Install offline voice data if needed and verify airplane mode.
 
 Gate: a debug APK runs on phone; phase progression stays correct while screen off and switching apps; obsolete voice cancels on skip; offline voice or explicit sound fallback works. Document measured limitations and chosen approach before building full UI. This is a disposable or reusable small vertical slice, not an excuse to build all features at once.
 
 CI gate: the automated tests pass in GitHub Actions, and a PR with failing tests demonstrably cannot merge. Protection/check configuration is documented; add instrumentation and shared-contract checks as those suites appear. Do not mark this gate complete based only on a local test run or workflow file.
 
-Device scope: run the timing, offline English/Brazilian Portuguese speech, screen-off, movable overlay and notification fallback prototype checks on both confirmed phones. Measure cue preemption and short-phase preview warnings while timer pace stays unchanged. Record differences instead of assuming one Samsung result covers the other.
+Device scope: run the timing, offline English/Brazilian Portuguese speech, screen-off, movable overlay and notification fallback prototype checks on Phone 2. Measure cue preemption and short-phase preview warnings while timer pace stays unchanged. Phone 1 remains supported but its device-specific behavior is unverified; Phone 2 results do not establish a Phone 1 pass.
 
 Learning: Gradle wrapper, app lifecycle, Compose state, monotonic time, coroutines, foreground service versus UI thread.
 
@@ -58,7 +58,7 @@ Confirmed defaults: Brazilian Portuguese for the Portuguese option, count-up for
 
 Gate: an actual offline workout with phased reps and manual steps runs correctly with screen off and another app open; all controls work from app/notification and the required movable panel when overlay access is granted. Dragging does not affect workout progression; denial/revocation leaves notification controls usable. Stop cancels audio and returns Home. Short-phase voice behavior is tested and explained; no timing waits for speech. Screen readers and large text retain usable controls. Document force-stop/reboot limits.
 
-Recovery gate: crash/reboot then reopen offers saved session paused with Continue/Restart, without replaying interruption time or stale cues. Explicit Stop leaves no recoverable workout. Verify separately on both target phones.
+Recovery gate: crash/reboot then reopen offers saved session paused with Continue/Restart, without replaying interruption time or stale cues. Explicit Stop leaves no recoverable workout. Verify on Phone 2; record Phone 1 as compatibility-target only, not a required test gate.
 
 Learning: service ownership, audio focus, offline TTS, asynchronous callbacks, cancellation and resource cleanup.
 
@@ -80,7 +80,7 @@ Task groups: full real-device acceptance matrix and regressions; performance/bat
 
 Gate: user can use Timey daily without a web server; all agreed phone features demonstrated, known OS limits explained and accepted, setup/test docs reproducible. User accepts phone milestone before web/API implementation begins.
 
-Device gate: complete the relevant acceptance matrix and at least one full real routine on each confirmed phone; verify Drive recovery and cross-device conflicts between the two.
+Device gate: complete the relevant acceptance matrix and at least one full real routine on Phone 2; verify Drive recovery and cross-client conflicts with Phone 2 plus an emulator or isolated test client. Phone 1 testing is not required for acceptance.
 
 Learning: debug versus release APKs, signing keys, CI evidence, profiling and interpreting regressions.
 
@@ -143,7 +143,7 @@ Initial P0 tasks:
 
 - [#9: Scaffold Android and verify Mac/device setup](https://github.com/JuliaMathias/timey/issues/9)
 - [#10: Add GitHub Actions and enforce the required merge gate](https://github.com/JuliaMathias/timey/issues/10)
-- [#11: Prototype phased reps and offline speech on both phones](https://github.com/JuliaMathias/timey/issues/11)
+- [#11: Prototype phased reps and offline speech on Phone 2](https://github.com/JuliaMathias/timey/issues/11)
 - [#12: Prototype screen-off playback and draggable overlay](https://github.com/JuliaMathias/timey/issues/12)
 
 The [Timey Project board](https://github.com/users/JuliaMathias/projects/7/views/3) is created, linked to the repository and contains all twelve issues. Columns are Backlog, Ready, In progress, Review and Done; #9 is In progress, #10 is Done, and remaining dependent work is Backlog. The project retains default private visibility. Required CI and main protection were implemented and verified in #10 through failing/repaired test PR #14; scaffold/CI PR #13 merged only after all final-revision checks passed. See [migration handoff](plans/github-migration.md).

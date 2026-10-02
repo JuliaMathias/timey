@@ -24,6 +24,8 @@ The GitHub CLI is already available on this Mac. Authenticated API access as Jul
 
 ## Task lifecycle
 
+**Human approval and merging are mandatory.** Agents may create branches, commit/push changes, open/update PRs, resolve conflicts, run checks and report readiness. They must never merge a PR, enable auto-merge, schedule a merge, or invoke a merge queue on the user’s behalf. Leave every PR open for the user to review, approve and merge manually in GitHub. Passing CI, plan approval or permission to implement/publish does not authorize an agent to merge.
+
 Before coding, read relevant instructions and requirement IDs, inspect current state, and identify a concrete slice. A multi-session task gets a plan based on `docs/plans/TEMPLATE.md`. Keep progress, evidence, and decisions current so another agent can resume without the original chat.
 
 Implement and test a coherent increment, update its documentation, inspect the diff, and commit with a title and body. Useful increments include a model plus validation tests, persistence plus migration tests, and a screen plus interaction tests. Do not hold all work until a large feature is complete. Do not create knowingly broken intermediate commits.
@@ -34,6 +36,8 @@ All repository changes must use a branch dedicated to a GitHub issue and a PR ta
 
 Keep making small logical commits with complete titles and bodies on that branch. Open a small linked PR, using `Closes #<number>` only when it completes the issue; otherwise use `Refs #<number>` and describe the remaining work. Integrate through the PR after required latest-revision CI passes. Link the issue and include actual validation. Commits are local by default; commit authorization is not automatic permission to publish or merge. A review checks the behavior against the issue, not just style.
 
+Every PR working on an issue must have a real GitHub Development association with that issue, verified in the sidebar; a `Refs #<number>` text reference alone is insufficient. Link it using GitHub’s Development selector, and retain the issue reference and scope in the PR description. Timey disables automatic closure of merged linked issues so partial PRs stay associated without prematurely completing an issue. Close an issue explicitly only after its acceptance criteria, required CI, manual evidence where needed and forward-plan review are complete.
+
 Tests must run and pass in GitHub Actions before merging each PR. Require PRs and an up-to-date branch, require the stable CI gate from GitHub Actions, and apply protections to administrators too, without a routine bypass. Failed, cancelled, missing, or pending tests block merge. Local checks remain useful but do not replace this requirement. See `TESTING.md` for suite coverage and enforcement details.
 
 GitHub's documented branch protection availability depends on account plan and visibility: public repositories support it on Free, while private repositories require a supporting paid plan such as Pro. Verify the user's account capability before choosing final visibility; keep the CI merge requirement and explain any unresolved enforcement limitation. Do not change privacy or purchase a plan without the user's choice.
@@ -42,7 +46,7 @@ Done means acceptance criteria met, tests and required CI passed, material limit
 
 As each issue is completed, reread all remaining phases in `PLAN.md` and outstanding issue dependencies before closing it or beginning the next issue. Use the implementation, test results and device discoveries to assess future architecture, sequencing, scope, risks, validation and acceptance gates. Do not limit the review to the next task or the current milestone.
 
-Adjust affected plan sections, technical docs and future issue descriptions/dependencies when the evidence warrants it. Record the completed issue, discoveries, adjustments and reasons in its completion note and execution plan; if none are needed, explicitly record "No adjustments needed" and why. Keep issue status in GitHub once migrated rather than duplicating the backlog in Markdown. Routine technical refinements can proceed within approved scope; changes to agreed product behavior or user decisions must be presented for approval. Any resulting code/documentation changes follow the normal commit and PR/CI rules.
+Adjust affected plan sections, technical docs and future issue descriptions/dependencies when the evidence warrants it. Include every resulting repository adjustment in the same issue branch and PR that made it necessary; update affected GitHub issues before that PR merges and link those completed updates in the PR description. Do not leave forward-plan adjustments as promises for an untracked later task. If new evidence after merge requires more work, create a linked follow-up issue and PR. Record the completed issue, discoveries, adjustments and reasons in its completion note and execution plan; if none are needed, explicitly record "No adjustments needed" and why. Keep issue status in GitHub once migrated rather than duplicating the backlog in Markdown. Routine technical refinements can proceed within approved scope; changes to agreed product behavior or user decisions must be presented for approval. Any resulting code/documentation changes follow the normal commit and PR/CI rules.
 
 ## Optional agent collaboration
 

@@ -15,3 +15,7 @@ The user chose paused recovery rather than discarding the interrupted workout an
 Persist the execution snapshot, cursor and remaining/elapsed offsets necessary to recover. Reboot invalidates old monotonic deadlines; anchor new timing only after the user continues. Do not replay stale cues or treat interruption time as active workout time. Recover from stored checkpoint state, with checkpoint fidelity measured in P0/P3 rather than promised without tests.
 
 Distinguish app dismissal, process recreation, crash, force-stop, reboot and explicit Stop. Do not bypass force-stop or claim continuity through reboot; this decision concerns later app reopening. Test recovery and Stop clearing separately on both confirmed phones, with issue-specific manual instructions. Phase ordering is unchanged; no timer or persistence implementation has been started.
+
+## Validation scope update — 2026-10-02
+
+The user subsequently limited required physical testing to Phone 2 (Galaxy S22 Ultra) because Phone 1 has a damaged USB port. Earlier two-phone validation statements above are superseded by the current device policy in [PRODUCT.md](../PRODUCT.md) and [TESTING.md](../TESTING.md). The architectural decision and Phone 1 compatibility requirement remain unchanged; no Phone 1 hardware result is inferred.
