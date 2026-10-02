@@ -56,7 +56,7 @@ Continuous integration must use a compatible pinned JDK/SDK and run the establis
 
 ## Required GitHub Actions merge gate
 
-User requirement, agreed 2026-10-01: automated tests must run and pass through a GitHub Actions workflow before a PR can merge. The Android workflow is being introduced alongside the scaffold; verify its runs and remote enforcement in #10 before merging.
+User requirement, agreed 2026-10-01: automated tests must run and pass through a GitHub Actions workflow before a PR can merge. The Android workflow exists and main protection is configured; enforcement evidence and final verification are recorded in #10 and the foundation handoff.
 
 - Trigger CI for every PR targeting `main`, including new commits and branch updates; also run on pushes to `main` to detect integration regressions. Start with all established suites on every PR rather than path-filtering required workflows. Optimize later only with verified coverage and an always-reported merge gate.
 - Android checks include the pure Kotlin/domain and app unit tests, lint and debug build. Add Room migration/integration and critical Compose instrumentation tests on a CI emulator as those suites are introduced. Real-phone audio/background evidence remains separately required where relevant.

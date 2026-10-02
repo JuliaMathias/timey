@@ -31,3 +31,19 @@ PR #13 created. First CI run 37037106035 failed because hosted runners had no sd
 ## Local instrumentation compatibility finding
 
 The cold-booted API 37 emulator reached Activity/package readiness. Two tests executed but Espresso's inherited older version failed before assertions because InputManager.getInstance was removed on this OS. Explicitly pin Espresso 3.7.0, whose official release notes replace that reflection with system-service access. The changed app/test APKs compile and lint passes; subsequent instrumentation encountered an unresponsive emulator (unknown API level), so no API 37 pass is claimed. A bounded SwiftShader renderer retry is in progress after logs reported the default guest ANGLE path unstable above API 35. Hosted API 36 build/lint and result-guard cases pass; instrumentation remains pending.
+
+## Verified hosted results and negative gate
+
+Foundation revision a4d06df: [CI run 37038040750](https://github.com/JuliaMathias/timey/actions/runs/37038040750) passed android-build, android-device-tests and ci-required. Downloaded the actual report and independently verified two executed tests, zero failures/skips; six result-guard cases pass in CI. Local unit task has no JVM cases.
+
+Synthetic revision e55ef7c: [run 37037775434](https://github.com/JuliaMathias/timey/actions/runs/37037775434) has passing build but two intentional wrong-heading assertions fail. Uploaded reports confirm that exact cause. Required ci-required fails; non-draft PR #14 reports mergeable_state blocked. Restored the correct heading at 8370c8e; its fresh CI is running. Never merge the synthetic branch.
+
+## Forward-plan review
+
+Reviewed the entire P0–P7 plan and open task dependencies. Refinement needed: every instrumentation suite must prove tests executed, not merely trust Gradle exit status. Added the regression-tested guard now, so future Room/editor/background suites inherit that requirement. API 37 local property-fetching instability remains #9 setup work; API 36 hosted testing preserves the target-phone OS gate. #11 still needs fake-clock JVM tests and both phones/offline voices; #12 must validate foreground/overlay rules for target SDK 37 on both API 36 Samsungs. P1 contracts/persistence, P2 editors, P3 audio/player, P4 sync/history, P5 phone acceptance, and P6/P7 API/web order and product requirements remain unchanged. No adjustments needed to those phases' scope or order: scaffold evidence does not establish timing/audio/sync behavior.
+
+#9 remains open for physical-phone connections/runs and local emulator tooling evidence. #10 can close only after repaired synthetic CI/eligibility, test-branch cleanup, passing latest real PR CI and integration.
+
+## Local direct-run evidence
+
+At a4d06df, `adb -s emulator-5554 install -r` succeeded for app-debug.apk and app-debug-androidTest.apk. `adb -s emulator-5554 shell am instrument -w -r com.juliamathias.timey.test/androidx.test.runner.AndroidJUnitRunner` executed both FoundationScreenTest cases with status code 0 and ended `OK (2 tests)` in 172.575 seconds, INSTRUMENTATION_CODE -1. This verifies the actual API 37 app launch and recreation with Espresso 3.7. Gradle connected tests remain blocked by full getprop enumeration; hosted API 36 Gradle/instrumentation pass is separate evidence. No Samsung tests have run.
