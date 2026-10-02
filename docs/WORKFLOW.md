@@ -1,10 +1,10 @@
 # Project management and agent workflow
 
-Status: GitHub Issues, phase milestones and a Project board selected on 2026-10-01; repository layout approved. Delivery plan approved on 2026-10-01; remote repository details remain pending. No remote repository, issues, or board has been created.
+Status: GitHub Issues, phase milestones and a Project board selected on 2026-10-01; repository layout approved. Delivery plan approved on 2026-10-01; public repository [JuliaMathias/timey](https://github.com/JuliaMathias/timey) created on 2026-10-02. Eight milestones and twelve issues are created; Project board access is pending.
 
 ## Selected system
 
-Use one GitHub repository, GitHub Issues for executable tasks, milestones for phases, and one GitHub Project board. Private visibility is recommended but still requires confirmation with the owner/name and required branch-protection capability. GitHub is not technically necessary: local Markdown and Git are enough to start. It is useful here because human decisions, issue dependencies, code review, and automated checks can live together. We do not need Linear, Jira, Notion, or an agent orchestration service for this scope.
+Use the public JuliaMathias/timey repository, GitHub Issues for executable tasks, milestones for phases, and one GitHub Project board. The user explicitly selected public visibility on 2026-10-02. GitHub is not technically necessary: local Markdown and Git are enough to start. It is useful here because human decisions, issue dependencies, code review, and automated checks can live together. We do not need Linear, Jira, Notion, or an agent orchestration service for this scope.
 
 Docs describe enduring requirements and decisions. Issues describe work and status. The board displays those issues; it is not a second backlog. Chats are discussion, not the source of truth for accepted behavior. Do not maintain a competing status table in several places.
 
@@ -14,13 +14,13 @@ Suggested board states: Backlog, Ready, In progress, Review, Done. Labels: andro
 
 ## After plan approval
 
-1. Confirm GitHub owner and repository name/visibility (recommend private `timey`), then create/push the repository under explicit user authorization. Do not guess the account or expose reference media.
+1. Repository creation is complete: [JuliaMathias/timey](https://github.com/JuliaMathias/timey), public, with documentation history pushed. Keep personal reference media and credentials outside Git.
 2. Create milestone issues from the task groups in `PLAN.md`, split into small tasks with observable acceptance criteria and meaningful tests. Preserve requirement IDs, dependencies, scope, and learning objectives.
 3. Create the selected Project board. Add existing issues rather than copying their descriptions into new cards. Record issue URLs back in the plan.
 4. Start P0 only after plan approval. Later phases remain visible but do not block the first runnable phone prototype.
 5. As part of P0, add GitHub Actions tests and protect `main` so PRs cannot merge until the required checks pass. Verify enforcement with a deliberately failing test PR followed by a passing revision. Record the actual required check names and settings; do not merely add a workflow file and assume it blocks merges.
 
-The GitHub CLI is already available on this Mac. Authentication has not been checked; remote management requires the user's account authorization. Templates in `.github/` standardize tasks, bugs, and review without installing anything.
+The GitHub CLI is already available on this Mac. Authenticated API access as JuliaMathias was verified on 2026-10-02. Projects additionally requires the `project` scope; use `gh auth refresh -h github.com -s project` and complete authorization before board creation. Templates in `.github/` standardize tasks, bugs, and review without installing anything.
 
 ## Task lifecycle
 

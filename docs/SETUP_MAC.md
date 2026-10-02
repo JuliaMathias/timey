@@ -4,7 +4,7 @@ Status: guide only, checked 2026-10-01. No tools installed or account settings c
 
 ## What is already present
 
-This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub CLI 2.86.0 are available. Android Studio and Android SDK were not found in the usual `/Applications/Android Studio.app`, `~/Applications/Android Studio.app`, and `~/Library/Android/sdk` locations. That is not an exhaustive inventory. `/usr/bin/java` is a macOS launcher, not proof of an installed usable JDK. GitHub authentication and available disk/RAM were not checked.
+This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub CLI 2.86.0 are available. Android Studio and Android SDK were not found in the usual `/Applications/Android Studio.app`, `~/Applications/Android Studio.app`, and `~/Library/Android/sdk` locations. That is not an exhaustive inventory. `/usr/bin/java` is a macOS launcher, not proof of an installed usable JDK. Available disk/RAM were not checked. Authenticated GitHub API access as JuliaMathias was subsequently verified on 2026-10-02.
 
 ## Install Android tools first
 
@@ -43,7 +43,7 @@ App-data is hidden from normal Drive browsing; Timey's JSON export is the user-r
 
 ## GitHub and later Elixir tools
 
-Git and `gh` are already installed. Once the plan and remote ownership are approved, authorize GitHub and create the private repository/issues if chosen. No project-management tool installation is necessary now.
+Git and `gh` are already installed. The approved public repository is JuliaMathias/timey. GitHub API access is verified; Project board creation additionally needs `gh auth refresh -h github.com -s project` and completion of the authorization flow. No project-management tool installation is necessary now.
 
 Install compatible Erlang/OTP, Elixir, and Phoenix dependencies at P6, with versions pinned then. The proposed web database is SQLite, so PostgreSQL is not currently required. Follow the generated project's requirements at that time; Node.js is only needed if the chosen asset tooling needs it. Android development does not require Xcode, Docker, or Elixir. We will not install optional tools speculatively.
 

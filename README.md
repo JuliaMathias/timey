@@ -4,7 +4,7 @@ A personal Android interval timer for named exercise loops, paced repetitions an
 
 ## Current state
 
-Delivery plan approved on 2026-10-01; implementation has not started. There is no runnable app, Gradle wrapper, Phoenix project, CI workflow, or GitHub remote yet. The monorepo layout is approved; GitHub Issues, phase milestones and a Project board are selected; the delivery plan is approved. GitHub owner/name/visibility and tool setup remain to be confirmed. Do not interpret planned features as shipped features.
+Delivery plan approved on 2026-10-01; implementation has not started. The [public GitHub repository](https://github.com/JuliaMathias/timey) is created. There is no runnable app, Gradle wrapper, Phoenix project or CI workflow yet. The monorepo layout is approved; GitHub Issues, phase milestones and a Project board are selected; the delivery plan is approved. Eight milestones and twelve issues are created; Project board authorization and Android tool setup remain pending. Do not interpret planned features as shipped features.
 
 ## Start here
 

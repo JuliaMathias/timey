@@ -33,3 +33,7 @@ Checked 2026-10-01 using official documentation. These sources support platform 
 - [Android: Google authorization](https://developer.android.com/identity/authorization) — authorization for Google data is separate from sign-in identity.
 - [Google: OAuth 2.0](https://developers.google.com/identity/protocols/oauth2) — OAuth lifecycle and external Testing refresh-token limits.
 - [OpenAPI specification 3.2.1](https://spec.openapis.org/oas/v3.2.1.html) — current published specification checked during planning. Select a version supported by the Phoenix documentation/validation tooling in P6; 3.1 may be the compatible choice then.
+
+## GitHub migration follow-up, checked 2026-10-02
+
+- [GitHub CLI: Projects](https://cli.github.com/manual/gh_project) — Project commands require the `project` authorization scope; repository access alone does not grant it. Refresh authorization with `gh auth refresh -h github.com -s project`.

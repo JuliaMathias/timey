@@ -1,6 +1,6 @@
 # Delivery plan
 
-Status: approved by the user on 2026-10-01; implementation not started. Repository layout and GitHub Issues/milestones/Project board selected; no application code or remote issues created. Updated 2026-10-01.
+Status: approved by the user on 2026-10-01; implementation not started. Repository layout and GitHub Issues/milestones/Project board selected; no application code; public JuliaMathias/timey repository created on 2026-10-02 and eight milestone trackers and four initial P0 tasks created. Updated 2026-10-01.
 
 ## Outcome and sequencing
 
@@ -124,6 +124,30 @@ For every issue needing manual validation, include complete issue-specific test 
 
 At completion of every issue, reread the entire remaining plan and outstanding dependencies. Check whether the completed work changes technical assumptions, ordering, risk, test coverage or acceptance gates in any later phase. Update affected sections and future issues before moving on; record the evidence and rationale in the completed issue's note and execution plan, including an explicit "No adjustments needed" outcome when applicable. Preserve agreed requirements and seek approval for changes to user decisions. This review is part of issue completion, not an optional end-of-milestone activity.
 
+## GitHub migration
+
+Created 2026-10-02 in the public [JuliaMathias/timey repository](https://github.com/JuliaMathias/timey). GitHub Issues is now the task-status source of truth; this table is a navigation index. Phase trackers retain approved scope and acceptance gates. Split later phases into implementing child tasks when their dependencies and earlier evidence are available. No implementation issue is complete.
+
+| Phase | Milestone | Tracker |
+| --- | --- | --- |
+| P0 | [Milestone](https://github.com/JuliaMathias/timey/milestone/1) | [#1](https://github.com/JuliaMathias/timey/issues/1) |
+| P1 | [Milestone](https://github.com/JuliaMathias/timey/milestone/2) | [#2](https://github.com/JuliaMathias/timey/issues/2) |
+| P2 | [Milestone](https://github.com/JuliaMathias/timey/milestone/3) | [#3](https://github.com/JuliaMathias/timey/issues/3) |
+| P3 | [Milestone](https://github.com/JuliaMathias/timey/milestone/4) | [#4](https://github.com/JuliaMathias/timey/issues/4) |
+| P4 | [Milestone](https://github.com/JuliaMathias/timey/milestone/5) | [#5](https://github.com/JuliaMathias/timey/issues/5) |
+| P5 | [Milestone](https://github.com/JuliaMathias/timey/milestone/6) | [#6](https://github.com/JuliaMathias/timey/issues/6) |
+| P6 | [Milestone](https://github.com/JuliaMathias/timey/milestone/7) | [#7](https://github.com/JuliaMathias/timey/issues/7) |
+| P7 | [Milestone](https://github.com/JuliaMathias/timey/milestone/8) | [#8](https://github.com/JuliaMathias/timey/issues/8) |
+
+Initial P0 tasks:
+
+- [#9: Scaffold Android and verify Mac/device setup](https://github.com/JuliaMathias/timey/issues/9)
+- [#10: Add GitHub Actions and enforce the required merge gate](https://github.com/JuliaMathias/timey/issues/10)
+- [#11: Prototype phased reps and offline speech on both phones](https://github.com/JuliaMathias/timey/issues/11)
+- [#12: Prototype screen-off playback and draggable overlay](https://github.com/JuliaMathias/timey/issues/12)
+
+Project board creation is pending GitHub Projects authorization (`project` scope). Required CI/branch protection remains task #10, not an already enforced merge gate. See [migration handoff](plans/github-migration.md).
+
 ## Approval checkpoint
 
-GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. Confirm GitHub owner/name/visibility and required branch-protection capability before creating the remote repository and migrating tasks. Complete Android Studio setup using `SETUP_MAC.md` to unblock P0. Phone acceptance remains required before API/web implementation.
+GitHub Issues, phase milestones and a Project board are selected. The user approved the delivery plan and phase order on 2026-10-01. The public JuliaMathias/timey repository was created on 2026-10-02; eight milestone trackers and four P0 tasks are created; Project board access needs additional GitHub authorization. Verify actual required branch protection in P0 alongside its CI workflow. Complete Android Studio setup using `SETUP_MAC.md` to unblock P0. Phone acceptance remains required before API/web implementation.
