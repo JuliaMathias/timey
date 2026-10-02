@@ -16,6 +16,7 @@
 - Commit as you go in small, logical, reviewable increments. Do not wait for an entire feature. Each commit must have a descriptive title AND a nonempty body explaining all changes, their purpose, and validation or remaining limitations.
 - Every PR must be associated with its issue through GitHub’s Development link; verify the sidebar association after creation. A text reference alone is insufficient. Automatic closure of merged linked issues is disabled: close issues explicitly only after all acceptance and forward-plan gates are met.
 - Merge PRs using squash and merge only, after required latest-revision CI passes. Keep small logical development commits; the final squash commit must also have a descriptive title and complete nonempty body. GitHub uses the PR title and description by default, so reconcile them with the final implementation and actual validation before merging. Never rewrite existing merged history to apply this policy retroactively.
+- After the user merges a PR, verify GitHub reports it merged, fetch and fast-forward local `main`, then delete its completed local issue branch. Check for unpublished commits, uncommitted work and active worktrees first; preserve all unrelated work. Squash merges require verification through the merged PR rather than ancestry alone. Do not delete remote branches without separate authorization.
 - Stage explicit paths. Inspect the staged diff; never include unrelated user changes, credentials, personal databases, or raw reference media. Do not amend, reset, rebase, or force-push another contributor's work without authorization.
 - Run the meaningful checks for each increment before committing. A scaffold or documentation commit can use structural/link checks; do not claim application tests ran when there is no application.
 - Once GitHub CI exists, every PR must run the applicable automated tests through GitHub Actions and pass the required merge check on the latest revision. Do not merge with failed, cancelled, missing, or still-running tests, bypass protections, or substitute local results for required CI. Configure this during P0; add web/API tests when that application exists.
@@ -49,6 +50,8 @@
 - Do not infer technical implementation from screenshots (for example, whether the banner uses heads-up notifications or an overlay). Verify on the actual target phone.
 
 ## Agents and research
+
+- Assign appropriate existing GitHub labels whenever creating an issue, as part of creation rather than a later cleanup. Use labels matching its scope/type (for example `android`, `audio`, `sync`, `web`, `docs`, `bug`, or `phase`); verify the created issue has them. Do not leave new issues unlabeled.
 
 - One owner integrates each task. Delegate only when explicitly authorized for that task. When authorized, assign bounded work, acceptance criteria, file ownership, and base revision; isolate concurrent edits in worktrees when appropriate.
 - Shared contracts require one owner; coordinate before editing them. Agents return changed paths, commits, tests, risks, and remaining work. Do not use chat history as the only handoff.

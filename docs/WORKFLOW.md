@@ -10,6 +10,8 @@ Docs describe enduring requirements and decisions. Issues describe work and stat
 
 `PRODUCT.md` is the current behavior specification; `ARCHITECTURE.md` describes the current technical design; `PLAN.md` sequences delivery. Numbered records in `docs/decisions/` explain why durable architecture-shaping choices were made, which alternatives were considered and their consequences. Use its index/policy to decide when a choice needs a record. Language, color and other ordinary product preferences do not each need an ADR; choices affecting contracts, persistence, synchronization or runtime ownership do. Add/update the record and index alongside the relevant specification change. Mark replaced records superseded and link successors to retain decision history.
 
+Every new GitHub issue must receive appropriate existing labels when it is created. Select labels for its actual scope/type: for example `android` and `audio` for speech work, `docs` for workflow/documentation changes, `bug` for defects, and `phase` for milestone trackers. Verify the labels after creation; do not defer labeling until later or leave an issue unlabeled.
+
 Suggested board states: Backlog, Ready, In progress, Review, Done. Labels: android, web, contracts, sync, audio, design, bug, docs, learning. Use milestone P0-P7 from `PLAN.md`. Add blocked-by links and requirement IDs. One owner per issue. Begin with one implementation task at a time; add concurrency only for independent work after the contracts stabilize.
 
 ## After plan approval
@@ -47,6 +49,12 @@ Done means acceptance criteria met, tests and required CI passed, material limit
 As each issue is completed, reread all remaining phases in `PLAN.md` and outstanding issue dependencies before closing it or beginning the next issue. Use the implementation, test results and device discoveries to assess future architecture, sequencing, scope, risks, validation and acceptance gates. Do not limit the review to the next task or the current milestone.
 
 Adjust affected plan sections, technical docs and future issue descriptions/dependencies when the evidence warrants it. Include every resulting repository adjustment in the same issue branch and PR that made it necessary; update affected GitHub issues before that PR merges and link those completed updates in the PR description. Do not leave forward-plan adjustments as promises for an untracked later task. If new evidence after merge requires more work, create a linked follow-up issue and PR. Record the completed issue, discoveries, adjustments and reasons in its completion note and execution plan; if none are needed, explicitly record "No adjustments needed" and why. Keep issue status in GitHub once migrated rather than duplicating the backlog in Markdown. Routine technical refinements can proceed within approved scope; changes to agreed product behavior or user decisions must be presented for approval. Any resulting code/documentation changes follow the normal commit and PR/CI rules.
+
+## After the user merges
+
+Verify the PR is merged in GitHub and record its merge commit and final CI. Fetch the remote and fast-forward local `main`; preserve uncommitted files and active worktrees. Check the completed local issue branch for unpublished commits before deleting it. Remove completed local branches after integration instead of accumulating them; keep active branches and never delete remote branches without separate authorization.
+
+For squash merges, original commits need not be ancestors of `main`. Verify the merged PR’s head matches the completed branch and its work is integrated before cleanup; do not use force deletion merely to silence an unexplained Git warning. Record the handoff and close the issue only after its acceptance gates and forward-plan review are complete. Agents still never merge PRs themselves.
 
 ## Optional agent collaboration
 
