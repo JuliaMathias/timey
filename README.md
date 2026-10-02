@@ -1,6 +1,6 @@
 # Timey
 
-A personal Android interval timer for named exercise loops, paced repetitions and phases, pleasant cues, and offline routines. Google Drive sync provides recovery across devices. A Phoenix LiveView computer editor and documented API follow after the phone app is accepted.
+A personal Android interval timer for named exercise loops, paced repetitions and phases, pleasant cues, and offline routines. Google Drive sync provides recovery of the current library and settings across devices. Saved-version history is per routine; full-library JSON export provides an additional backup. A Phoenix LiveView computer editor and documented API follow after the phone app is accepted.
 
 ## Current state
 

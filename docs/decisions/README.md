@@ -33,3 +33,4 @@ Keep the index and links current. Specifications describe current behavior; reco
 | [0008: Current rep display](0008-current-rep-display.md) | Accepted semantics; implementation pending | Rep count-up shows 1 immediately; completion still waits for the final rep duration. |
 | [0009: Movable background panel](0009-movable-background-panel.md) | Accepted requirement; implementation pending | Required draggable overlay with notification fallback and one service-owned timer. |
 | [0010: Local recovery drafts](0010-local-recovery-drafts.md) | Accepted behavior; implementation pending | Recover unfinished invalid edits locally without saving invalid routines or syncing drafts. |
+| [0011: Per-routine history](0011-per-routine-history.md) | Accepted scope; implementation pending | Independent routine history budgets, full current-library/settings sync and full-library JSON export. |

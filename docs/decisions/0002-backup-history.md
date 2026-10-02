@@ -21,3 +21,5 @@ Store save kind and UTC creation time; group dates using the shared home timezon
 P2 implements save classification/settings. P4 validates cross-device date reconciliation and acknowledged cleanup so dormant clients cannot resurrect pruned history. Keep current records and sync lineage separate from backup cleanup. Test inactive periods, multiple snapshots per date, sixth-date removal, midnight/timezone cases and cleanup eligibility. See [architecture](../ARCHITECTURE.md) and [testing](../TESTING.md) for the proposed mechanisms and evidence requirements.
 
 At this record's creation, the initial home timezone was open. Later clarification on 2026-10-01 confirmed initialization from the first phone, synchronization and no automatic change until the user edits it. The exact storage/sync protocol remains open. Accepting this policy does not approve an untested cleanup algorithm or start implementation.
+
+Snapshot scope was subsequently clarified in [ADR 0011](0011-per-routine-history.md): this policy applies independently to each routine. The retention and save-kind decisions above remain in force.
