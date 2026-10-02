@@ -25,7 +25,7 @@ Later ExUnit tests cover contexts, Ecto migrations, API authentication/validatio
 
 ## Real-device matrix
 
-Use both confirmed phones for device acceptance and at least one full real routine on each, and an emulator for repeatable UI flows. Targets reported on 2026-10-01: Galaxy S24 Ultra SM-S928B/DS, Android 16 / One UI 8.5; Galaxy S22 Ultra SM-S908E, Android 16 / One UI 8.0. Recheck installed software at test time. Record model, Android/One UI version, target SDK, APK commit, voice engine/language, permissions, scenario, expected/actual behavior and evidence. Do not commit personal screenshots or tokens.
+Use both confirmed phones for device acceptance and at least one full real routine on each, and an emulator for repeatable UI flows. Targets reported on 2026-10-01: Phone 1: Galaxy S24 Ultra SM-S928B/DS, Android 16 / One UI 8.5; Phone 2: Galaxy S22 Ultra SM-S908E, Android 16 / One UI 8.0. Use these identifiers consistently in issues and test evidence. Recheck installed software at test time. Record model, Android/One UI version, target SDK, APK commit, voice engine/language, permissions, scenario, expected/actual behavior and evidence. Do not commit personal screenshots or tokens.
 
 P0 validates background timing, offline speech in English and Brazilian Portuguese (pt-BR), short-phase cue interruption with unchanged timer pace, and movable overlay/notification fallback behavior on both devices. P4/P5 use them as independent sync clients to verify restore and concurrent-edit conflicts; fresh-install checks use safe test data and an explicit data-preservation procedure. If a phone is unavailable, mark its cases blocked/not run rather than inferring a pass from the other phone.
 

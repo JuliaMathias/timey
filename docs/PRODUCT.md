@@ -98,10 +98,10 @@ The [short-phase cue decision](decisions/0005-short-phase-cues.md) records the a
 
 Reported by the user on 2026-10-01; verify current software versions when recording device-test evidence:
 
-| Phone | Model | Android | One UI |
-| --- | --- | --- | --- |
-| Samsung Galaxy S24 Ultra | SM-S928B/DS | 16 | 8.5 |
-| Samsung Galaxy S22 Ultra | SM-S908E | 16 | 8.0 |
+| Identifier | Phone | Model | Android | One UI |
+| --- | --- | --- | --- | --- |
+| Phone 1 | Samsung Galaxy S24 Ultra | SM-S928B/DS | 16 | 8.5 |
+| Phone 2 | Samsung Galaxy S22 Ultra | SM-S908E | 16 | 8.0 |
 
 Both are target devices for development and acceptance. Android minimum-version support outside these phones remains an engineering choice to record during P0.
 

@@ -9,7 +9,7 @@ This Mac reports Apple silicon (`arm64`) and macOS 26.6.2. Git 2.50.1 and GitHub
 - Android Studio at `/Applications/Android Studio.app`; bundle version 2026.2, build `262.9437.185.2621.16467767`.
 - Bundled Java executable runs successfully: OpenJDK 25.0.3. The scaffold pins Gradle 9.6.0 and CI Java 25.0.3; build validation is recorded in the Android foundation execution plan.
 - SDK at `~/Library/Android/sdk`, platform `android-37.0`, Build-Tools 36.0.0, Platform-Tools 37.0.1, emulator and system image installed.
-- AVD `Medium_Phone_API_37.0` is configured and now boots successfully after the storage fix and a cold boot with four virtual CPU cores. `adb devices` reports `emulator-5554 device`, `sys.boot_completed=1`, Android 17. Physical-phone connection remains unverified.
+- AVD `Medium_Phone_API_37.0` is configured and now boots successfully after the storage fix and a cold boot with four virtual CPU cores. `adb devices` reports `emulator-5554 device`, `sys.boot_completed=1`, Android 17. Phone connection evidence is recorded below.
 - SDK Command-line Tools are installed and execute with Studio's bundled Java. `sdkmanager --version` delegates to Android CLI and reports version 1.0.16486076; prefer current documented CLI commands when scripting SDK setup.
 
 Startup diagnosis confirmed 16 GiB RAM and initially insufficient disk (4568.97 MB available versus 12288 MB needed). After the user freed space, 32–34 GiB was available and userdata creation succeeded. The subsequent five-minute boot timeout was resolved by a cold boot with four virtual CPU cores; this does not prove which change alone resolved it. Authenticated GitHub API access and Projects authorization as JuliaMathias were verified on 2026-10-02.
@@ -36,6 +36,8 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 Then verify `java -version` and `adb version` in a new terminal. The checked-in wrapper is now available. From `android/`, run `./gradlew testDebugUnitTest lintDebug assembleDebug`, then `./gradlew connectedDebugAndroidTest` with the emulator or a phone connected. See README and the foundation execution plan for results and limitations.
 
 ## Connect your Android phone
+
+Use **Phone 1** for Galaxy S24 Ultra (SM-S928B/DS) and **Phone 2** for Galaxy S22 Ultra (SM-S908E), matching `PRODUCT.md` and test evidence. On 2026-10-02, the user reported Phone 2 connected successfully via USB debugging with ADB state `device`; Phone 1 connection testing is in progress. A subsequent agent check saw one unidentified physical phone in state `unauthorized` while devices were being switched; this does not identify the phone or invalidate the earlier Phone 2 result. Neither phone has a recorded Timey installation or application-test pass yet.
 
 Enable Developer options (usually tapping Build number repeatedly), enable USB debugging, connect a data-capable USB cable, and accept the computer's debugging authorization on the phone. Mac does not require an extra OEM USB driver. Confirm the device is listed by `adb devices` and select it as Android Studio's Run target. Enable wireless debugging later if useful; USB is simpler for first setup.
 
