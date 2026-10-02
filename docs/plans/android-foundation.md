@@ -27,3 +27,7 @@ Use the checked-in wrapper from `android/`, with Studio's bundled Java and the i
 ## CI/protection progress
 
 PR #13 created. First CI run 37037106035 failed because hosted runners had no sdkmanager on PATH; adding explicit pinned SDK setup rather than assuming a preinstalled path. Main protection was applied and read back: `ci-required` bound to GitHub Actions app 15368, strict up-to-date checks, PR required with zero required approvals for the sole owner, administrator enforcement, conversation resolution, force pushes/deletions disabled. Failed PR currently reports merge state blocked. Synthetic behavioral-failure/repaired revision verification still pending.
+
+## Local instrumentation compatibility finding
+
+The cold-booted API 37 emulator reached Activity/package readiness. Two tests executed but Espresso's inherited older version failed before assertions because InputManager.getInstance was removed on this OS. Explicitly pin Espresso 3.7.0, whose official release notes replace that reflection with system-service access. The changed app/test APKs compile and lint passes; subsequent instrumentation encountered an unresponsive emulator (unknown API level), so no API 37 pass is claimed. A bounded SwiftShader renderer retry is in progress after logs reported the default guest ANGLE path unstable above API 35. Hosted API 36 build/lint and result-guard cases pass; instrumentation remains pending.

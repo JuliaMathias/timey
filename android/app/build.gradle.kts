@@ -37,5 +37,7 @@ dependencies {
     androidTestImplementation(libs.compose.ui.test)
     androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.test.junit)
+    // Espresso 3.7 avoids InputManager reflection removed on the API 37 test device.
+    androidTestImplementation(libs.test.espresso)
     debugImplementation(libs.compose.ui.test.manifest)
 }
