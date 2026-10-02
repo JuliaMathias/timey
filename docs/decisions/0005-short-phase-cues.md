@@ -15,3 +15,7 @@ The accepted proposal keeps exercise timing independent of voice length and prio
 The engine emits timestamped cue events independently of speech completion. The audio adapter cancels/replaces obsolete utterances; asynchronous completion/cache callbacks must not replay an old event. Group number and phase information due at one boundary into a single utterance so simultaneous cues do not preempt one another.
 
 Preview identifies speech-fit issues without silently extending durations. Positive-duration validation still applies. P0 measures real offline TTS latency and cancellation in English and Brazilian Portuguese on both phones; P3 implements preview warnings and cue replacement. Test an announcement spanning a later cue, simultaneous number/phase events, pause/skip/stop, stale callbacks and unchanged engine progression. Minimum representable duration and measurable timing tolerances are implementation details to validate, not promises of sample-accurate speech.
+
+## Validation scope update — 2026-10-02
+
+The user subsequently limited required physical testing to Phone 2 (Galaxy S22 Ultra) because Phone 1 has a damaged USB port. Earlier two-phone validation statements above are superseded by the current device policy in [PRODUCT.md](../PRODUCT.md) and [TESTING.md](../TESTING.md). The architectural decision and Phone 1 compatibility requirement remain unchanged; no Phone 1 hardware result is inferred.

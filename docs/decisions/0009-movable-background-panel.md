@@ -17,3 +17,7 @@ P0 must prototype overlay permission, drag behavior and notification fallback on
 Keep position device-local and recover usable bounds after display changes. Preserve running/paused dismissal semantics and remove the panel on Stop/finish. Verify that dragging, dismissal and permission changes do not alter the workout clock or duplicate cues. Test cleanup on stop and lifecycle failures, alongside ordinary notification actions.
 
 The panel's visual design remains for design review. Specific adapter/lifecycle implementation is validated during P0 rather than inferred from the reference app. This accepts the requirement, not the full delivery plan or a claim that device tests have passed.
+
+## Validation scope update — 2026-10-02
+
+The user subsequently limited required physical testing to Phone 2 (Galaxy S22 Ultra) because Phone 1 has a damaged USB port. Earlier two-phone validation statements above are superseded by the current device policy in [PRODUCT.md](../PRODUCT.md) and [TESTING.md](../TESTING.md). The architectural decision and Phone 1 compatibility requirement remain unchanged; no Phone 1 hardware result is inferred.

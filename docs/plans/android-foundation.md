@@ -57,3 +57,7 @@ User encountered JAVA_HOME=/opt/jdk-17.0.8+7. Read-only inspection found that st
 ## Integration and task handoff
 
 [Final CI 37039572771](https://github.com/JuliaMathias/timey/actions/runs/37039572771) passed every mandatory job on 964e862. [PR #13](https://github.com/JuliaMathias/timey/pull/13) merged with commit be46b01 under protection, preserving five logical implementation/documentation commits (b6f5a0c through 964e862). #10 closed and board set Done; #9 stays In progress. The user's current blocker was the stale JAVA_HOME, for which the exact command-scoped workaround is verified and documented. Next: connect/install/check both phones per #9, resolve local Gradle emulator enumeration or use a separately created API 36 AVD, then #11's timing/offline-speech prototype. No change to agreed product scope or Android-before-web gate.
+
+## Revised physical-device scope — 2026-10-02
+
+User confirmed Phone 1 has a damaged USB port: test only Phone 2, while retaining Phone 1 as a supported Android 16 compatibility target. This supersedes earlier two-phone setup/prototype gates in this handoff. Updated P0/P3/P5 physical gates and P4/P5 cross-client validation to use Phone 2 plus an emulator or isolated client; no Phone 1 device pass is implied. Phone 1 access is not a delivery blocker. Product behavior and Android-before-web order are unchanged.
