@@ -48,6 +48,12 @@ As each issue is completed, reread all remaining phases in `PLAN.md` and outstan
 
 Adjust affected plan sections, technical docs and future issue descriptions/dependencies when the evidence warrants it. Include every resulting repository adjustment in the same issue branch and PR that made it necessary; update affected GitHub issues before that PR merges and link those completed updates in the PR description. Do not leave forward-plan adjustments as promises for an untracked later task. If new evidence after merge requires more work, create a linked follow-up issue and PR. Record the completed issue, discoveries, adjustments and reasons in its completion note and execution plan; if none are needed, explicitly record "No adjustments needed" and why. Keep issue status in GitHub once migrated rather than duplicating the backlog in Markdown. Routine technical refinements can proceed within approved scope; changes to agreed product behavior or user decisions must be presented for approval. Any resulting code/documentation changes follow the normal commit and PR/CI rules.
 
+## After the user merges
+
+Verify the PR is merged in GitHub and record its merge commit and final CI. Fetch the remote and fast-forward local `main`; preserve uncommitted files and active worktrees. Check the completed local issue branch for unpublished commits before deleting it. Remove completed local branches after integration instead of accumulating them; keep active branches and never delete remote branches without separate authorization.
+
+For squash merges, original commits need not be ancestors of `main`. Verify the merged PR’s head matches the completed branch and its work is integrated before cleanup; do not use force deletion merely to silence an unexplained Git warning. Record the handoff and close the issue only after its acceptance gates and forward-plan review are complete. Agents still never merge PRs themselves.
+
 ## Optional agent collaboration
 
 No agents or extra tools are required for planning. Default to one integrating agent. When the user authorizes parallel agents, useful independent assignments are engine/model work, editor/UI work, and bounded device/review research after interfaces are agreed. Each receives an issue, exact file ownership, base revision, dependencies, tests, and delivery format. Shared schema changes have one owner. Use independent worktrees to avoid competing indexes/commits.
