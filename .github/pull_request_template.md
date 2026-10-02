@@ -25,3 +25,7 @@ Migrations, sync compatibility, permissions, audio/lifecycle risks, and recovery
 What does this issue's completed work change in the remaining plan? Record affected phases/dependencies, evidence and updates to future issues/docs, or "No adjustments needed" with a reason. Reconcile the review with the integrated result before closing the issue or starting the next task.
 
 - [ ] All resulting repository plan/documentation adjustments are included in this PR, and affected GitHub issues/dependencies have been updated and linked above; no promised forward-plan adjustments remain outstanding.
+
+## Human approval and merge
+
+Agents leave this PR open for the user to review, approve and merge manually after required CI passes. Agents must not merge or enable automatic/scheduled merging.

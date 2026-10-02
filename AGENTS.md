@@ -9,6 +9,8 @@
 
 ## Git discipline
 
+- Never merge PRs on the user’s behalf, enable auto-merge, schedule merges or invoke a merge queue. Prepare and validate the PR, resolve conflicts and report readiness, then leave it open for the user to approve and merge manually in GitHub. Passing CI or earlier implementation/publication authorization does not grant merge permission.
+
 - All repository changes, including documentation, fixes and maintenance, must use a branch dedicated to a GitHub issue and a linked PR targeting `main`. Create the issue before changing files if none exists. Name branches `codex/issue-<number>-<short-description>`; never implement directly on `main` or mix unrelated issues on one branch. Integrate only through a PR after required latest-revision CI passes.
 
 - Commit as you go in small, logical, reviewable increments. Do not wait for an entire feature. Each commit must have a descriptive title AND a nonempty body explaining all changes, their purpose, and validation or remaining limitations.

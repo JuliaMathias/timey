@@ -24,6 +24,8 @@ The GitHub CLI is already available on this Mac. Authenticated API access as Jul
 
 ## Task lifecycle
 
+**Human approval and merging are mandatory.** Agents may create branches, commit/push changes, open/update PRs, resolve conflicts, run checks and report readiness. They must never merge a PR, enable auto-merge, schedule a merge, or invoke a merge queue on the user’s behalf. Leave every PR open for the user to review, approve and merge manually in GitHub. Passing CI, plan approval or permission to implement/publish does not authorize an agent to merge.
+
 Before coding, read relevant instructions and requirement IDs, inspect current state, and identify a concrete slice. A multi-session task gets a plan based on `docs/plans/TEMPLATE.md`. Keep progress, evidence, and decisions current so another agent can resume without the original chat.
 
 Implement and test a coherent increment, update its documentation, inspect the diff, and commit with a title and body. Useful increments include a model plus validation tests, persistence plus migration tests, and a screen plus interaction tests. Do not hold all work until a large feature is complete. Do not create knowingly broken intermediate commits.
