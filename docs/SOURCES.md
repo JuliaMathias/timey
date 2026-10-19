@@ -50,3 +50,10 @@ Checked 2026-10-01 using official documentation. These sources support platform 
 - [Android Auto Backup rules](https://developer.android.com/identity/data/autobackup): explicit modern data-extraction exclusions for cloud backup and device transfer; allowBackup alone is insufficient on some manufacturers.
 - [Android SDK setup action](https://github.com/android-actions/setup-android): explicit command-line SDK installation/PATH setup for hosted runners; pinned action and command-line-tools build 15859902. Hosted CI initially had no sdkmanager on PATH.
 - [AndroidX Test releases](https://developer.android.com/jetpack/androidx/releases/test): Espresso 3.7 replaces reflected InputManager access with getSystemService, needed for the API 37 emulator.
+
+## Issue #11 platform verification — 2026-10-02
+
+- [SystemClock](https://developer.android.com/reference/android/os/SystemClock): elapsedRealtime supplies monotonic milliseconds including deep sleep; no wall-clock timer arithmetic.
+- [TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech): asynchronous initialization, TTS service manifest queries, QUEUE_FLUSH replacement and shutdown lifecycle.
+- [Voice](https://developer.android.com/reference/android/speech/tts/Voice) and [Engine features](https://developer.android.com/reference/android/speech/tts/TextToSpeech.Engine): exclude network-required and not-installed voices; pt-BR must match Brazil. Actual offline usability still requires airplane-mode Phone 2 tests.
+- [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) and [Lifecycle release notes](https://developer.android.com/jetpack/androidx/releases/lifecycle): rotation ownership and stable 2.11.0 dependency verified by compilation/lint with the foundation pins. Callback onset is an engine observation, not a measurement of audible output.

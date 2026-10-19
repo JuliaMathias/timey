@@ -36,7 +36,7 @@ class FoundationScreenTest {
         compose.activityRule.scenario.recreate()
         compose.onNodeWithText("Your time, your pace").assertIsDisplayed()
         compose.onNodeWithText(
-            "The app foundation is ready. Routine editing and playback are coming next.",
+            "The rep diagnostic is ready. Routine editing and background playback are coming next.",
         ).performScrollTo().assertIsDisplayed()
     }
 }

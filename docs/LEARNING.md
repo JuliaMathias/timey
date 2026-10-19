@@ -41,3 +41,17 @@ Every meaningful delivery includes one short learning note explaining a relevant
 `MainActivity` is Android's entry screen. Android can destroy and recreate it when configuration changes; it is not a permanent process like an OTP supervisor. `setContent` installs a Compose tree, where functions describe what should be visible. Our recreation test restarts the actual Activity and checks that the screen remains usable. This is why the future workout clock must belong to the playback service/engine, not to a screen that Android may replace.
 
 The Gradle wrapper is the repository's build entry point, similar in purpose to running Mix tasks. The Android plugin compiles/packages the APK; the SDK provides Android APIs; the JDK runs the build. These are separate tools. AGP 9 includes Kotlin support, while the Compose compiler plugin is still explicit.
+
+## P0 reps: elapsed time and callback identities
+
+The prototype computes rep and phase from integer elapsed milliseconds. A 2200ms rep does not lose decimal precision, and a late rendering poll jumps to the correct position instead of subtracting one tick at a time. The fake clock lets JVM tests jump directly to 2199ms, 2200ms and 22000ms without sleeping—similar to testing a pure Elixir transition with explicit inputs.
+
+Each speech request gets a new identity. Cancellation invalidates it, so a callback arriving after Pause, Next or Restart cannot change current diagnostics or restart speech. Speech reports what happened; it never advances the engine. Preview estimates are warnings, not measured speech durations or new minimum-duration rules.
+
+The diagnostic ViewModel survives Activity rotation and exposes a StateFlow: Compose observes immutable state snapshots and sends actions back to one owner. A coroutine polls every 20ms to refresh state; those delays are opportunities to observe time, not the source of time. Unlike an OTP process, the ViewModel is tied to an Android owner and is cleared when that owner ends. The TTS adapter shuts down then. Leaving the foreground pauses this prototype; #12 needs a service for screen-off ownership.
+
+## P0 selection: state versus actions
+
+A regular Button expresses an action, but does not explain which choice remains selected. Fixture and voice language are separate single-choice groups, so each now uses a RadioButton, a filled selected indicator and explicit Selected text. Compose derives the selection from the existing immutable UI snapshot; tapping an option sends configuration to its owner rather than keeping a second local choice. This resembles rendering a LiveView radio input from assigns and handling its event centrally.
+
+The enclosing row is the single selectable accessibility target, with the radio's click callback set to null. This makes the label and indicator one large tap target and exposes selected state to TalkBack and Compose tests. Disabling configuration during playback still preserves that state. The regression switches fixtures and languages independently and asserts that the old choice clears while the other group stays selected. Official pattern: [Compose radio buttons](https://developer.android.com/develop/ui/compose/components/radio-button).

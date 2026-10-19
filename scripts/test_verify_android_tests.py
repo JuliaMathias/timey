@@ -10,7 +10,7 @@ from verify_android_tests import verify_report
 class AndroidResultGuardTest(unittest.TestCase):
     """Prove infrastructure failures, absent reports and skipped tests cannot pass the gate."""
 
-    def check_counts(self, tests: int, failures: int, skipped: int) -> int:
+    def check_counts(self, tests: int, failures: int, skipped: int, minimum_tests: int = 2) -> int:
         """Write a disposable AGP-shaped report and run the production verifier."""
         with tempfile.TemporaryDirectory() as directory:
             report = Path(directory) / "index.html"
@@ -18,12 +18,18 @@ class AndroidResultGuardTest(unittest.TestCase):
                 f'<div class="infoBox" id="{name}">\n<div class="counter">{value}</div></div>'
                 for name, value in (("tests", tests), ("failures", failures), ("skipped", skipped))
             ))
-            return verify_report(report)
+            return verify_report(report, minimum_tests)
 
     def test_accepts_executed_passing_suite(self) -> None:
         """A genuine passing suite satisfies the guard without fixing the total forever."""
         self.assertEqual(self.check_counts(2, 0, 0), 2)
         self.assertEqual(self.check_counts(5, 0, 0), 5)
+
+    def test_requires_diagnostic_suite_when_configured(self) -> None:
+        """The expanded five-case suite cannot pass with only the old foundation cases."""
+        with self.assertRaises(ValueError):
+            self.check_counts(2, 0, 0, 5)
+        self.assertEqual(self.check_counts(5, 0, 0, 5), 5)
 
     def test_rejects_zero_test_infrastructure_failure(self) -> None:
         """Regress the observed AGP install failure that exited zero with no tests."""
