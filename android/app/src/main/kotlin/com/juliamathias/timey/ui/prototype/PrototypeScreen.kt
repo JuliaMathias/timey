@@ -1,16 +1,24 @@
 package com.juliamathias.timey.ui.prototype
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.juliamathias.timey.domain.playback.*
@@ -42,11 +50,27 @@ internal fun PrototypeScreen(
                 Text(state.fixture.name)
                 Text("Count-up · Every rep · ${state.language}" + if (state.preview) " · Two-rep preview" else "")
                 Text(state.voice)
-                Button(onClick = { configure(PrototypeFixtures.a, state.language) }, enabled = !active) { Text("Fixture A") }
-                Button(onClick = { configure(PrototypeFixtures.b, state.language) }, enabled = !active) { Text("Fixture B") }
-                Button(onClick = { configure(PrototypeFixtures.short, state.language) }, enabled = !active) { Text("Short phases") }
-                Button(onClick = { configure(state.fixture, "en-US") }, enabled = !active) { Text("English") }
-                Button(onClick = { configure(state.fixture, "pt-BR") }, enabled = !active) { Text("Português (Brasil)") }
+                Text("Fixture", style = MaterialTheme.typography.titleMedium)
+                Column(Modifier.selectableGroup()) {
+                    DiagnosticOption("Fixture A", state.fixture == PrototypeFixtures.a, !active) {
+                        configure(PrototypeFixtures.a, state.language)
+                    }
+                    DiagnosticOption("Fixture B", state.fixture == PrototypeFixtures.b, !active) {
+                        configure(PrototypeFixtures.b, state.language)
+                    }
+                    DiagnosticOption("Short phases", state.fixture == PrototypeFixtures.short, !active) {
+                        configure(PrototypeFixtures.short, state.language)
+                    }
+                }
+                Text("Voice language", style = MaterialTheme.typography.titleMedium)
+                Column(Modifier.selectableGroup()) {
+                    DiagnosticOption("English", state.language == "en-US", !active) {
+                        configure(state.fixture, "en-US")
+                    }
+                    DiagnosticOption("Português (Brasil)", state.language == "pt-BR", !active) {
+                        configure(state.fixture, "pt-BR")
+                    }
+                }
                 Text("Preview warning uses an estimate, not measured speech duration.")
                 previewWarnings(state.fixture).forEach { Text(it) }
                 Button(onClick = { start(true) }, enabled = !active) { Text("Preview 2 reps") }
@@ -61,5 +85,24 @@ internal fun PrototypeScreen(
                 state.events.forEach { Text(it, style = MaterialTheme.typography.bodySmall) }
             }
         }
+    }
+}
+
+/**
+ * Shows one choice from an owner-controlled group with a radio indicator and explicit selected text.
+ * The entire row is a single accessible target; disabling edits preserves its selection semantics.
+ */
+@Composable
+private fun DiagnosticOption(label: String, selected: Boolean, enabled: Boolean, onSelect: () -> Unit) {
+    Row(
+        Modifier.fillMaxWidth().heightIn(min = 48.dp)
+            .selectable(selected = selected, enabled = enabled, role = Role.RadioButton, onClick = onSelect)
+            .padding(horizontal = 8.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        RadioButton(selected = selected, enabled = enabled, onClick = null)
+        Text(label, modifier = Modifier.weight(1f))
+        if (selected) Text("Selected", style = MaterialTheme.typography.labelMedium)
     }
 }

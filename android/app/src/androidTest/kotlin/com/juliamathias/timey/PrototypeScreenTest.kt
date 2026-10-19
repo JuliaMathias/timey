@@ -1,5 +1,8 @@
 package com.juliamathias.timey
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.test.assertIsSelected
+import androidx.compose.ui.test.assertIsNotSelected
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertIsDisplayed
@@ -25,7 +28,10 @@ class PrototypeScreenTest {
     /** Configuration cannot mutate running fixture snapshots; pause is the available action. */
     @Test fun runningDisablesConfigurationAndStart() {
         render(PrototypeUiState(playback = RepState(RepStatus.RUNNING, 0, 1, 0)))
-        compose.onNodeWithText("Fixture B").performScrollTo().assertIsNotEnabled()
+        compose.onNodeWithText("Fixture B").performScrollTo().assertIsNotEnabled().assertIsNotSelected()
+        compose.onNodeWithText("Fixture A").performScrollTo().assertIsNotEnabled().assertIsSelected()
+        compose.onNodeWithText("English").performScrollTo().assertIsNotEnabled().assertIsSelected()
+        compose.onNodeWithText("Português (Brasil)").performScrollTo().assertIsNotEnabled().assertIsNotSelected()
         compose.onNodeWithText("Start 10 reps").performScrollTo().assertIsNotEnabled()
         compose.onNodeWithText("Pause").performScrollTo().assertIsEnabled()
         compose.onNodeWithText("Resume").performScrollTo().assertIsNotEnabled()
@@ -56,6 +62,32 @@ class PrototypeScreenTest {
         assertEquals(true, preview)
         compose.onNodeWithText("Back to foundation").performScrollTo().performClick()
         assertEquals(1, stops)
+    }
+
+    /** Each group exposes its current choice, updates after taps and preserves the other group. */
+    @Test fun selectionIsVisibleAndExclusiveWithinEachGroup() {
+        val state = mutableStateOf(PrototypeUiState())
+        compose.setContent {
+            TimeyTheme {
+                PrototypeScreen(state.value, { fixture, language ->
+                    state.value = state.value.copy(fixture = fixture, language = language)
+                }, {}, {}, {}, {}, {}, {}, {})
+            }
+        }
+        compose.onNodeWithText("Fixture A").performScrollTo().assertIsSelected()
+        compose.onNodeWithText("Fixture B").performScrollTo().assertIsNotSelected()
+        compose.onNodeWithText("Short phases").performScrollTo().assertIsNotSelected()
+        compose.onNodeWithText("English").performScrollTo().assertIsSelected()
+        compose.onNodeWithText("Português (Brasil)").performScrollTo().assertIsNotSelected()
+        compose.onNodeWithText("Fixture B").performScrollTo().performClick().assertIsSelected()
+        compose.onNodeWithText("Fixture A").performScrollTo().assertIsNotSelected()
+        compose.onNodeWithText("English").performScrollTo().assertIsSelected()
+        compose.onNodeWithText("Português (Brasil)").performScrollTo().performClick().assertIsSelected()
+        compose.onNodeWithText("English").performScrollTo().assertIsNotSelected()
+        compose.onNodeWithText("Fixture B").performScrollTo().assertIsSelected()
+        compose.onNodeWithText("Short phases").performScrollTo().performClick().assertIsSelected()
+        compose.onNodeWithText("Fixture B").performScrollTo().assertIsNotSelected()
+        compose.onNodeWithText("Português (Brasil)").performScrollTo().assertIsSelected()
     }
 
     /** Renders state with inert adapters so tests validate UI behavior in isolation. */
